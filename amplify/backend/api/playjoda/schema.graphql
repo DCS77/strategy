@@ -1,0 +1,89 @@
+type Game @model {
+  id: ID!
+  playerOne: PlayerConfig!
+  playerTwo: PlayerConfig!
+  boardSize: BoardSize!
+  mode: GameMode!
+  state: GameState!
+  moves: [Move!]! @connection(keyName: "byMove", fields: ["id"])
+}
+
+enum GameMode { standard no_turns }
+
+type Move @model @key(name: "byMove", fields: ["gameID", "moveID"]) {
+  id: ID!
+  gameID: ID!
+  moveID: ID!
+  player: ID!
+  action: [MoveAction!]! @connection(keyName: "byAction", fields: ["id"])
+  game: Game @connection(fields: ["gameID"])
+  timeLeft: Int
+}
+
+type MoveAction @model @key(name: "byAction", fields: ["moveID", "actionID"]) {
+  id: ID!
+  actionID: ID!
+  moveID: ID!
+  move: Move @connection(fields: ["moveID"])
+  pieceType: String!
+  pieceFrom: Coordinate!
+  pieceTo: Coordinate!
+}
+
+type PlayerConfig {
+  id: ID!
+  pieces: [Piece!]!
+  time: Int!
+  health: Int!
+  moves: Int!
+  actionsPerMove: Int!
+  rating: Int!
+}
+
+type Piece {
+  type: PieceType!
+  count: Int!
+}
+
+enum PieceType { deer wolf hawk }
+
+type BoardSize {
+  x: Int!
+  y: Int!
+  z: Int!
+}
+
+type Coordinate {
+  x: Int!
+  y: Int!
+  z: Int!
+}
+
+type GameState {
+  active: Boolean!
+  turn: PlayerTurn!
+  result: GameResult
+}
+
+type GameResult {
+  tie: ResultType!
+  winMethod: WinMethod!
+  winner: ID
+}
+
+enum PlayerTurn { one two no_one }
+enum ResultType { win tie cancel }
+enum WinMethod { points moves time forfeit }
+
+# type Query {
+#   getGames: [Game]
+#   getPlayerGames(player: ID): [Game]
+#   getPairGames(playerOne: ID, playerTwo: ID): [Game]
+#   getGame(game: ID): Game
+# }
+
+# type Mutation {
+#   createGame(game: GameInput): Game
+#   addMove(gameID: ID, move: MoveInput): Game
+#   setState(gameID: ID, result: GameStateInput): GameState
+# }
