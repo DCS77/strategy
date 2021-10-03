@@ -1,0 +1,16 @@
+.itemContainer {
+  text-align: inherit;
+  white-space: nowrap;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  height: 22px;
+  white-space: nowrap;
+}
+
+img {
+  height: 22px;
+  filter: var(--svg-filter);
+}

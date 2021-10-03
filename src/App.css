@@ -1,38 +1,99 @@
-.App {
+@import url('https://fonts.googleapis.com/css?family=Passero+One');
+
+.transition > * {
+  -webkit-transition: all .2s ease-out;
+  -moz-transition: all .2s ease-out;
+  -o-transition: all .2s ease-out;
+  -ms-transition: all .2s ease-out;
+  transition: all .2s ease-out;
+}
+
+.theme-light {
+  --header-color: #fff;
+  --footer-color: #fff;
+  --page-color: #ccc;
+  --font-color: #000;
+  --link-color: #000;
+  --svg-filter: brightness(3) invert(0);
+}
+.theme-dark {
+  --header-color: #000;
+  --footer-color: #000;
+  --page-color: #333;
+  --font-color: #fff;
+  --link-color: #fff;
+  --svg-filter: brightness(0) invert(1);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  position: relative;
+  height: 100%;
+  min-height: 100%;
+}
+
+a {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.page {
+  box-sizing: border-box;
+  min-height: 100vh;
+  padding-top: 40px;
+  padding-bottom: 60px;
+  background-color: var(--page-color);
+  color: var(--font-color);
+}
+
+.passero {
+  font-family: 'Passero One', regular;
+}
+
+.narrow-screen { display: none; }
+@media (max-width: 530px) {
+  .narrow-screen { display: inline-block; }
+  .wide-screen { display: none; }
+}
+
+.inline {
+  white-space: nowrap;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+}
+
+.bar-spaced {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.left-group {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+}
+
+.center-group {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.right-group {
+  flex: 1;
   display: flex;
-  flex-direction: column;
+  justify-content: flex-end;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  text-align: right;
 }
