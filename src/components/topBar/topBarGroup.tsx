@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import AccountDropdownMenu from './accountDropdown';
 import LanguageDropdownMenu from './languageDropdown';
 import TopBar from './topBar';
@@ -8,26 +8,71 @@ import '../../App.css';
 interface TopBarProps {
   theme: string;
   onClickThemeSwitch: (checked: boolean) => void;
-  onAccountClick: (visible: boolean) => void;
-  onLanguageClick: (visible: boolean) => void;
 }
 
 function TopBarGroup(Props: TopBarProps) {
   const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
-  const [accountDropdownClass, setAccountDropdownClass] = useState('passero');
+  const [accountDropdownClass, setAccountDropdownClass] = useState('noselect passero hidden');
+  const [accountMouseDown, setAccountMouseDown] = useState(false);
+  const accountDropdown = useRef<HTMLDivElement>(null);
+  
   const [languageDropdownVisible, setLanguageDropdownVisible] = useState(false);
-  const [languageDropdownClass, setLanguageDropdownClass] = useState('passero');
+  const [languageDropdownClass, setLanguageDropdownClass] = useState('noselect passero hidden');
+  const [languageMouseDown, setLanguageMouseDown] = useState(false);
+  const languageDropdown = useRef<HTMLDivElement>(null);
 
-  function ToggleAccountDropdown() {
-    setAccountDropdownVisible(!accountDropdownVisible);
-    setAccountDropdownClass(accountDropdownVisible ? 'noselect passero' : 'noselect passero hidden');
-    Props.onAccountClick(accountDropdownVisible);
+  function ToggleAccountDropdown(visible: boolean) {
+    setAccountDropdownVisible(visible);
+    setAccountDropdownClass(visible ? 'noselect passero' : 'noselect passero hidden');
+    if (visible && accountDropdown.current !== null) {
+      accountDropdown.current.focus();
+    }
   }
 
-  function ToggleLanguageDropdown() {
-    setLanguageDropdownVisible(!languageDropdownVisible);
-    setLanguageDropdownClass(languageDropdownVisible ? 'noselect passero' : 'noselect passero hidden');
-    Props.onLanguageClick(languageDropdownVisible);
+  function AccountMouseUp(){
+    ToggleAccountDropdown(!accountDropdownVisible);
+    setAccountMouseDown(false);
+  }
+
+  function AccountMouseDown(){
+    setAccountMouseDown(true);
+  }
+
+  function AccountBlur(){
+    if(!accountMouseDown){
+      ToggleAccountDropdown(false);
+    }
+  }
+
+  function CloseAccountMenu(){
+    ToggleAccountDropdown(false);
+  }
+
+  function ToggleLanguageDropdown(visible: boolean) {
+    setLanguageDropdownVisible(visible);
+    setLanguageDropdownClass(visible ? 'noselect passero' : 'noselect passero hidden');
+    if (visible && languageDropdown.current !== null) {
+      languageDropdown.current.focus();
+    }
+  }
+
+  function LanguageMouseUp(){
+    ToggleLanguageDropdown(!languageDropdownVisible);
+    setLanguageMouseDown(false);
+  }
+
+  function LanguageMouseDown(){
+    setLanguageMouseDown(true);
+  }
+
+  function LanguageBlur(){
+    if(!languageMouseDown){
+      ToggleLanguageDropdown(false);
+    }
+  }
+
+  function CloseLanguageMenu(){
+    ToggleLanguageDropdown(false);
   }
 
   return (
@@ -35,14 +80,16 @@ function TopBarGroup(Props: TopBarProps) {
       <TopBar
         theme={Props.theme}
         onClickThemeSwitch={Props.onClickThemeSwitch}
-        onAccountClick={ToggleAccountDropdown}
-        onLanguageClick={ToggleLanguageDropdown}
+        onAccountMouseUp={AccountMouseUp}
+        onAccountMouseDown={AccountMouseDown}
+        onLanguageMouseUp={LanguageMouseUp}
+        onLanguageMouseDown={LanguageMouseDown}
       />
-      <div className={accountDropdownClass}>
-        <AccountDropdownMenu/>
+      <div ref={accountDropdown} className={accountDropdownClass} tabIndex={0} onBlur={AccountBlur}>
+        <AccountDropdownMenu onClickAnyItem={CloseAccountMenu}/>
       </div>
-      <div className={languageDropdownClass}>
-        <LanguageDropdownMenu/>
+      <div ref={languageDropdown} className={languageDropdownClass} tabIndex={1} onBlur={LanguageBlur}>
+        <LanguageDropdownMenu onClickAnyItem={CloseLanguageMenu}/>
       </div>
     </React.Fragment>
   );

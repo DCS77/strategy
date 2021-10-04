@@ -1,21 +1,27 @@
 
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import Switch from '../toggleSwitch';
 import BarItem from '../barItem';
 import { Translate, PaintRoller, CaretDown, User } from 'phosphor-react';
+import i18n from '../../i18nextConf';
+import { useTranslation } from 'react-i18next';
 import '../../App.css';
 
 interface SettingsProps {
   theme: string;
   onClickThemeSwitch: (checked: boolean) => void;
-  onAccountClick: () => void;
-  onLanguageClick: () => void;
+  onAccountMouseUp: () => void;
+  onAccountMouseDown: () => void;
+  onLanguageMouseUp: () => void;
+  onLanguageMouseDown: () => void;
 }
 
 function SettingsProps(Props: SettingsProps) {
+  const { t } = useTranslation('translation', { i18n });
+
   return (
     <React.Fragment>
-      <BarItem clickHandler={Props.onLanguageClick}>
+      <BarItem mouseUpHandler={Props.onLanguageMouseUp} mouseDownHandler={Props.onLanguageMouseDown}>
         <span className='wide-screen'>
           <span className='inline flex-center bar-spaced'><Translate/></span>
         </span>
@@ -33,9 +39,9 @@ function SettingsProps(Props: SettingsProps) {
           />
         </span>
       </BarItem>
-      <BarItem clickHandler={Props.onAccountClick}>
+      <BarItem mouseUpHandler={Props.onAccountMouseUp} mouseDownHandler={Props.onAccountMouseDown}>
         <span className='wide-screen bar-spaced'>
-          <span className='inline flex-center bar-spaced'>Account<CaretDown/></span>
+          <span className='inline flex-center bar-spaced'>{t('Account')}<CaretDown/></span>
         </span>
         <span className='narrow-screen'>
           <span className='inline flex-center'><User/><CaretDown/></span>

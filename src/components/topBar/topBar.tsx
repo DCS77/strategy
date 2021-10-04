@@ -8,23 +8,13 @@ import '../../App.css';
 interface TopBarProps {
   theme: string;
   onClickThemeSwitch: (checked: boolean) => void;
-  onAccountClick: () => void;
-  onLanguageClick: () => void;
+  onAccountMouseUp: () => void;
+  onAccountMouseDown: () => void;
+  onLanguageMouseUp: () => void;
+  onLanguageMouseDown: () => void;
 }
 
 function TopBar(Props: TopBarProps) {
-  // const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
-
-  // function ToggleAccountDropdown() {
-  //   setAccountDropdownVisible(!accountDropdownVisible);
-  //   Props.onAccountClick(accountDropdownVisible);
-  // }
-
-  // function ToggleLanguageDropdown() {
-  //   setLanguageDropdownVisible(!languageDropdownVisible);
-  //   Props.onLanguageClick(languageDropdownVisible);
-  // }
-
   return (
     <div className={'header noselect passero theme-' + Props.theme}>
       <span className='left-group'><SiteIdentity/></span>
@@ -33,8 +23,10 @@ function TopBar(Props: TopBarProps) {
         <Settings
           theme={Props.theme}
           onClickThemeSwitch={Props.onClickThemeSwitch}
-          onAccountClick={Props.onAccountClick}
-          onLanguageClick={Props.onLanguageClick}
+          onAccountMouseUp={Props.onAccountMouseUp}
+          onAccountMouseDown={Props.onAccountMouseDown}
+          onLanguageMouseUp={Props.onLanguageMouseUp}
+          onLanguageMouseDown={Props.onLanguageMouseDown}
         />
       </span>
     </div>

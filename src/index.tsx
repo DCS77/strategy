@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Amplify from "aws-amplify";
 import awsExports from "./aws-exports";
+import i18n from './i18nextConf';
 Amplify.configure(awsExports);
 
 ReactDOM.render(

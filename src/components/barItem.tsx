@@ -1,24 +1,60 @@
 import React, { useState } from 'react';
+import { Link, BrowserRouter } from 'react-router-dom';
 import './barItem.css';
 
-interface ItemProps {
-  link?: string;
+interface BarItemProps {
   icon?: string;
+  to?: string;
+  link?: string;
+  newTab?: boolean;
   children: React.ReactNode;
-  clickHandler?: () => void;
+  mouseUpHandler?: () => void;
+  mouseDownHandler?: () => void;
 }
 
-function Switch(Props: ItemProps) {
+interface LinkProps {
+  to?: string;
+  link?: string;
+  newTab?: boolean;
+  children: React.ReactNode;
+}
+
+function ItemLink(Props: LinkProps){
+  const [hrefTarget] = useState(Props.newTab ? '_blank' : '');
+
+  if(Props.to) {
+    return (
+      <Link to={Props.to}>
+        {Props.children}
+      </Link>
+    );
+  } 
+  else if(Props.link) {
+    return (
+      <a href={Props.link} target={hrefTarget}>
+        {Props.children}
+      </a>
+    );
+  } else {
+    return (
+      <a>
+        {Props.children}
+      </a>
+    );
+  }
+}
+
+function BarItem(Props: BarItemProps) {
   return (
-    <div className='itemContainer hover-tint' onClick={Props.clickHandler}>
-      <a href={Props.link}>
+    <div className='itemContainer hover-tint' onMouseUp={Props.mouseUpHandler} onMouseDown={Props.mouseDownHandler}>
+      <ItemLink to={Props.to} link={Props.link} newTab={Props.newTab}>
         <div className='item'>
           {Props.icon ? (<img src={Props.icon}/>) : null}
           {Props.children}
         </div>
-      </a>
+      </ItemLink>
     </div>
   );
 };
 
-export default Switch;
+export default BarItem;

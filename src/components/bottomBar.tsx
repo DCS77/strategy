@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import BarItem from './barItem';
 import { GithubLogo, UserRectangle, CurrencyCircleDollar, Scales, Cookie, Copyright } from 'phosphor-react';
+import i18n from '../i18nextConf';
+import { useTranslation } from 'react-i18next';
 import './bottomBar.css';
 import '../App.css';
 
@@ -8,49 +10,51 @@ interface BottomBarProps {
 }
 
 function BottomBar(Props: BottomBarProps) {
+  const { t } = useTranslation('translation', { i18n });
+
   return (
     <div className='footer passero inline'>
       <div className='left-group inline'>
-        <BarItem link='https://github.com/DCS77/strategy'>
+        <BarItem link='https://github.com/DCS77/strategy' newTab={true}>
           <span className='wide-screen'>
-            <span className='inline flex-center bar-spaced'><GithubLogo/>Github</span>
+            <span className='inline flex-center bar-spaced'><GithubLogo/>{t('Github')}</span>
           </span>
           <span className='narrow-screen'>
-            <span className='inline flex-center'><GithubLogo/>Github</span>
+            <span className='inline flex-center'><GithubLogo/>{t('Github')}</span>
           </span>
         </BarItem>
-        <BarItem link='#'>
+        <BarItem to='/contact'>
           <span className='wide-screen'>
-            <span className='inline flex-center bar-spaced'><UserRectangle/>Contact</span>
+            <span className='inline flex-center bar-spaced'><UserRectangle/>{t('Contact')}</span>
           </span>
           <span className='narrow-screen'>
-            <span className='inline flex-center'><UserRectangle/>Contact</span>
+            <span className='inline flex-center'><UserRectangle/>{t('Contact')}</span>
           </span>
         </BarItem>
-        <BarItem link='#'>
+        <BarItem to='/donate'>
           <span className='wide-screen'>
-            <span className='inline flex-center bar-spaced'><CurrencyCircleDollar/>Donate</span>
+            <span className='inline flex-center bar-spaced'><CurrencyCircleDollar/>{t('Donate')}</span>
           </span>
           <span className='narrow-screen'>
-            <span className='inline flex-center'><CurrencyCircleDollar/>Donate</span>
+            <span className='inline flex-center'><CurrencyCircleDollar/>{t('Donate')}</span>
           </span>
         </BarItem>
       </div>
       <div className='right-group inline'>
-        <BarItem link='#'>
+        <BarItem to='/terms'>
           <span className='wide-screen'>
-            <span className='inline flex-center bar-spaced'><Scales/>Terms of Use</span>
+            <span className='inline flex-center bar-spaced'><Scales/>{t('TermsOfUse')}</span>
           </span>
           <span className='narrow-screen'>
-            <span className='inline flex-center'><Scales/>Terms</span>
+            <span className='inline flex-center'><Scales/>{t('TermsOfUse')}</span>
           </span>
         </BarItem>
-        <BarItem link='#'>
+        <BarItem to='/privacy'>
           <span className='wide-screen'>
-            <span className='inline flex-center bar-spaced'><Cookie/>Privacy</span>
+            <span className='inline flex-center bar-spaced'><Cookie/>{t('Privacy')}</span>
           </span>
           <span className='narrow-screen'>
-            <span className='inline flex-center'><Cookie/>Privacy</span>
+            <span className='inline flex-center'><Cookie/>{t('Privacy')}</span>
           </span>
         </BarItem>
         <BarItem>
