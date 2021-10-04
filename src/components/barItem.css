@@ -1,6 +1,7 @@
 .itemContainer {
   text-align: inherit;
   white-space: nowrap;
+  cursor: default;
 }
 
 .item {

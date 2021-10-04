@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import BottomBar from './components/bottomBar';
-import TopBar from './components/topBar';
+import TopBarGroup from './components/topBar/topBarGroup';
 import './App.css';
 
 function App() {
@@ -9,9 +9,21 @@ function App() {
     setTheme(checked ? 'dark' : 'light');
   }
 
+  function onAccountClick(visible: boolean) {
+    console.log('account clicked', visible);
+  }
+
+  function onLanguageClick(visible: boolean) {
+    console.log('language clicked', visible);
+  }
+
   return (
-    <div id="theme" className={"transition theme-" + theme}>
-      <TopBar theme={theme} onClickThemeSwitch={onClickThemeSwitch}/>
+    <div id="theme" className={'transition theme-' + theme}>
+      <TopBarGroup
+        theme={theme}
+        onClickThemeSwitch={onClickThemeSwitch}
+        onAccountClick={onAccountClick}
+        onLanguageClick={onLanguageClick}/>
       <div className="page">
           Testing
           <br></br>

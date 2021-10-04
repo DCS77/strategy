@@ -9,16 +9,16 @@
 }
 
 .theme-light {
-  --header-color: #fff;
-  --footer-color: #fff;
+  --bar-color: #fff;
+  --bar-tint: #dedede;
   --page-color: #ccc;
   --font-color: #000;
   --link-color: #000;
   --svg-filter: brightness(3) invert(0);
 }
 .theme-dark {
-  --header-color: #000;
-  --footer-color: #000;
+  --bar-color: #000;
+  --bar-tint: #333333;
   --page-color: #333;
   --font-color: #fff;
   --link-color: #fff;
@@ -39,6 +39,11 @@ html, body {
 a {
   color: var(--link-color);
   text-decoration: none;
+  background-color: #fff;
+}
+
+a:hover > * {
+  background-color: var(--bar-tint);
 }
 
 .page {
@@ -59,6 +64,8 @@ a {
   .narrow-screen { display: inline-block; }
   .wide-screen { display: none; }
 }
+
+.hidden > * { display:none !important; }
 
 .inline {
   white-space: nowrap;
