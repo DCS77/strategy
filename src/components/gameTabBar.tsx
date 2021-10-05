@@ -46,7 +46,7 @@ function GameTabBar(Props: GameTabBarProps) {
 
   return (
     <div>
-      <div className='game-tab-bar passero'>
+      <div className='game-tab-bar passero no-select'>
         <div className='game-tab-bar-inner'>
           <TabList/>
         </div>

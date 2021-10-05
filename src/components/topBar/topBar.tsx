@@ -16,7 +16,7 @@ interface TopBarProps {
 
 function TopBar(Props: TopBarProps) {
   return (
-    <div className={'header noselect passero theme-' + Props.theme}>
+    <div className={'header no-select passero theme-' + Props.theme}>
       <span className='left-group'><SiteIdentity/></span>
       <span className='center-group'><SiteStats/></span>
       <span className='right-group'>
