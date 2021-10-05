@@ -1,0 +1,26 @@
+.game-tab-bar {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  text-align: left;
+  background-color: var(--tab-bar-color);
+  min-height: 0;
+  width: 100%;
+  overflow: auto;
+}
+
+.game-tab-bar-inner {
+  display: flex;
+  flex-flow: row wrap;
+  max-height: var(--tab-bar-height);
+  overflow-y: scroll;
+}
+
+.tab-item {
+  text-indent: 5px;
+  min-width: 80px;
+  border-right:2px solid var(--tab-border-color); 
+  border-bottom:1px solid var(--tab-border-color);
+  background-color: var(--tab-bar-item-color);
+}

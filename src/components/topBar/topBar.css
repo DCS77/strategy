@@ -15,14 +15,14 @@
   top: 0;
   left: 0;
   width: 100%;
-  min-height: 22px;
+  min-height: var(--bar-height);
   background-color: var(--bar-color);
   color: var(--font-color);
 }
 
 .dropdown-menu {
   position:absolute;
-  margin-top: 22px;
+  margin-top: var(--bar-height);
   right: 0;
   width: 200px;
   background-color: var(--bar-color);

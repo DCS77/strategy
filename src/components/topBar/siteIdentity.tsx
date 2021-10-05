@@ -6,7 +6,7 @@ import '../../App.css';
 
 function SiteIdentity() {
   return (
-    <BarItem icon={Logo}>
+    <BarItem to='/' icon={Logo}>
       <span className='wide-screen'>Strategy Game Site</span>
     </BarItem>
   );

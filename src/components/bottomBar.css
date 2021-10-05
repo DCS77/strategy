@@ -6,7 +6,7 @@
   bottom: 0;
   left: 0;
   width: 100%;
-  min-height: 22px;
+  min-height: var(--bar-height);
   background-color: var(--bar-color);
   color: var(--font-color);
 }

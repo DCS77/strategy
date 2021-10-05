@@ -11,7 +11,7 @@ function SiteStats() {
 
   return (
     <span className='center-group inline'>
-      <BarItem>
+      <BarItem to='/online'>
         <span className='wide-screen'>
           <span className='inline flex-center bar-spaced'><Users/>32 {t('Online')}</span>
         </span>
@@ -19,7 +19,7 @@ function SiteStats() {
           <span className='inline flex-center'><Users/>32</span>
         </span>
       </BarItem>
-      <BarItem>
+      <BarItem to='/live'>
         <span className='wide-screen'>
           <span className='inline flex-center bar-spaced'><Sword/>8 {t('ActiveGames')}</span>
         </span>

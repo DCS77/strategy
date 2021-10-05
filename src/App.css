@@ -14,7 +14,13 @@
   --page-color: #ccc;
   --font-color: #000;
   --link-color: #000;
+  --tab-bar-color: #ddd;
+  --tab-bar-item-color: #fff;
+  --tab-border-color: #bbb;
+  --switch-color: #000;
   --svg-filter: brightness(3) invert(0);
+  --bar-height: 22px;
+  --tab-bar-height: 52px;
 }
 .theme-dark {
   --bar-color: #000;
@@ -22,7 +28,13 @@
   --page-color: #333;
   --font-color: #fff;
   --link-color: #fff;
+  --tab-bar-color: #222;
+  --tab-bar-item-color: #000;
+  --tab-border-color: #444;
+  --switch-color: #fff;
   --svg-filter: brightness(0) invert(1);
+  --bar-height: 22px;
+  --tab-bar-height: 52px;
 }
 
 * {
@@ -49,8 +61,8 @@ a:hover > * {
 .page {
   box-sizing: border-box;
   min-height: 100vh;
-  padding-top: 22px;
-  padding-bottom: 22px;
+  padding-top: var(--bar-height);
+  padding-bottom: var(--bar-height);
   background-color: var(--page-color);
   color: var(--font-color);
 }

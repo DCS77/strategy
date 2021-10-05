@@ -6,10 +6,7 @@ import { useTranslation } from 'react-i18next';
 import './bottomBar.css';
 import '../App.css';
 
-interface BottomBarProps {
-}
-
-function BottomBar(Props: BottomBarProps) {
+function BottomBar() {
   const { t } = useTranslation('translation', { i18n });
 
   return (
