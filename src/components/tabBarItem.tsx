@@ -8,14 +8,15 @@ import './gameTabBar.css';
 import '../App.css';
 
 interface TabBarItemProps {
+  ID: string;
   Type: TabType,
   Title?: string;
   Player?: string;
   Rating?: number;
-  ID?: string;
   to?: string;
   link?: string;
   newTab?: boolean;
+  closeTabHandler: (ID: string) => void;
 }
 
 function GetEnumText(type: TabType){
@@ -28,6 +29,11 @@ function GetEnumText(type: TabType){
 function TabBarItem(Props: TabBarItemProps) {
   const { t } = useTranslation('translation', { i18n });
 
+  function CloseTab(){
+    console.log('tabBarItem: ', Props.ID);
+    Props.closeTabHandler(Props.ID);
+  }
+
   function GetTabText(Props: TabBarItemProps){
     let gameTitle = Props.Title? Props.Title : '';
     let rating = Props.Rating? `(${Props.Rating})` : '';
@@ -38,10 +44,10 @@ function TabBarItem(Props: TabBarItemProps) {
   }
 
   return (
-    <span>
-      {/* <Asterisk/> */}
-      <BarItem to={Props.to} link={Props.link} newTab={Props.newTab}>{GetTabText(Props)}</BarItem>  
-      {/* <X/> */}
+    <span className='tab-item'>
+      <Asterisk/>
+      <BarItem to={Props.to} link={Props.link} newTab={Props.newTab}>{GetTabText(Props)}</BarItem>
+      <BarItem mouseUpHandler={CloseTab}><X/></BarItem>
     </span>
   );
 };

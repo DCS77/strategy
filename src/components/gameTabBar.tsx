@@ -11,20 +11,31 @@ interface GameTabBarProps {
 function CreateTabBarItem(Props: GameTabDetail|InfoTabDetail){
   if('GameID' in Props){
     return (
-      <span className='tab-item'>
-        <TabBarItem Type={TabType.Game} Title={Props.Title} Player={Props.Player} Rating={Props.Rating} ID='0' to={Props.GameID}/>
-      </span>
+      <TabBarItem
+        ID={Props.ID}
+        Type={TabType.Game}
+        Title={Props.Title}
+        Player={Props.Player}
+        Rating={Props.Rating}
+        to={Props.GameID}
+        closeTabHandler={Props.closeTabHandler}
+      />
     );
   } else if('InfoID' in Props){
     return (
-      <span className='tab-item'>
-        <TabBarItem Type={TabType.Info} Title={Props.Title} ID='0' to={Props.InfoID}/>
-      </span>
+      <TabBarItem
+        ID={Props.ID}
+        Type={TabType.Info}
+        Title={Props.Title}
+        to={Props.InfoID}
+        closeTabHandler={Props.closeTabHandler}
+      />
     );
   }
 }
 
 function GameTabBar(Props: GameTabBarProps) {
+
   function TabList() {
     return (
       <React.Fragment>

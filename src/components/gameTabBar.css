@@ -18,6 +18,11 @@
 }
 
 .tab-item {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
   text-indent: 5px;
   min-width: 80px;
   border-right:2px solid var(--tab-border-color); 
