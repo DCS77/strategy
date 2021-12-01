@@ -1,4 +1,5 @@
 .header {
+  z-index: 10000;
   display: flex;
   overflow: hidden;
   position: fixed;
@@ -11,6 +12,7 @@
 }
 
 .dropdown-menu {
+  z-index: 10000;
   position:absolute;
   margin-top: var(--bar-height);
   right: 0;

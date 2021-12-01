@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, BrowserRouter } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './barItem.css';
 
 interface BarItemProps {
@@ -37,9 +37,9 @@ function ItemLink(Props: LinkProps){
     );
   } else {
     return (
-      <a>
+      <span className='on-click-link'>
         {Props.children}
-      </a>
+      </span>
     );
   }
 }
@@ -49,7 +49,7 @@ function BarItem(Props: BarItemProps) {
     <div className='itemContainer hover-tint' onMouseUp={Props.mouseUpHandler} onMouseDown={Props.mouseDownHandler}>
       <ItemLink to={Props.to} link={Props.link} newTab={Props.newTab}>
         <div className='item'>
-          {Props.icon ? (<img src={Props.icon}/>) : null}
+          {Props.icon ? (<img src={Props.icon} alt='icon'/>) : null}
           {Props.children}
         </div>
       </ItemLink>

@@ -35,7 +35,6 @@ function CreateTabBarItem(Props: GameTabDetail|InfoTabDetail){
 }
 
 function GameTabBar(Props: GameTabBarProps) {
-
   function TabList() {
     return (
       <React.Fragment>

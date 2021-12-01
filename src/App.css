@@ -12,6 +12,7 @@
   --bar-color: #fff;
   --bar-tint: #dedede;
   --page-color: #ccc;
+  --page-gradient: linear-gradient(#ddd, #eee);
   --font-color: #000;
   --link-color: #000;
   --tab-bar-color: #ddd;
@@ -26,6 +27,7 @@
   --bar-color: #000;
   --bar-tint: #333333;
   --page-color: #333;
+  --page-gradient: linear-gradient(#222, #333);
   --font-color: #fff;
   --link-color: #fff;
   --tab-bar-color: #222;
@@ -51,10 +53,18 @@ html, body {
 a {
   color: var(--link-color);
   text-decoration: none;
-  background-color: #fff;
 }
 
 a:hover > * {
+  background-color: var(--bar-tint);
+}
+
+.on-click-link {
+  color: var(--link-color);
+  text-decoration: none;
+}
+
+.on-click-link:hover > * {
   background-color: var(--bar-tint);
 }
 
@@ -63,7 +73,8 @@ a:hover > * {
   min-height: 100vh;
   padding-top: var(--bar-height);
   padding-bottom: var(--bar-height);
-  background-color: var(--page-color);
+  background-image: var(--page-gradient);
+  background-attachment: fixed;
   color: var(--font-color);
 }
 
@@ -75,6 +86,13 @@ a:hover > * {
 @media (max-width: 700px) {
   .narrow-screen { display: inline-block; }
   .wide-screen { display: none; }
+}
+
+.full-size {
+  z-index: 2;
+  width: 100vw;
+  height: 100%;
+  max-height: 100%;
 }
 
 .no-select > * {
