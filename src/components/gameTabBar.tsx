@@ -12,6 +12,7 @@ function CreateTabBarItem(Props: GameTabDetail|InfoTabDetail){
   if('GameID' in Props){
     return (
       <TabBarItem
+        key={Props.ID}
         ID={Props.ID}
         Type={TabType.Game}
         Title={Props.Title}
@@ -24,6 +25,7 @@ function CreateTabBarItem(Props: GameTabDetail|InfoTabDetail){
   } else if('InfoID' in Props){
     return (
       <TabBarItem
+        key={Props.ID}
         ID={Props.ID}
         Type={TabType.Info}
         Title={Props.Title}

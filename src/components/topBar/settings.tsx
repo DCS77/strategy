@@ -16,7 +16,7 @@ interface SettingsProps {
   onLanguageMouseDown: () => void;
 }
 
-function SettingsProps(Props: SettingsProps) {
+function Settings(Props: SettingsProps) {
   const { t } = useTranslation('translation', { i18n });
 
   return (
@@ -51,4 +51,4 @@ function SettingsProps(Props: SettingsProps) {
   );
 };
 
-export default SettingsProps;
+export default Settings;
