@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { TabType, TabDetails, GameTabDetail, InfoTabDetail } from '../types';
 import TabBarItem from './tabBarItem';
 import './gameTabBar.css';

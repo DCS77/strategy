@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React from 'react';
 import BarItem from '../barItem';
 import Logo from '../../images/logo.svg';
 import '../../App.css';

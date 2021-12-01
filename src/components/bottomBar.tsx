@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import BarItem from './barItem';
 import { GithubLogo, UserRectangle, CurrencyCircleDollar, Scales, Cookie, Copyright } from 'phosphor-react';
 import i18n from '../i18nextConf';

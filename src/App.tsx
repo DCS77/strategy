@@ -50,24 +50,6 @@ function App() {
     setTabs([...tabs, game2]);
   }
 
-  function GetPageSize(){
-    let el = document.getElementById('page');
-    if(document != null && el != null){
-      console.log('width: ', el.offsetWidth);
-      console.log('height: ', el.offsetHeight);
-      return {
-        width: el.offsetWidth,
-        height: el.offsetHeight - 60
-      }
-    }
-    console.log('width: ', 800);
-    console.log('height: ', 800);
-    return {
-      width: 800,
-      height: 800
-    }
-  }
-
   return (
     <BrowserRouter>
       <div ref={app} id='theme' className={'flex-full transition theme-' + theme}>

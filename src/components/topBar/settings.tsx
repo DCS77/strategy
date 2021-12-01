@@ -1,5 +1,5 @@
 
-import React, { useState, Suspense } from 'react';
+import React from 'react';
 import Switch from '../toggleSwitch';
 import BarItem from '../barItem';
 import { Translate, PaintRoller, CaretDown, User } from 'phosphor-react';

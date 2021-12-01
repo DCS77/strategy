@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import BarItem from '../barItem';
 import { Users, Sword } from 'phosphor-react';
 import i18n from '../../i18nextConf';

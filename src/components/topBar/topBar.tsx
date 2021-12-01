@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import SiteIdentity from './siteIdentity';
 import SiteStats from './siteStats';
 import Settings from './settings';
