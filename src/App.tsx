@@ -1,16 +1,12 @@
 import React, { useState, useRef } from 'react';
 import { useStateRef } from 'use-state-ref';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
-import BarItem from './components/barItem';
+import Home from './components/pages/home';
 import BottomBar from './components/bottomBar';
 import TopBarGroup from './components/topBar/topBarGroup';
 import GameTabBar from './components/gameTabBar';
 import { TabDetails, GameTabDetail, InfoTabDetail } from './types';
 import './App.css';
-
-interface StateRef {
-  tabs: TabDetails;
-}
 
 function App() {
   const [theme, setTheme] = useState('dark');
@@ -19,7 +15,6 @@ function App() {
   const app = useRef<HTMLDivElement>(null);
 
   function CloseTab(ID: string){
-    console.log('close tab: ', ID, tabs);
     if(tabsRef.current){
       let newTabs = tabsRef.current.filter((item:GameTabDetail|InfoTabDetail) => item.ID !== ID);
       setTabs(newTabs);
@@ -55,41 +50,62 @@ function App() {
     setTabs([...tabs, game2]);
   }
 
+  function GetPageSize(){
+    let el = document.getElementById('page');
+    if(document != null && el != null){
+      console.log('width: ', el.offsetWidth);
+      console.log('height: ', el.offsetHeight);
+      return {
+        width: el.offsetWidth,
+        height: el.offsetHeight - 60
+      }
+    }
+    console.log('width: ', 800);
+    console.log('height: ', 800);
+    return {
+      width: 800,
+      height: 800
+    }
+  }
+
   return (
     <BrowserRouter>
-      <div ref={app} id="theme" className={'transition theme-' + theme}>
+      <div ref={app} id='theme' className={'flex-full transition theme-' + theme}>
         <TopBarGroup
           theme={theme}
           onClickThemeSwitch={onClickThemeSwitch}/>
-        <div className="page">
+        <div id='page' className='page'>
           <GameTabBar Tabs={tabs}/>
           <Switch>
-            <Route path="/game1">
+            <Route path='/game1'>
               Game 1
             </Route>
-            <Route path="/info1">
+            <Route path='/info1'>
               Info 1
             </Route>
-            <Route path="/online">
+            <Route path='/online'>
               Online
             </Route>
-            <Route path="/live">
+            <Route path='/live'>
+              <div onClick={AddGameTab}>
+                Add game tab
+              </div>
               Active games
             </Route>
-            <Route path="/contact">
+            <Route path='/contact'>
               Contact
             </Route>
-            <Route path="/donate">
+            <Route path='/donate'>
               Donate
             </Route>
-            <Route path="/terms">
+            <Route path='/terms'>
               Terms
             </Route>
-            <Route path="/privacy">
+            <Route path='/privacy'>
               Privacy
             </Route>
-            <Route path="/">
-              Home
+            <Route path='/'>
+              <Home getSize={GetPageSize}/>
             </Route>
           </Switch>
         </div>
