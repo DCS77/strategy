@@ -105,7 +105,7 @@ function App() {
               Privacy
             </Route>
             <Route path='/'>
-              <Home getSize={GetPageSize}/>
+              <Home/>
             </Route>
           </Switch>
         </div>
