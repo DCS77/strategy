@@ -1,11 +1,32 @@
-.navigation {
-  height: 500px
+.navigationColumn {
+  float: left;
+  width: 20%;
+  background-color: yellow;
+  min-height: -moz-calc(100vh - var(--used-space-height));
+  min-height: -webkit-calc(100vh - var(--used-space-height));
+  min-height: calc(100vh - var(--used-space-height));
 }
 
-.home {
-  height: 100vh
+.boardColumn {
+  float: left;
+  width: 60%;
+  background-color: red;
+  min-height: -moz-calc(100vh - var(--used-space-height));
+  min-height: -webkit-calc(100vh - var(--used-space-height));
+  min-height: calc(100vh - var(--used-space-height));
 }
 
-.chat {
-  height: 100vh
+.chatColumn {
+  float: left;
+  width: 20%;
+  background-color: blue;
+  min-height: -moz-calc(100vh - var(--used-space-height));
+  min-height: -webkit-calc(100vh - var(--used-space-height));
+  min-height: calc(100vh - var(--used-space-height));
+}
+
+.homeRow:after {
+  content: '';
+  display: table;
+  clear: both;
 }

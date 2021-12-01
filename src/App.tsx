@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react';
 import { useStateRef } from 'use-state-ref';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { BrowserRouter, Switch, Route, useLocation } from 'react-router-dom';
 import Home from './components/pages/home';
+import Game from './components/pages/game';
 import BottomBar from './components/bottomBar';
 import TopBarGroup from './components/topBar/topBarGroup';
 import GameTabBar from './components/gameTabBar';
@@ -40,7 +41,7 @@ function App() {
   function AddGameTab(){
     let ID = MakeID(2);
     let game2:GameTabDetail = {
-      GameID: 'Game',
+      GameID: `/game/${ID}`,
       Title: ID,
       Player: 'Sam',
       Rating: 1647,
@@ -48,6 +49,11 @@ function App() {
       closeTabHandler: CloseTab
     };
     setTabs([...tabs, game2]);
+  }
+
+  function SelectedGame(){
+    const splitPath = useLocation().pathname.split('/');
+    return <Game ID={splitPath[2]}/>
   }
 
   return (
@@ -59,10 +65,10 @@ function App() {
         <div id='page' className='page'>
           <GameTabBar Tabs={tabs}/>
           <Switch>
-            <Route path='/game1'>
-              Game 1
+            <Route path='/game'>
+              <SelectedGame/>
             </Route>
-            <Route path='/info1'>
+            <Route path='/info'>
               Info 1
             </Route>
             <Route path='/online'>
