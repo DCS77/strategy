@@ -1,12 +1,14 @@
 import React from 'react';
 import './game.css';
 import '../App.css';
+import NavigationList from '../components/navigation/navigationList';
 
 interface GameProps {
   ID?: string;
+  onCreateGame: () => void;
 }
 
-function Game(Props: GameProps) {
+function ShowGame(Props: GameProps) {
   return (
     <div className='full-size gameRow'>
       <div className='leftColumn'>
@@ -25,6 +27,29 @@ function Game(Props: GameProps) {
         <div className='chatSection'>
           Chat
         </div>
+      </div>
+    </div>
+  )
+}
+
+function Game(Props: GameProps) {
+  if(Props.ID){
+    return ShowGame(Props)
+  }
+
+  return (
+    <div className='full-size gameRow'>
+      <div className='leftColumn'>
+        <NavigationList/>
+      </div>
+      <div className='boardColumn'>
+        Create a new game
+        <div onClick={Props.onCreateGame}>
+          Add game tab
+        </div>
+      </div>
+      <div className='rightColumn'>
+        Chat
       </div>
     </div>
   )

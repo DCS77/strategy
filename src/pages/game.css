@@ -1,7 +1,6 @@
 .leftColumn {
   float: left;
   width: 20%;
-  background-color: orange;
   min-height: -moz-calc(100vh - var(--used-space-height));
   min-height: -webkit-calc(100vh - var(--used-space-height));
   min-height: calc(100vh - var(--used-space-height));
@@ -10,7 +9,6 @@
 .boardColumn {
   float: left;
   width: 60%;
-  background-color: red;
   min-height: -moz-calc(100vh - var(--used-space-height));
   min-height: -webkit-calc(100vh - var(--used-space-height));
   min-height: calc(100vh - var(--used-space-height));
@@ -19,7 +17,6 @@
 .rightColumn {
   float: left;
   width: 20%;
-  background-color: blue;
   min-height: -moz-calc(100vh - var(--used-space-height));
   min-height: -webkit-calc(100vh - var(--used-space-height));
   min-height: calc(100vh - var(--used-space-height));

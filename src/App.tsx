@@ -25,8 +25,8 @@ function App() {
         let tabIndex = tabsRef.current.findIndex(tab => { return tab.ID === ID });
 
         newPath = tabIndex === tabsRef.current.length - 1 ?
-          `/game/${tabsRef.current[tabIndex - 1].ID}` :
-          `/game/${tabsRef.current[tabIndex + 1].ID}`;
+          `/play/${tabsRef.current[tabIndex - 1].ID}` :
+          `/play/${tabsRef.current[tabIndex + 1].ID}`;
       }
       history.push(newPath);
     }
@@ -56,11 +56,6 @@ function App() {
     }
   }
 
-  function SelectedGame() {
-    const splitPath = useLocation().pathname.split('/');
-    return <Game ID={splitPath[2]}/>
-  }
-
   // Added temporarily to test adding of game tabs
   function MakeID(length: number) {
     var result           = '';
@@ -76,7 +71,7 @@ function App() {
   function AddGameTab() {
     let ID = MakeID(2);
     let game2:GameTabDetail = {
-      GameID: `/game/${ID}`,
+      GameID: `/play/${ID}`,
       Title: ID,
       Player: 'Sam',
       Rating: 1647,
@@ -84,6 +79,11 @@ function App() {
       closeTabHandler: onCloseTab
     };
     setTabs([...tabs, game2]);
+  }
+
+  function PlayGame() {
+    const splitPath = useLocation().pathname.split('/');
+    return <Game onCreateGame={AddGameTab} ID={splitPath[2]}/>
   }
 
   return (
@@ -94,19 +94,31 @@ function App() {
       <div id='page' className='page'>
         <GameTabBar Tabs={tabs} onHeightChange={onTabBarHeightChange}/>
         <Switch>
-          <Route path='/game'>
-            <SelectedGame/>
+          <Route path='/play'>
+            <PlayGame/>
           </Route>
           <Route path='/info'>
             Info 1
+          </Route>
+          <Route path='/tv'>
+            Arena TV
+          </Route>
+          <Route path='/ai'>
+            Play AI
+          </Route>
+          <Route path='/tutorial'>
+            Tutorial
+          </Route>
+          <Route path='/army'>
+            Manage Your Army
+          </Route>
+          <Route path='/leaderboards'>
+            Leaderboards
           </Route>
           <Route path='/online'>
             Online
           </Route>
           <Route path='/live'>
-            <div onClick={AddGameTab}>
-              Add game tab
-            </div>
             Active games
           </Route>
           <Route path='/contact'>
