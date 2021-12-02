@@ -1,10 +1,10 @@
 import React from 'react';
-import BarItem from './barItem';
+import BarItem from '../items/barItem';
 import { GithubLogo, UserRectangle, CurrencyCircleDollar, Scales, Cookie, Copyright } from 'phosphor-react';
-import i18n from '../i18nextConf';
+import i18n from '../../i18nextConf';
 import { useTranslation } from 'react-i18next';
 import './bottomBar.css';
-import '../App.css';
+import '../../App.css';
 
 function BottomBar() {
   const { t } = useTranslation('translation', { i18n });

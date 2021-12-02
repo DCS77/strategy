@@ -1,6 +1,6 @@
 import React from 'react';
 import './home.css';
-import '../../App.css';
+import '../App.css';
 
 interface HomeProps {}
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import useResizeObserver from 'use-resize-observer';
-import { TabType, TabDetails, GameTabDetail, InfoTabDetail } from '../types';
+import { TabType, TabDetails, GameTabDetail, InfoTabDetail } from '../../types';
 import TabBarItem from './tabBarItem';
 import './gameTabBar.css';
-import '../App.css';
+import '../../App.css';
 
 interface GameTabBarProps {
   Tabs: TabDetails;

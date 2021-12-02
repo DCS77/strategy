@@ -1,7 +1,7 @@
 
 import React from 'react';
-import Switch from '../toggleSwitch';
-import BarItem from '../barItem';
+import Switch from '../items/toggleSwitch';
+import BarItem from '../items/barItem';
 import { Translate, PaintRoller, CaretDown, User } from 'phosphor-react';
 import i18n from '../../i18nextConf';
 import { useTranslation } from 'react-i18next';

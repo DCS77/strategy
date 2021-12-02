@@ -1,5 +1,5 @@
 import React from 'react';
-import BarItem from '../barItem';
+import BarItem from '../items/barItem';
 import i18n from '../../i18nextConf';
 import { useTranslation } from 'react-i18next';
 import '../../App.css';

@@ -9,7 +9,7 @@
 }
 
 .game-tab-bar-0 {
-  --current-tab-bar-height: 0;
+  --current-tab-bar-height: 0px;
 }
 .game-tab-bar-1 {
   --current-tab-bar-height: 23px;

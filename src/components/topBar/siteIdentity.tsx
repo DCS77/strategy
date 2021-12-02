@@ -1,5 +1,5 @@
 import React from 'react';
-import BarItem from '../barItem';
+import BarItem from '../items/barItem';
 import Logo from '../../images/logo.svg';
 import '../../App.css';
 

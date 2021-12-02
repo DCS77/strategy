@@ -1,6 +1,6 @@
 import React from 'react';
 import './game.css';
-import '../../App.css';
+import '../App.css';
 
 interface GameProps {
   ID?: string;

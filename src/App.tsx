@@ -1,11 +1,11 @@
 import React, { useState, useRef } from 'react';
 import { useStateRef } from 'use-state-ref';
 import { Switch, Route, useLocation, useHistory, withRouter } from 'react-router-dom';
-import Home from './components/pages/home';
-import Game from './components/pages/game';
-import BottomBar from './components/bottomBar';
+import Home from './pages/home';
+import Game from './pages/game';
+import BottomBar from './components/bottomBar/bottomBar';
 import TopBarGroup from './components/topBar/topBarGroup';
-import GameTabBar from './components/gameTabBar';
+import GameTabBar from './components/tabBar/gameTabBar';
 import { TabDetails, GameTabDetail, InfoTabDetail } from './types';
 import './App.css';
 

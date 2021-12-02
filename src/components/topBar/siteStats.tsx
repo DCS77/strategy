@@ -1,6 +1,6 @@
 
 import React from 'react';
-import BarItem from '../barItem';
+import BarItem from '../items/barItem';
 import { Users, Sword } from 'phosphor-react';
 import i18n from '../../i18nextConf';
 import { useTranslation } from 'react-i18next';

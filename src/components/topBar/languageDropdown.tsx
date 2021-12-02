@@ -1,6 +1,6 @@
 import React from 'react';
 import i18n from '../../i18nextConf';
-import BarItem from '../barItem';
+import BarItem from '../items/barItem';
 import '../../App.css';
 
 interface LanguageDropdownProps {

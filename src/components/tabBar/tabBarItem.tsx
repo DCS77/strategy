@@ -1,11 +1,11 @@
 import React from 'react';
-import { TabType } from '../types';
-import BarItem from './barItem';
+import { TabType } from '../../types';
+import BarItem from '../items/barItem';
 import { Asterisk, X } from 'phosphor-react';
-import i18n from '../i18nextConf';
+import i18n from '../../i18nextConf';
 import { useTranslation } from 'react-i18next';
 import './gameTabBar.css';
-import '../App.css';
+import '../../App.css';
 
 interface TabBarItemProps {
   ID: string;
@@ -30,7 +30,6 @@ function TabBarItem(Props: TabBarItemProps) {
   const { t } = useTranslation('translation', { i18n });
 
   function CloseTab(){
-    console.log('tabBarItem: ', Props.ID);
     Props.closeTabHandler(Props.ID);
   }
 
