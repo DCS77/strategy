@@ -40,10 +40,10 @@ function BottomBar() {
       <div className='right-group inline'>
         <BarItem to='/terms'>
           <span className='wide-screen'>
-            <span className='inline flex-center bar-spaced'><Scales/>{t('TermsOfUse')}</span>
+            <span className='inline flex-center bar-spaced'><Scales/>{t('Terms of Use')}</span>
           </span>
           <span className='narrow-screen'>
-            <span className='inline flex-center'><Scales/>{t('TermsOfUse')}</span>
+            <span className='inline flex-center'><Scales/>{t('Terms of Use')}</span>
           </span>
         </BarItem>
         <BarItem to='/privacy'>

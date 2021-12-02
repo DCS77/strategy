@@ -5,10 +5,17 @@
   "Profile": "Profile",
   "Settings": "Settings",
   "Logout": "Logout",
-  "ActiveGames": "Active Games",
+  "Active Games": "Active Games",
   "Online": "Online",
   "Contact": "Contact",
   "Donate": "Donate",
-  "TermsOfUse": "Terms of Use",
-  "Privacy": "Privacy"
+  "Terms of Use": "Terms of Use",
+  "Privacy": "Privacy",
+  "Arena TV": "Arena TV",
+  "Multiplayer": "Multiplayer",
+  "Play AI": "Play AI",
+  "Tutorial": "Tutorial",
+  "Your Army": "Your Army",
+  "Leaderboards": "Leaderboards",
+  "Play": "Play"
 }

@@ -5,10 +5,17 @@
   "Profile": "プロフィール",
   "Settings": "セッティング",
   "Logout": "ログアウト",
-  "ActiveGames": "つのアクティブなゲーム",
+  "Active Games": "つのアクティブなゲーム",
   "Online": "オンライン",
   "Contact": "コンタクト",
   "Donate": "寄付",
-  "TermsOfUse": "利用条件",
-  "Privacy": "プライバシー"
+  "Terms of Use": "利用条件",
+  "Privacy": "プライバシー",
+  "Arena TV": "Arena TV",
+  "Multiplayer": "Multiplayer",
+  "Play AI": "Play AI",
+  "Tutorial": "Tutorial",
+  "Your Army": "Your Army",
+  "Leaderboards": "Leaderboards",
+  "Play": "Play"
 }

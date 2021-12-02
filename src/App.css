@@ -140,6 +140,11 @@ a:hover > * {
   padding-right: 4px;
 }
 
+.all-spaced > * {
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
 .left-group {
   flex: 1;
   display: flex;

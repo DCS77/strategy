@@ -1,7 +1,7 @@
 
 import React from 'react';
 import BarItem from '../items/barItem';
-import { Users, Sword } from 'phosphor-react';
+import { Sword, Television, Users, UsersFour } from 'phosphor-react';
 import i18n from '../../i18nextConf';
 import { useTranslation } from 'react-i18next';
 import '../../App.css';
@@ -11,21 +11,27 @@ function SiteStats() {
 
   return (
     <span className='center-group inline'>
+      <BarItem to='/tv'>
+        <span className='inline flex-center all-spaced'><Television/>TV</span>
+      </BarItem>
       <BarItem to='/online'>
         <span className='wide-screen'>
-          <span className='inline flex-center bar-spaced'><Users/>32 {t('Online')}</span>
+          <span className='inline flex-center all-spaced'><UsersFour/>32 {t('Online')}</span>
         </span>
         <span className='narrow-screen'>
-          <span className='inline flex-center'><Users/>32</span>
+          <span className='inline flex-center'><UsersFour/>32</span>
         </span>
       </BarItem>
       <BarItem to='/live'>
         <span className='wide-screen'>
-          <span className='inline flex-center bar-spaced'><Sword/>8 {t('ActiveGames')}</span>
+          <span className='inline flex-center all-spaced'><Sword/>8 {t('Active Games')}</span>
         </span>
         <span className='narrow-screen'>
           <span className='inline flex-center'><Sword/>8</span>
         </span>
+      </BarItem>
+      <BarItem to='/play'>
+        <span className='inline flex-center all-spaced'><Users/>{t('Play')}</span>
       </BarItem>
     </span>
   );
