@@ -2,6 +2,7 @@ import React from 'react';
 import './game.css';
 import '../App.css';
 import NavigationList from '../components/navigation/navigationList';
+import Board from '../components/board/board';
 
 interface GameProps {
   ID?: string;
@@ -19,7 +20,9 @@ function ShowGame(Props: GameProps) {
           Pieces
         </div>
       </div>
-      <div className='boardColumn'>Board for game {Props.ID}</div>
+      <div className='boardColumn'>
+        <Board/>
+      </div>
       <div className='rightColumn'>
         <div className='opponentSection'>
           Opponent Details

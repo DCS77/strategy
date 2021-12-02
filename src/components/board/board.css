@@ -1,0 +1,60 @@
+.playerDetails {
+  background-color: var(--board-player-details-color);
+  min-height: 10vh;
+}
+
+.even .list:nth-child(even) {
+  background: var(--board-primary-color);
+}
+
+.even .list:nth-child(odd) {
+  background: var(--board-secondary-color);
+}
+
+.odd .list:nth-child(odd) {
+  background: var(--board-primary-color);
+}
+
+.odd .list:nth-child(even) {
+  background: var(--board-secondary-color);
+}
+
+.board {
+  min-height: -moz-calc(80vh - var(--used-space-height));
+  min-height: -webkit-calc(80vh - var(--used-space-height));
+  min-height: calc(80vh - var(--used-space-height));
+  width: 100%;
+}
+
+.boardRow {
+  height: -moz-calc((80vh - var(--used-space-height)) / var(--board-rows));
+  height: -webkit-calc((80vh - var(--used-space-height)) / var(--board-rows));
+  height: calc((80vh - var(--used-space-height)) / var(--board-rows));
+}
+
+.boardRow .list {
+  display: inline-block;
+  height: 100%;
+}
+
+.board .h-1 { --board-rows: 1; }
+.board .h-2 { --board-rows: 2; }
+.board .h-3 { --board-rows: 3; }
+.board .h-4 { --board-rows: 4; }
+.board .h-5 { --board-rows: 5; }
+.board .h-6 { --board-rows: 6; }
+.board .h-7 { --board-rows: 7; }
+.board .h-8 { --board-rows: 8; }
+.board .h-9 { --board-rows: 9; }
+.board .h-10 { --board-rows: 10; }
+
+.boardRow .w-1 { min-width: 100%; }
+.boardRow .w-2 { min-width: 50%; }
+.boardRow .w-3 { min-width: 33.33%; }
+.boardRow .w-4 { min-width: 25%; }
+.boardRow .w-5 { min-width: 20%; }
+.boardRow .w-6 { min-width: 16.66%; }
+.boardRow .w-7 { min-width: 14.28%; }
+.boardRow .w-8 { min-width: 12.25%; }
+.boardRow .w-9 { min-width: 11.11%; }
+.boardRow .w-10 { min-width: 10%; }
