@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { useStateRef } from 'use-state-ref';
-import { BrowserRouter, Switch, Route, useLocation } from 'react-router-dom';
+import { Switch, Route, useLocation, useHistory, withRouter } from 'react-router-dom';
 import Home from './components/pages/home';
 import Game from './components/pages/game';
 import BottomBar from './components/bottomBar';
@@ -15,8 +15,22 @@ function App() {
   const [tabs, setTabs] = useState<TabDetails>([]);
   const tabsRef = useStateRef(tabs);
   const app = useRef<HTMLDivElement>(null);
+  const history = useHistory();
 
-  function CloseTab(ID: string){
+  function onCloseTab(ID: string) {
+    const splitPath = window.location.pathname.split('/');
+    if(splitPath[2] === ID) {
+      let newPath = '/';
+      if(tabsRef.current && tabsRef.current.length > 1) {
+        let tabIndex = tabsRef.current.findIndex(tab => { return tab.ID === ID });
+
+        newPath = tabIndex === tabsRef.current.length - 1 ?
+          `/game/${tabsRef.current[tabIndex - 1].ID}` :
+          `/game/${tabsRef.current[tabIndex + 1].ID}`;
+      }
+      history.push(newPath);
+    }
+
     if(tabsRef.current){
       let newTabs = tabsRef.current.filter((item:GameTabDetail|InfoTabDetail) => item.ID !== ID);
       setTabs(newTabs);
@@ -25,6 +39,21 @@ function App() {
 
   function onClickThemeSwitch(checked: boolean) {
     setTheme(checked ? 'dark' : 'light');
+  }
+
+  function onTabBarHeightChange(height: Number) {
+    if(height >= 0 && height < 20) {
+      setGameTabBarSize(0);
+    }
+    else if(height > 20 && height <= 40) {
+      setGameTabBarSize(1);
+    }
+    else if(height > 40 && height <= 50) {
+      setGameTabBarSize(2);
+    }
+    else if(height > 50) {
+      setGameTabBarSize(3);
+    }
   }
 
   function SelectedGame() {
@@ -52,71 +81,54 @@ function App() {
       Player: 'Sam',
       Rating: 1647,
       ID: ID,
-      closeTabHandler: CloseTab
+      closeTabHandler: onCloseTab
     };
     setTabs([...tabs, game2]);
   }
 
-  function UpdateGameTabBarHeight(height: Number) {
-    if(height >= 0 && height < 20) {
-      setGameTabBarSize(0);
-    }
-    else if(height > 20 && height <= 40) {
-      setGameTabBarSize(1);
-    }
-    else if(height > 40 && height <= 50) {
-      setGameTabBarSize(2);
-    }
-    else if(height > 50) {
-      setGameTabBarSize(3);
-    }
-  }
-
   return (
-    <BrowserRouter>
-      <div ref={app} id='theme' className={`flex-full transition theme-${theme} game-tab-bar-${gameTabBarSize}`}>
-        <TopBarGroup
-          theme={theme}
-          onClickThemeSwitch={onClickThemeSwitch}/>
-        <div id='page' className='page'>
-          <GameTabBar Tabs={tabs} onHeightChange={UpdateGameTabBarHeight}/>
-          <Switch>
-            <Route path='/game'>
-              <SelectedGame/>
-            </Route>
-            <Route path='/info'>
-              Info 1
-            </Route>
-            <Route path='/online'>
-              Online
-            </Route>
-            <Route path='/live'>
-              <div onClick={AddGameTab}>
-                Add game tab
-              </div>
-              Active games
-            </Route>
-            <Route path='/contact'>
-              Contact
-            </Route>
-            <Route path='/donate'>
-              Donate
-            </Route>
-            <Route path='/terms'>
-              Terms
-            </Route>
-            <Route path='/privacy'>
-              Privacy
-            </Route>
-            <Route path='/'>
-              <Home/>
-            </Route>
-          </Switch>
-        </div>
-        <BottomBar/>
+    <div ref={app} id='theme' className={`flex-full transition theme-${theme} game-tab-bar-${gameTabBarSize}`}>
+      <TopBarGroup
+        theme={theme}
+        onClickThemeSwitch={onClickThemeSwitch}/>
+      <div id='page' className='page'>
+        <GameTabBar Tabs={tabs} onHeightChange={onTabBarHeightChange}/>
+        <Switch>
+          <Route path='/game'>
+            <SelectedGame/>
+          </Route>
+          <Route path='/info'>
+            Info 1
+          </Route>
+          <Route path='/online'>
+            Online
+          </Route>
+          <Route path='/live'>
+            <div onClick={AddGameTab}>
+              Add game tab
+            </div>
+            Active games
+          </Route>
+          <Route path='/contact'>
+            Contact
+          </Route>
+          <Route path='/donate'>
+            Donate
+          </Route>
+          <Route path='/terms'>
+            Terms
+          </Route>
+          <Route path='/privacy'>
+            Privacy
+          </Route>
+          <Route path='/'>
+            <Home/>
+          </Route>
+        </Switch>
       </div>
-    </BrowserRouter>
+      <BottomBar/>
+    </div>
   );
 }
 
-export default App;
+export default withRouter(App);
