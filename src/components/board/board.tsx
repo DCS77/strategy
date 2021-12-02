@@ -3,6 +3,8 @@ import './board.css';
 
 interface CellProps {
   cols: number;
+  colIndex: number;
+  rowIndex: number;
 }
 
 interface RowProps {
@@ -19,13 +21,13 @@ interface GridProps {
 function Cell(Props: CellProps) {
   return (
     <div className={`list w-${Props.cols}`}> 
-      <span>Cell</span>
+      <span id={`cell-${Props.rowIndex}-${Props.colIndex}`} >Cell</span>
     </div>
   )
 }
 
 function Row(Props: RowProps) {
-  const Cols = (Array.from(new Array(Props.cols), (val, index) => <Cell key={`board-cell-${Props.index}-${index}`} cols={Props.cols}/>));
+  const Cols = (Array.from(new Array(Props.cols), (val, index) => <Cell key={`board-cell-${Props.index}-${index}`} cols={Props.cols} colIndex={index} rowIndex={Props.index}/>));
 
   const oddEven = Props.index % 2 === 0 ? 'even' : 'odd';
 
