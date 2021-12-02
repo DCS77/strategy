@@ -13,7 +13,7 @@
 .game-tab-bar-inner {
   display: flex;
   flex-flow: row wrap;
-  max-height: var(--tab-bar-height);
+  max-height: var(--max-tab-bar-height);
   overflow-y: scroll;
 }
 

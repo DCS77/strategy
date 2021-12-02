@@ -8,6 +8,19 @@
   transition: all .2s ease-out;
 }
 
+.game-tab-bar-0 {
+  --current-tab-bar-height: 0;
+}
+.game-tab-bar-1 {
+  --current-tab-bar-height: 23px;
+}
+.game-tab-bar-2 {
+  --current-tab-bar-height: 46px;
+}
+.game-tab-bar-3 {
+  --current-tab-bar-height: 52px;
+}
+
 .theme-light {
   --bar-color: #fff;
   --bar-tint: #dedede;
@@ -21,11 +34,10 @@
   --switch-color: #000;
   --svg-filter: brightness(3) invert(0);
   --bar-height: 22px;
-  --tab-bar-height: 52px;
-
-  --used-space-height: -moz-calc(2*var(--bar-height) + var(--tab-bar-height));
-  --used-space-height: -webkit-calc(2*var(--bar-height) + var(--tab-bar-height));
-  --used-space-height: calc(2*var(--bar-height) + var(--tab-bar-height));
+  --max-tab-bar-height: 52px;
+  --used-space-height: -moz-calc(2*var(--bar-height) + var(--current-tab-bar-height));
+  --used-space-height: -webkit-calc(2*var(--bar-height) + var(--current-tab-bar-height));
+  --used-space-height: calc(2*var(--bar-height) + var(--current-tab-bar-height));
 }
 .theme-dark {
   --bar-color: #000;
@@ -40,11 +52,10 @@
   --switch-color: #fff;
   --svg-filter: brightness(0) invert(1);
   --bar-height: 22px;
-  --tab-bar-height: 52px;
-
-  --used-space-height: -moz-calc(2*var(--bar-height) + var(--tab-bar-height));
-  --used-space-height: -webkit-calc(2*var(--bar-height) + var(--tab-bar-height));
-  --used-space-height: calc(2*var(--bar-height) + var(--tab-bar-height));
+  --max-tab-bar-height: 52px;
+  --used-space-height: -moz-calc(2*var(--bar-height) + var(--current-tab-bar-height));
+  --used-space-height: -webkit-calc(2*var(--bar-height) + var(--current-tab-bar-height));
+  --used-space-height: calc(2*var(--bar-height) + var(--current-tab-bar-height));
 }
 
 * {

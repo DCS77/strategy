@@ -11,6 +11,7 @@ import './App.css';
 
 function App() {
   const [theme, setTheme] = useState('dark');
+  const [gameTabBarSize, setGameTabBarSize] = useState(0);
   const [tabs, setTabs] = useState<TabDetails>([]);
   const tabsRef = useStateRef(tabs);
   const app = useRef<HTMLDivElement>(null);
@@ -26,6 +27,11 @@ function App() {
     setTheme(checked ? 'dark' : 'light');
   }
 
+  function SelectedGame() {
+    const splitPath = useLocation().pathname.split('/');
+    return <Game ID={splitPath[2]}/>
+  }
+
   // Added temporarily to test adding of game tabs
   function MakeID(length: number) {
     var result           = '';
@@ -38,7 +44,7 @@ function App() {
   }
 
   // Added temporarily to test adding of game tabs
-  function AddGameTab(){
+  function AddGameTab() {
     let ID = MakeID(2);
     let game2:GameTabDetail = {
       GameID: `/game/${ID}`,
@@ -51,19 +57,29 @@ function App() {
     setTabs([...tabs, game2]);
   }
 
-  function SelectedGame(){
-    const splitPath = useLocation().pathname.split('/');
-    return <Game ID={splitPath[2]}/>
+  function UpdateGameTabBarHeight(height: Number) {
+    if(height >= 0 && height < 20) {
+      setGameTabBarSize(0);
+    }
+    else if(height > 20 && height <= 40) {
+      setGameTabBarSize(1);
+    }
+    else if(height > 40 && height <= 50) {
+      setGameTabBarSize(2);
+    }
+    else if(height > 50) {
+      setGameTabBarSize(3);
+    }
   }
 
   return (
     <BrowserRouter>
-      <div ref={app} id='theme' className={'flex-full transition theme-' + theme}>
+      <div ref={app} id='theme' className={`flex-full transition theme-${theme} game-tab-bar-${gameTabBarSize}`}>
         <TopBarGroup
           theme={theme}
           onClickThemeSwitch={onClickThemeSwitch}/>
         <div id='page' className='page'>
-          <GameTabBar Tabs={tabs}/>
+          <GameTabBar Tabs={tabs} onHeightChange={UpdateGameTabBarHeight}/>
           <Switch>
             <Route path='/game'>
               <SelectedGame/>
