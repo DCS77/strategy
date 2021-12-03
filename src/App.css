@@ -35,9 +35,9 @@
   --svg-filter: brightness(3) invert(0);
   --bar-height: 22px;
   --max-tab-bar-height: 52px;
-  --used-space-height: -moz-calc(2*var(--bar-height) + var(--current-tab-bar-height));
-  --used-space-height: -webkit-calc(2*var(--bar-height) + var(--current-tab-bar-height));
-  --used-space-height: calc(2*var(--bar-height) + var(--current-tab-bar-height));
+  --used-space-height: -moz-calc(2 * var(--bar-height) + var(--current-tab-bar-height));
+  --used-space-height: -webkit-calc(2 * var(--bar-height) + var(--current-tab-bar-height));
+  --used-space-height: calc(2 * var(--bar-height) + var(--current-tab-bar-height));
 
   --board-player-details-color: #bbb;
   --board-primary-color: #ccc;
@@ -57,9 +57,9 @@
   --svg-filter: brightness(0) invert(1);
   --bar-height: 22px;
   --max-tab-bar-height: 52px;
-  --used-space-height: -moz-calc(2*var(--bar-height) + var(--current-tab-bar-height));
-  --used-space-height: -webkit-calc(2*var(--bar-height) + var(--current-tab-bar-height));
-  --used-space-height: calc(2*var(--bar-height) + var(--current-tab-bar-height));
+  --used-space-height: -moz-calc(2 * var(--bar-height) + var(--current-tab-bar-height));
+  --used-space-height: -webkit-calc(2 * var(--bar-height) + var(--current-tab-bar-height));
+  --used-space-height: calc(2 * var(--bar-height) + var(--current-tab-bar-height));
 
   --board-player-details-color: #444;
   --board-primary-color: #333;
