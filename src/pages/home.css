@@ -1,24 +1,18 @@
 .navigationColumn {
   float: left;
   width: 20%;
-  min-height: -moz-calc(100vh - var(--used-space-height));
-  min-height: -webkit-calc(100vh - var(--used-space-height));
   min-height: calc(100vh - var(--used-space-height));
 }
 
 .centerColumn {
   float: left;
   width: 60%;
-  min-height: -moz-calc(100vh - var(--used-space-height));
-  min-height: -webkit-calc(100vh - var(--used-space-height));
   min-height: calc(100vh - var(--used-space-height));
 }
 
 .chatColumn {
   float: left;
   width: 20%;
-  min-height: -moz-calc(100vh - var(--used-space-height));
-  min-height: -webkit-calc(100vh - var(--used-space-height));
   min-height: calc(100vh - var(--used-space-height));
 }
 

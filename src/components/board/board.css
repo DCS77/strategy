@@ -20,15 +20,11 @@
 }
 
 .board {
-  min-height: -moz-calc(80vh - var(--used-space-height));
-  min-height: -webkit-calc(80vh - var(--used-space-height));
   min-height: calc(80vh - var(--used-space-height));
   width: 100%;
 }
 
 .boardRow {
-  height: -moz-calc((80vh - var(--used-space-height)) / var(--board-rows));
-  height: -webkit-calc((80vh - var(--used-space-height)) / var(--board-rows));
   height: calc((80vh - var(--used-space-height)) / var(--board-rows));
 }
 
