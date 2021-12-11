@@ -1,5 +1,8 @@
 export enum TabType {
+  Army,
   Game,
+  Leaderboards,
+  Learn,
   Info,
   TV
 }

@@ -2,16 +2,15 @@ import React, { useEffect } from 'react';
 import './page.css';
 import '../App.css';
 import NavigationList from '../components/navigation/navigationList';
-import Board from '../components/board/board';
 import { TabType } from '../types';
 
-interface TVProps {
+interface LearnProps {
   createTab: (ID: string, path: string, title: string, type: TabType) => void;
 }
 
-function TV(Props: TVProps) {
+function Learn(Props: LearnProps) {
   useEffect(() => {
-    Props.createTab('tv', 'tv', 'Arena TV', TabType.TV);
+    Props.createTab('learn', 'learn', 'Learn to play', TabType.Learn);
   });
 
   return (
@@ -20,16 +19,16 @@ function TV(Props: TVProps) {
         <div className='navSection'>
           <NavigationList/>
         </div>
-        <div className='moveHistory'>
-          Move History
+        <div className='selectLesson'>
+          Select a lesson
         </div>
       </div>
-      <div className='boardColumn'>
-        <Board/>
+      <div className='learnColumn'>
+        Text for selected lesson
       </div>
       <div className='rightColumn'>
-        <div className='opponentSection'>
-          View player teams
+        <div className='actionSection'>
+          Process and actions
         </div>
         <div className='chatSection'>
           Chat
@@ -39,4 +38,4 @@ function TV(Props: TVProps) {
   )
 };
 
-export default TV;
+export default Learn;

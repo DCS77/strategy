@@ -33,9 +33,9 @@ function NavigationList() {
           <span className='inline flex-center'><Cpu/></span>
         </span>
       </BarItem>
-      <BarItem to='/tutorial' newTab={true}>
+      <BarItem to='/learn' newTab={true}>
         <span className='wide-screen'>
-          <span className='inline flex-center all-spaced'><Books/>{t('Tutorial')}</span>
+          <span className='inline flex-center all-spaced'><Books/>{t('Learn to play')}</span>
         </span>
         <span className='narrow-screen'>
           <span className='inline flex-center'><Books/></span>

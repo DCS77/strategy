@@ -2,6 +2,10 @@ import React, { useState, useRef } from 'react';
 import { useStateRef } from 'use-state-ref';
 import { Switch, Route, useLocation, useHistory, withRouter } from 'react-router-dom';
 import Home from './pages/home';
+import AI from './pages/ai';
+import Army from './pages/army';
+import Leaderboards from './pages/leaderboards';
+import Learn from './pages/learn';
 import Play from './pages/play';
 import TV from './pages/tv';
 import BottomBar from './components/bottomBar/bottomBar';
@@ -39,14 +43,15 @@ function App() {
 
   function onCloseTab(ID: string) {
     const splitPath = window.location.pathname.split('/');
-    if(splitPath[2] === ID || ID === 'tv') {
+    console.log('closing tab: ', ID, splitPath);
+    if((splitPath[1] === 'play' && splitPath[2] === ID) || (splitPath[1] === ID)) {
       let newPath = '/';
       if(tabsRef.current && tabsRef.current.length > 1) {
         let tabIndex = tabsRef.current.findIndex(tab => { return tab.ID === ID });
 
         newPath = tabIndex === tabsRef.current.length - 1 ?
-          `/play/${tabsRef.current[tabIndex - 1].ID}` :
-          `/play/${tabsRef.current[tabIndex + 1].ID}`;
+          tabsRef.current[tabIndex - 1].path :
+          tabsRef.current[tabIndex + 1].path;
       }
       history.push(newPath);
     }
@@ -86,9 +91,11 @@ function App() {
     />
   }
 
-  function TVTab() {
-    return <TV createTab={AddTab}/>
-  }
+  function AITab() { return <AI createTab={AddTab}/> }
+  function ArmyTab() { return <Army createTab={AddTab}/> }
+  function LeaderboardsTab() { return <Leaderboards createTab={AddTab}/> }
+  function LearnTab() { return <Learn createTab={AddTab}/> }
+  function TVTab() { return <TV createTab={AddTab}/> }
 
   return (
     <div ref={app} id='theme' className={`flex-full transition theme-${theme} game-tab-bar-${gameTabBarSize}`}>
@@ -108,16 +115,16 @@ function App() {
             <TVTab/>
           </Route>
           <Route path='/ai'>
-            Play AI
+            <AITab/>
           </Route>
-          <Route path='/tutorial'>
-            Tutorial
+          <Route path='/learn'>
+            <LearnTab/>
           </Route>
           <Route path='/army'>
-            Manage Your Army
+            <ArmyTab/>
           </Route>
           <Route path='/leaderboards'>
-            Leaderboards
+            <LeaderboardsTab/>
           </Route>
           <Route path='/online'>
             Online

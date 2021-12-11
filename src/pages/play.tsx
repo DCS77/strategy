@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import './play.css';
+import './page.css';
 import '../App.css';
 import NavigationList from '../components/navigation/navigationList';
 import Board from '../components/board/board';
@@ -28,7 +28,7 @@ function ShowGame(Props: PlayProps) {
       </div>
       <div className='rightColumn'>
         <div className='opponentSection'>
-          Opponent Details and Actions
+          Opponent Details, Team and Actions
         </div>
         <div className='chatSection'>
           Chat

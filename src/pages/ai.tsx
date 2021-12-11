@@ -5,13 +5,13 @@ import NavigationList from '../components/navigation/navigationList';
 import Board from '../components/board/board';
 import { TabType } from '../types';
 
-interface TVProps {
+interface AIProps {
   createTab: (ID: string, path: string, title: string, type: TabType) => void;
 }
 
-function TV(Props: TVProps) {
+function AI(Props: AIProps) {
   useEffect(() => {
-    Props.createTab('tv', 'tv', 'Arena TV', TabType.TV);
+    Props.createTab('ai', 'ai', 'Play AI', TabType.Game);
   });
 
   return (
@@ -29,7 +29,7 @@ function TV(Props: TVProps) {
       </div>
       <div className='rightColumn'>
         <div className='opponentSection'>
-          View player teams
+          Opponent Details and Team
         </div>
         <div className='chatSection'>
           Chat
@@ -39,4 +39,4 @@ function TV(Props: TVProps) {
   )
 };
 
-export default TV;
+export default AI;

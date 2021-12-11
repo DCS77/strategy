@@ -2,16 +2,15 @@ import React, { useEffect } from 'react';
 import './page.css';
 import '../App.css';
 import NavigationList from '../components/navigation/navigationList';
-import Board from '../components/board/board';
 import { TabType } from '../types';
 
-interface TVProps {
+interface ArmyProps {
   createTab: (ID: string, path: string, title: string, type: TabType) => void;
 }
 
-function TV(Props: TVProps) {
+function Army(Props: ArmyProps) {
   useEffect(() => {
-    Props.createTab('tv', 'tv', 'Arena TV', TabType.TV);
+    Props.createTab('army', 'army', 'Your Army', TabType.Army);
   });
 
   return (
@@ -20,16 +19,20 @@ function TV(Props: TVProps) {
         <div className='navSection'>
           <NavigationList/>
         </div>
-        <div className='moveHistory'>
-          Move History
+        <div className='selectTeam'>
+          Select team
+         <br/>
+          Create new team
         </div>
       </div>
-      <div className='boardColumn'>
-        <Board/>
+      <div className='learnColumn'>
+        Select or create a team on the left to begin
+        <br/>
+        Details about meta / average composition of teams
       </div>
       <div className='rightColumn'>
-        <div className='opponentSection'>
-          View player teams
+        <div className='actionSection'>
+          Process and actions
         </div>
         <div className='chatSection'>
           Chat
@@ -39,4 +42,4 @@ function TV(Props: TVProps) {
   )
 };
 
-export default TV;
+export default Army;

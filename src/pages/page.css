@@ -1,0 +1,73 @@
+.leftColumn {
+  float: left;
+  width: 20%;
+  min-height: calc(100vh - var(--used-space-height));
+}
+
+.boardColumn {
+  float: left;
+  width: 60%;
+  min-height: calc(100vh - var(--used-space-height));
+}
+
+.learnColumn {
+  float: left;
+  width: 60%;
+  min-height: calc(100vh - var(--used-space-height));
+  max-height: calc(100vh - var(--used-space-height));
+  overflow: scroll;
+}
+
+.rightColumn {
+  float: left;
+  width: 20%;
+  min-height: calc(100vh - var(--used-space-height));
+}
+
+.gameRow:after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+.navSection {
+  min-height: calc(40vh - var(--used-space-height));
+  max-height: calc(40vh - var(--used-space-height));
+  overflow: scroll;
+}
+
+.moveHistory {
+  min-height: calc(60vh - var(--used-space-height));
+  max-height: calc(60vh - var(--used-space-height));
+  overflow: scroll;
+}
+
+.opponentSection {
+  min-height: calc(40vh - var(--used-space-height));
+  max-height: calc(40vh - var(--used-space-height));
+  overflow: scroll;
+}
+
+.chatSection {
+  min-height: calc(60vh - var(--used-space-height));
+  max-height: calc(60vh - var(--used-space-height));
+  overflow: scroll;
+}
+
+.selectLesson {
+  min-height: calc(60vh - var(--used-space-height));
+  max-height: calc(60vh - var(--used-space-height));
+  overflow: scroll;
+}
+
+.selectTeam {
+  min-height: calc(60vh - var(--used-space-height));
+  max-height: calc(60vh - var(--used-space-height));
+  overflow: scroll;
+}
+
+.actionSection {
+  min-height: calc(40vh - var(--used-space-height));
+  max-height: calc(40vh - var(--used-space-height));
+  overflow: scroll;
+}
