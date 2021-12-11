@@ -27,5 +27,20 @@
   min-width: 80px;
   border-right:2px solid var(--tab-border-color); 
   border-bottom:1px solid var(--tab-border-color);
+}
+
+.inactive-tab {
   background-color: var(--tab-bar-item-color);
+}
+
+.inactive-tab .tab-text {
+  color: var(--font-color);
+}
+
+.active-tab {
+  background-color: var(--tab-bar-item-highlighted-color);
+}
+
+.active-tab .tab-text {
+  color: var(--font-highlighted-color);
 }

@@ -22,11 +22,11 @@
   clear: both;
 }
 
-.moveSection {
+.navSection {
   min-height: calc(40vh - var(--used-space-height));
 }
 
-.pieceSection {
+.moveHistory {
   min-height: calc(60vh - var(--used-space-height));
 }
 

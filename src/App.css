@@ -27,9 +27,11 @@
   --page-color: #ccc;
   --page-gradient: linear-gradient(#ddd, #eee);
   --font-color: #000;
+  --font-highlighted-color: #ff6600;
   --link-color: #000;
   --tab-bar-color: #ddd;
-  --tab-bar-item-color: #fff;
+  --tab-bar-item-color: #ccc;
+  --tab-bar-item-highlighted-color: #fff;
   --tab-border-color: #bbb;
   --switch-color: #000;
   --svg-filter: brightness(3) invert(0);
@@ -47,9 +49,11 @@
   --page-color: #333;
   --page-gradient: linear-gradient(#222, #333);
   --font-color: #fff;
+  --font-highlighted-color: #ff9966;
   --link-color: #fff;
   --tab-bar-color: #222;
-  --tab-bar-item-color: #000;
+  --tab-bar-item-color: #444;
+  --tab-bar-item-highlighted-color: #000;
   --tab-border-color: #444;
   --switch-color: #fff;
   --svg-filter: brightness(0) invert(1);

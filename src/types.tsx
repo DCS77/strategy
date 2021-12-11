@@ -1,22 +1,15 @@
 export enum TabType {
   Game,
-  Info
+  Info,
+  TV
 }
 
-export interface GameTabDetail {
+export interface TabDetail {
   ID: string;
-  GameID: string;
-  Title?: string;
-  Player?: string;
-  Rating?: number;
-  closeTabHandler: (ID: string) => void;
+  path: string;
+  title?: string;
+  type: TabType;
+  closeTabHandler: (ID: string, type: TabType) => void;
 }
 
-export interface InfoTabDetail {
-  ID: string;
-  InfoID: string;
-  Title?: string;
-  closeTabHandler: (ID: string) => void;
-}
-
-export interface TabDetails extends Array<GameTabDetail|InfoTabDetail>{}
+export interface TabDetails extends Array<TabDetail>{}

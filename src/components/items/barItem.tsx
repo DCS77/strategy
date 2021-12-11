@@ -7,6 +7,7 @@ interface BarItemProps {
   to?: string;
   link?: string;
   newTab?: boolean;
+  tabItem?: boolean;
   children: React.ReactNode;
   mouseUpHandler?: () => void;
   mouseDownHandler?: () => void;
@@ -48,7 +49,7 @@ function BarItem(Props: BarItemProps) {
   return (
     <div className='itemContainer hover-tint' onMouseUp={Props.mouseUpHandler} onMouseDown={Props.mouseDownHandler}>
       <ItemLink to={Props.to} link={Props.link} newTab={Props.newTab}>
-        <div className='item'>
+        <div className={`item ${Props.tabItem ? 'tab-item' : ''}`}>
           {Props.icon ? (<img src={Props.icon} alt='icon'/>) : null}
           {Props.children}
         </div>

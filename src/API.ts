@@ -2,26 +2,82 @@
 /* eslint-disable */
 //  This file was automatically generated and should not be edited.
 
-export type CreateGameInput = {
+export type CreatePendingGameInput = {
   id?: string | null,
-  playerOne: PlayerConfigInput,
-  playerTwo: PlayerConfigInput,
-  boardSize: BoardSizeInput,
-  mode: GameMode,
-  state: GameStateInput,
+  expiry: number,
+  pendingGameGameId: string,
 };
 
-export type PlayerConfigInput = {
+export type ModelPendingGameConditionInput = {
+  expiry?: ModelIntInput | null,
+  and?: Array< ModelPendingGameConditionInput | null > | null,
+  or?: Array< ModelPendingGameConditionInput | null > | null,
+  not?: ModelPendingGameConditionInput | null,
+};
+
+export type ModelIntInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+};
+
+export enum ModelAttributeTypes {
+  binary = "binary",
+  binarySet = "binarySet",
+  bool = "bool",
+  list = "list",
+  map = "map",
+  number = "number",
+  numberSet = "numberSet",
+  string = "string",
+  stringSet = "stringSet",
+  _null = "_null",
+}
+
+
+export type PendingGame = {
+  __typename: "PendingGame",
   id: string,
-  pieces: Array< PieceInput >,
+  game: Game,
+  expiry: number,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type Game = {
+  __typename: "Game",
+  id: string,
+  playerOne: PlayerConfig,
+  playerTwo?: PlayerConfig | null,
+  boardSize: BoardSize,
+  mode: GameMode,
+  state: GameState,
+  moves?: ModelMoveConnection | null,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type PlayerConfig = {
+  __typename: "PlayerConfig",
+  id: string,
+  pieces:  Array<Piece >,
   time: number,
   health: number,
   moves: number,
   actionsPerMove: number,
   rating: number,
+  createdAt: string,
+  updatedAt: string,
 };
 
-export type PieceInput = {
+export type Piece = {
+  __typename: "Piece",
   type: PieceType,
   count: number,
 };
@@ -33,7 +89,8 @@ export enum PieceType {
 }
 
 
-export type BoardSizeInput = {
+export type BoardSize = {
+  __typename: "BoardSize",
   x: number,
   y: number,
   z: number,
@@ -45,20 +102,23 @@ export enum GameMode {
 }
 
 
-export type GameStateInput = {
-  active: boolean,
-  turn: PlayerTurn,
-  result?: GameResultInput | null,
+export type GameState = {
+  __typename: "GameState",
+  state: State,
+  turn: number,
+  result?: GameResult | null,
 };
 
-export enum PlayerTurn {
-  one = "one",
-  two = "two",
-  no_one = "no_one",
+export enum State {
+  pending = "pending",
+  active = "active",
+  paused = "paused",
+  done = "done",
 }
 
 
-export type GameResultInput = {
+export type GameResult = {
+  __typename: "GameResult",
   tie: ResultType,
   winMethod: WinMethod,
   winner?: string | null,
@@ -79,100 +139,34 @@ export enum WinMethod {
 }
 
 
-export type ModelGameConditionInput = {
-  mode?: ModelGameModeInput | null,
-  and?: Array< ModelGameConditionInput | null > | null,
-  or?: Array< ModelGameConditionInput | null > | null,
-  not?: ModelGameConditionInput | null,
-};
-
-export type ModelGameModeInput = {
-  eq?: GameMode | null,
-  ne?: GameMode | null,
-};
-
-export type Game = {
-  __typename: "Game",
-  id: string,
-  playerOne: PlayerConfig,
-  playerTwo: PlayerConfig,
-  boardSize: BoardSize,
-  mode: GameMode,
-  state: GameState,
-  moves?: ModelMoveConnection | null,
-  createdAt: string,
-  updatedAt: string,
-};
-
-export type PlayerConfig = {
-  __typename: "PlayerConfig",
-  id: string,
-  pieces:  Array<Piece >,
-  time: number,
-  health: number,
-  moves: number,
-  actionsPerMove: number,
-  rating: number,
-};
-
-export type Piece = {
-  __typename: "Piece",
-  type: PieceType,
-  count: number,
-};
-
-export type BoardSize = {
-  __typename: "BoardSize",
-  x: number,
-  y: number,
-  z: number,
-};
-
-export type GameState = {
-  __typename: "GameState",
-  active: boolean,
-  turn: PlayerTurn,
-  result?: GameResult | null,
-};
-
-export type GameResult = {
-  __typename: "GameResult",
-  tie: ResultType,
-  winMethod: WinMethod,
-  winner?: string | null,
-};
-
 export type ModelMoveConnection = {
   __typename: "ModelMoveConnection",
-  items?:  Array<Move | null > | null,
+  items:  Array<Move >,
   nextToken?: string | null,
 };
 
 export type Move = {
   __typename: "Move",
   id: string,
-  gameID: string,
-  moveID: string,
-  player: string,
-  action?: ModelMoveActionConnection | null,
   game?: Game | null,
+  player: PlayerConfig,
+  action?: ModelActionConnection | null,
   timeLeft?: number | null,
   createdAt: string,
   updatedAt: string,
 };
 
-export type ModelMoveActionConnection = {
-  __typename: "ModelMoveActionConnection",
-  items?:  Array<MoveAction | null > | null,
+export type ModelActionConnection = {
+  __typename: "ModelActionConnection",
+  items:  Array<Action >,
   nextToken?: string | null,
 };
 
-export type MoveAction = {
-  __typename: "MoveAction",
+export type Action = {
+  __typename: "Action",
   id: string,
-  actionID: string,
-  moveID: string,
-  move?: Move | null,
+  move: Move,
+  player: PlayerConfig,
   pieceType: string,
   pieceFrom: Coordinate,
   pieceTo: Coordinate,
@@ -187,13 +181,62 @@ export type Coordinate = {
   z: number,
 };
 
+export type UpdatePendingGameInput = {
+  id: string,
+  expiry?: number | null,
+  pendingGameGameId?: string | null,
+};
+
+export type DeletePendingGameInput = {
+  id: string,
+};
+
+export type CreateGameInput = {
+  id?: string | null,
+  boardSize: BoardSizeInput,
+  mode: GameMode,
+  state: GameStateInput,
+  gamePlayerOneId: string,
+  gamePlayerTwoId?: string | null,
+};
+
+export type BoardSizeInput = {
+  x: number,
+  y: number,
+  z: number,
+};
+
+export type GameStateInput = {
+  state: State,
+  turn: number,
+  result?: GameResultInput | null,
+};
+
+export type GameResultInput = {
+  tie: ResultType,
+  winMethod: WinMethod,
+  winner?: string | null,
+};
+
+export type ModelGameConditionInput = {
+  mode?: ModelGameModeInput | null,
+  and?: Array< ModelGameConditionInput | null > | null,
+  or?: Array< ModelGameConditionInput | null > | null,
+  not?: ModelGameConditionInput | null,
+};
+
+export type ModelGameModeInput = {
+  eq?: GameMode | null,
+  ne?: GameMode | null,
+};
+
 export type UpdateGameInput = {
   id: string,
-  playerOne?: PlayerConfigInput | null,
-  playerTwo?: PlayerConfigInput | null,
   boardSize?: BoardSizeInput | null,
   mode?: GameMode | null,
   state?: GameStateInput | null,
+  gamePlayerOneId?: string | null,
+  gamePlayerTwoId?: string | null,
 };
 
 export type DeleteGameInput = {
@@ -202,93 +245,36 @@ export type DeleteGameInput = {
 
 export type CreateMoveInput = {
   id?: string | null,
-  gameID: string,
-  moveID: string,
-  player: string,
   timeLeft?: number | null,
+  moveGameId?: string | null,
+  movePlayerId: string,
 };
 
 export type ModelMoveConditionInput = {
-  gameID?: ModelIDInput | null,
-  moveID?: ModelIDInput | null,
-  player?: ModelIDInput | null,
   timeLeft?: ModelIntInput | null,
   and?: Array< ModelMoveConditionInput | null > | null,
   or?: Array< ModelMoveConditionInput | null > | null,
   not?: ModelMoveConditionInput | null,
 };
 
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
-export enum ModelAttributeTypes {
-  binary = "binary",
-  binarySet = "binarySet",
-  bool = "bool",
-  list = "list",
-  map = "map",
-  number = "number",
-  numberSet = "numberSet",
-  string = "string",
-  stringSet = "stringSet",
-  _null = "_null",
-}
-
-
-export type ModelSizeInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-};
-
-export type ModelIntInput = {
-  ne?: number | null,
-  eq?: number | null,
-  le?: number | null,
-  lt?: number | null,
-  ge?: number | null,
-  gt?: number | null,
-  between?: Array< number | null > | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-};
-
 export type UpdateMoveInput = {
   id: string,
-  gameID?: string | null,
-  moveID?: string | null,
-  player?: string | null,
   timeLeft?: number | null,
+  moveGameId?: string | null,
+  movePlayerId?: string | null,
 };
 
 export type DeleteMoveInput = {
   id: string,
 };
 
-export type CreateMoveActionInput = {
+export type CreateActionInput = {
   id?: string | null,
-  actionID: string,
-  moveID: string,
   pieceType: string,
   pieceFrom: CoordinateInput,
   pieceTo: CoordinateInput,
+  actionMoveId: string,
+  actionPlayerId: string,
 };
 
 export type CoordinateInput = {
@@ -297,13 +283,11 @@ export type CoordinateInput = {
   z: number,
 };
 
-export type ModelMoveActionConditionInput = {
-  actionID?: ModelIDInput | null,
-  moveID?: ModelIDInput | null,
+export type ModelActionConditionInput = {
   pieceType?: ModelStringInput | null,
-  and?: Array< ModelMoveActionConditionInput | null > | null,
-  or?: Array< ModelMoveActionConditionInput | null > | null,
-  not?: ModelMoveActionConditionInput | null,
+  and?: Array< ModelActionConditionInput | null > | null,
+  or?: Array< ModelActionConditionInput | null > | null,
+  not?: ModelActionConditionInput | null,
 };
 
 export type ModelStringInput = {
@@ -322,17 +306,97 @@ export type ModelStringInput = {
   size?: ModelSizeInput | null,
 };
 
-export type UpdateMoveActionInput = {
+export type ModelSizeInput = {
+  ne?: number | null,
+  eq?: number | null,
+  le?: number | null,
+  lt?: number | null,
+  ge?: number | null,
+  gt?: number | null,
+  between?: Array< number | null > | null,
+};
+
+export type UpdateActionInput = {
   id: string,
-  actionID?: string | null,
-  moveID?: string | null,
   pieceType?: string | null,
   pieceFrom?: CoordinateInput | null,
   pieceTo?: CoordinateInput | null,
+  actionMoveId?: string | null,
+  actionPlayerId?: string | null,
 };
 
-export type DeleteMoveActionInput = {
+export type DeleteActionInput = {
   id: string,
+};
+
+export type CreatePlayerConfigInput = {
+  id?: string | null,
+  pieces: Array< PieceInput >,
+  time: number,
+  health: number,
+  moves: number,
+  actionsPerMove: number,
+  rating: number,
+};
+
+export type PieceInput = {
+  type: PieceType,
+  count: number,
+};
+
+export type ModelPlayerConfigConditionInput = {
+  time?: ModelIntInput | null,
+  health?: ModelIntInput | null,
+  moves?: ModelIntInput | null,
+  actionsPerMove?: ModelIntInput | null,
+  rating?: ModelIntInput | null,
+  and?: Array< ModelPlayerConfigConditionInput | null > | null,
+  or?: Array< ModelPlayerConfigConditionInput | null > | null,
+  not?: ModelPlayerConfigConditionInput | null,
+};
+
+export type UpdatePlayerConfigInput = {
+  id: string,
+  pieces?: Array< PieceInput > | null,
+  time?: number | null,
+  health?: number | null,
+  moves?: number | null,
+  actionsPerMove?: number | null,
+  rating?: number | null,
+};
+
+export type DeletePlayerConfigInput = {
+  id: string,
+};
+
+export type ModelPendingGameFilterInput = {
+  id?: ModelIDInput | null,
+  expiry?: ModelIntInput | null,
+  and?: Array< ModelPendingGameFilterInput | null > | null,
+  or?: Array< ModelPendingGameFilterInput | null > | null,
+  not?: ModelPendingGameFilterInput | null,
+};
+
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
+};
+
+export type ModelPendingGameConnection = {
+  __typename: "ModelPendingGameConnection",
+  items:  Array<PendingGame >,
+  nextToken?: string | null,
 };
 
 export type ModelGameFilterInput = {
@@ -345,29 +409,219 @@ export type ModelGameFilterInput = {
 
 export type ModelGameConnection = {
   __typename: "ModelGameConnection",
-  items?:  Array<Game | null > | null,
+  items:  Array<Game >,
   nextToken?: string | null,
 };
 
 export type ModelMoveFilterInput = {
   id?: ModelIDInput | null,
-  gameID?: ModelIDInput | null,
-  moveID?: ModelIDInput | null,
-  player?: ModelIDInput | null,
   timeLeft?: ModelIntInput | null,
   and?: Array< ModelMoveFilterInput | null > | null,
   or?: Array< ModelMoveFilterInput | null > | null,
   not?: ModelMoveFilterInput | null,
 };
 
-export type ModelMoveActionFilterInput = {
+export type ModelActionFilterInput = {
   id?: ModelIDInput | null,
-  actionID?: ModelIDInput | null,
-  moveID?: ModelIDInput | null,
   pieceType?: ModelStringInput | null,
-  and?: Array< ModelMoveActionFilterInput | null > | null,
-  or?: Array< ModelMoveActionFilterInput | null > | null,
-  not?: ModelMoveActionFilterInput | null,
+  and?: Array< ModelActionFilterInput | null > | null,
+  or?: Array< ModelActionFilterInput | null > | null,
+  not?: ModelActionFilterInput | null,
+};
+
+export type ModelPlayerConfigFilterInput = {
+  id?: ModelIDInput | null,
+  time?: ModelIntInput | null,
+  health?: ModelIntInput | null,
+  moves?: ModelIntInput | null,
+  actionsPerMove?: ModelIntInput | null,
+  rating?: ModelIntInput | null,
+  and?: Array< ModelPlayerConfigFilterInput | null > | null,
+  or?: Array< ModelPlayerConfigFilterInput | null > | null,
+  not?: ModelPlayerConfigFilterInput | null,
+};
+
+export type ModelPlayerConfigConnection = {
+  __typename: "ModelPlayerConfigConnection",
+  items:  Array<PlayerConfig >,
+  nextToken?: string | null,
+};
+
+export type CreatePendingGameMutationVariables = {
+  input: CreatePendingGameInput,
+  condition?: ModelPendingGameConditionInput | null,
+};
+
+export type CreatePendingGameMutation = {
+  createPendingGame?:  {
+    __typename: "PendingGame",
+    id: string,
+    game:  {
+      __typename: "Game",
+      id: string,
+      playerOne:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      },
+      playerTwo?:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      boardSize:  {
+        __typename: "BoardSize",
+        x: number,
+        y: number,
+        z: number,
+      },
+      mode: GameMode,
+      state:  {
+        __typename: "GameState",
+        state: State,
+        turn: number,
+      },
+      moves?:  {
+        __typename: "ModelMoveConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    expiry: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdatePendingGameMutationVariables = {
+  input: UpdatePendingGameInput,
+  condition?: ModelPendingGameConditionInput | null,
+};
+
+export type UpdatePendingGameMutation = {
+  updatePendingGame?:  {
+    __typename: "PendingGame",
+    id: string,
+    game:  {
+      __typename: "Game",
+      id: string,
+      playerOne:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      },
+      playerTwo?:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      boardSize:  {
+        __typename: "BoardSize",
+        x: number,
+        y: number,
+        z: number,
+      },
+      mode: GameMode,
+      state:  {
+        __typename: "GameState",
+        state: State,
+        turn: number,
+      },
+      moves?:  {
+        __typename: "ModelMoveConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    expiry: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeletePendingGameMutationVariables = {
+  input: DeletePendingGameInput,
+  condition?: ModelPendingGameConditionInput | null,
+};
+
+export type DeletePendingGameMutation = {
+  deletePendingGame?:  {
+    __typename: "PendingGame",
+    id: string,
+    game:  {
+      __typename: "Game",
+      id: string,
+      playerOne:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      },
+      playerTwo?:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      boardSize:  {
+        __typename: "BoardSize",
+        x: number,
+        y: number,
+        z: number,
+      },
+      mode: GameMode,
+      state:  {
+        __typename: "GameState",
+        state: State,
+        turn: number,
+      },
+      moves?:  {
+        __typename: "ModelMoveConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    expiry: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
 };
 
 export type CreateGameMutationVariables = {
@@ -392,8 +646,10 @@ export type CreateGameMutation = {
       moves: number,
       actionsPerMove: number,
       rating: number,
+      createdAt: string,
+      updatedAt: string,
     },
-    playerTwo:  {
+    playerTwo?:  {
       __typename: "PlayerConfig",
       id: string,
       pieces:  Array< {
@@ -406,7 +662,9 @@ export type CreateGameMutation = {
       moves: number,
       actionsPerMove: number,
       rating: number,
-    },
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     boardSize:  {
       __typename: "BoardSize",
       x: number,
@@ -416,8 +674,8 @@ export type CreateGameMutation = {
     mode: GameMode,
     state:  {
       __typename: "GameState",
-      active: boolean,
-      turn: PlayerTurn,
+      state: State,
+      turn: number,
       result?:  {
         __typename: "GameResult",
         tie: ResultType,
@@ -427,16 +685,13 @@ export type CreateGameMutation = {
     },
     moves?:  {
       __typename: "ModelMoveConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Move",
         id: string,
-        gameID: string,
-        moveID: string,
-        player: string,
         timeLeft?: number | null,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -466,8 +721,10 @@ export type UpdateGameMutation = {
       moves: number,
       actionsPerMove: number,
       rating: number,
+      createdAt: string,
+      updatedAt: string,
     },
-    playerTwo:  {
+    playerTwo?:  {
       __typename: "PlayerConfig",
       id: string,
       pieces:  Array< {
@@ -480,7 +737,9 @@ export type UpdateGameMutation = {
       moves: number,
       actionsPerMove: number,
       rating: number,
-    },
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     boardSize:  {
       __typename: "BoardSize",
       x: number,
@@ -490,8 +749,8 @@ export type UpdateGameMutation = {
     mode: GameMode,
     state:  {
       __typename: "GameState",
-      active: boolean,
-      turn: PlayerTurn,
+      state: State,
+      turn: number,
       result?:  {
         __typename: "GameResult",
         tie: ResultType,
@@ -501,16 +760,13 @@ export type UpdateGameMutation = {
     },
     moves?:  {
       __typename: "ModelMoveConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Move",
         id: string,
-        gameID: string,
-        moveID: string,
-        player: string,
         timeLeft?: number | null,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -540,8 +796,10 @@ export type DeleteGameMutation = {
       moves: number,
       actionsPerMove: number,
       rating: number,
+      createdAt: string,
+      updatedAt: string,
     },
-    playerTwo:  {
+    playerTwo?:  {
       __typename: "PlayerConfig",
       id: string,
       pieces:  Array< {
@@ -554,7 +812,9 @@ export type DeleteGameMutation = {
       moves: number,
       actionsPerMove: number,
       rating: number,
-    },
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     boardSize:  {
       __typename: "BoardSize",
       x: number,
@@ -564,8 +824,8 @@ export type DeleteGameMutation = {
     mode: GameMode,
     state:  {
       __typename: "GameState",
-      active: boolean,
-      turn: PlayerTurn,
+      state: State,
+      turn: number,
       result?:  {
         __typename: "GameResult",
         tie: ResultType,
@@ -575,16 +835,13 @@ export type DeleteGameMutation = {
     },
     moves?:  {
       __typename: "ModelMoveConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Move",
         id: string,
-        gameID: string,
-        moveID: string,
-        player: string,
         timeLeft?: number | null,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -601,22 +858,6 @@ export type CreateMoveMutation = {
   createMove?:  {
     __typename: "Move",
     id: string,
-    gameID: string,
-    moveID: string,
-    player: string,
-    action?:  {
-      __typename: "ModelMoveActionConnection",
-      items?:  Array< {
-        __typename: "MoveAction",
-        id: string,
-        actionID: string,
-        moveID: string,
-        pieceType: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
     game?:  {
       __typename: "Game",
       id: string,
@@ -628,8 +869,10 @@ export type CreateMoveMutation = {
         moves: number,
         actionsPerMove: number,
         rating: number,
+        createdAt: string,
+        updatedAt: string,
       },
-      playerTwo:  {
+      playerTwo?:  {
         __typename: "PlayerConfig",
         id: string,
         time: number,
@@ -637,7 +880,9 @@ export type CreateMoveMutation = {
         moves: number,
         actionsPerMove: number,
         rating: number,
-      },
+        createdAt: string,
+        updatedAt: string,
+      } | null,
       boardSize:  {
         __typename: "BoardSize",
         x: number,
@@ -647,8 +892,8 @@ export type CreateMoveMutation = {
       mode: GameMode,
       state:  {
         __typename: "GameState",
-        active: boolean,
-        turn: PlayerTurn,
+        state: State,
+        turn: number,
       },
       moves?:  {
         __typename: "ModelMoveConnection",
@@ -656,6 +901,33 @@ export type CreateMoveMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
+    } | null,
+    player:  {
+      __typename: "PlayerConfig",
+      id: string,
+      pieces:  Array< {
+        __typename: "Piece",
+        type: PieceType,
+        count: number,
+      } >,
+      time: number,
+      health: number,
+      moves: number,
+      actionsPerMove: number,
+      rating: number,
+      createdAt: string,
+      updatedAt: string,
+    },
+    action?:  {
+      __typename: "ModelActionConnection",
+      items:  Array< {
+        __typename: "Action",
+        id: string,
+        pieceType: string,
+        createdAt: string,
+        updatedAt: string,
+      } >,
+      nextToken?: string | null,
     } | null,
     timeLeft?: number | null,
     createdAt: string,
@@ -672,22 +944,6 @@ export type UpdateMoveMutation = {
   updateMove?:  {
     __typename: "Move",
     id: string,
-    gameID: string,
-    moveID: string,
-    player: string,
-    action?:  {
-      __typename: "ModelMoveActionConnection",
-      items?:  Array< {
-        __typename: "MoveAction",
-        id: string,
-        actionID: string,
-        moveID: string,
-        pieceType: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
     game?:  {
       __typename: "Game",
       id: string,
@@ -699,8 +955,10 @@ export type UpdateMoveMutation = {
         moves: number,
         actionsPerMove: number,
         rating: number,
+        createdAt: string,
+        updatedAt: string,
       },
-      playerTwo:  {
+      playerTwo?:  {
         __typename: "PlayerConfig",
         id: string,
         time: number,
@@ -708,7 +966,9 @@ export type UpdateMoveMutation = {
         moves: number,
         actionsPerMove: number,
         rating: number,
-      },
+        createdAt: string,
+        updatedAt: string,
+      } | null,
       boardSize:  {
         __typename: "BoardSize",
         x: number,
@@ -718,8 +978,8 @@ export type UpdateMoveMutation = {
       mode: GameMode,
       state:  {
         __typename: "GameState",
-        active: boolean,
-        turn: PlayerTurn,
+        state: State,
+        turn: number,
       },
       moves?:  {
         __typename: "ModelMoveConnection",
@@ -727,6 +987,33 @@ export type UpdateMoveMutation = {
       } | null,
       createdAt: string,
       updatedAt: string,
+    } | null,
+    player:  {
+      __typename: "PlayerConfig",
+      id: string,
+      pieces:  Array< {
+        __typename: "Piece",
+        type: PieceType,
+        count: number,
+      } >,
+      time: number,
+      health: number,
+      moves: number,
+      actionsPerMove: number,
+      rating: number,
+      createdAt: string,
+      updatedAt: string,
+    },
+    action?:  {
+      __typename: "ModelActionConnection",
+      items:  Array< {
+        __typename: "Action",
+        id: string,
+        pieceType: string,
+        createdAt: string,
+        updatedAt: string,
+      } >,
+      nextToken?: string | null,
     } | null,
     timeLeft?: number | null,
     createdAt: string,
@@ -743,22 +1030,6 @@ export type DeleteMoveMutation = {
   deleteMove?:  {
     __typename: "Move",
     id: string,
-    gameID: string,
-    moveID: string,
-    player: string,
-    action?:  {
-      __typename: "ModelMoveActionConnection",
-      items?:  Array< {
-        __typename: "MoveAction",
-        id: string,
-        actionID: string,
-        moveID: string,
-        pieceType: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
     game?:  {
       __typename: "Game",
       id: string,
@@ -770,8 +1041,10 @@ export type DeleteMoveMutation = {
         moves: number,
         actionsPerMove: number,
         rating: number,
+        createdAt: string,
+        updatedAt: string,
       },
-      playerTwo:  {
+      playerTwo?:  {
         __typename: "PlayerConfig",
         id: string,
         time: number,
@@ -779,7 +1052,9 @@ export type DeleteMoveMutation = {
         moves: number,
         actionsPerMove: number,
         rating: number,
-      },
+        createdAt: string,
+        updatedAt: string,
+      } | null,
       boardSize:  {
         __typename: "BoardSize",
         x: number,
@@ -789,8 +1064,8 @@ export type DeleteMoveMutation = {
       mode: GameMode,
       state:  {
         __typename: "GameState",
-        active: boolean,
-        turn: PlayerTurn,
+        state: State,
+        turn: number,
       },
       moves?:  {
         __typename: "ModelMoveConnection",
@@ -799,33 +1074,51 @@ export type DeleteMoveMutation = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    player:  {
+      __typename: "PlayerConfig",
+      id: string,
+      pieces:  Array< {
+        __typename: "Piece",
+        type: PieceType,
+        count: number,
+      } >,
+      time: number,
+      health: number,
+      moves: number,
+      actionsPerMove: number,
+      rating: number,
+      createdAt: string,
+      updatedAt: string,
+    },
+    action?:  {
+      __typename: "ModelActionConnection",
+      items:  Array< {
+        __typename: "Action",
+        id: string,
+        pieceType: string,
+        createdAt: string,
+        updatedAt: string,
+      } >,
+      nextToken?: string | null,
+    } | null,
     timeLeft?: number | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type CreateMoveActionMutationVariables = {
-  input: CreateMoveActionInput,
-  condition?: ModelMoveActionConditionInput | null,
+export type CreateActionMutationVariables = {
+  input: CreateActionInput,
+  condition?: ModelActionConditionInput | null,
 };
 
-export type CreateMoveActionMutation = {
-  createMoveAction?:  {
-    __typename: "MoveAction",
+export type CreateActionMutation = {
+  createAction?:  {
+    __typename: "Action",
     id: string,
-    actionID: string,
-    moveID: string,
-    move?:  {
+    move:  {
       __typename: "Move",
       id: string,
-      gameID: string,
-      moveID: string,
-      player: string,
-      action?:  {
-        __typename: "ModelMoveActionConnection",
-        nextToken?: string | null,
-      } | null,
       game?:  {
         __typename: "Game",
         id: string,
@@ -833,10 +1126,41 @@ export type CreateMoveActionMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      player:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      },
+      action?:  {
+        __typename: "ModelActionConnection",
+        nextToken?: string | null,
+      } | null,
       timeLeft?: number | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
+    },
+    player:  {
+      __typename: "PlayerConfig",
+      id: string,
+      pieces:  Array< {
+        __typename: "Piece",
+        type: PieceType,
+        count: number,
+      } >,
+      time: number,
+      health: number,
+      moves: number,
+      actionsPerMove: number,
+      rating: number,
+      createdAt: string,
+      updatedAt: string,
+    },
     pieceType: string,
     pieceFrom:  {
       __typename: "Coordinate",
@@ -855,27 +1179,18 @@ export type CreateMoveActionMutation = {
   } | null,
 };
 
-export type UpdateMoveActionMutationVariables = {
-  input: UpdateMoveActionInput,
-  condition?: ModelMoveActionConditionInput | null,
+export type UpdateActionMutationVariables = {
+  input: UpdateActionInput,
+  condition?: ModelActionConditionInput | null,
 };
 
-export type UpdateMoveActionMutation = {
-  updateMoveAction?:  {
-    __typename: "MoveAction",
+export type UpdateActionMutation = {
+  updateAction?:  {
+    __typename: "Action",
     id: string,
-    actionID: string,
-    moveID: string,
-    move?:  {
+    move:  {
       __typename: "Move",
       id: string,
-      gameID: string,
-      moveID: string,
-      player: string,
-      action?:  {
-        __typename: "ModelMoveActionConnection",
-        nextToken?: string | null,
-      } | null,
       game?:  {
         __typename: "Game",
         id: string,
@@ -883,10 +1198,41 @@ export type UpdateMoveActionMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      player:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      },
+      action?:  {
+        __typename: "ModelActionConnection",
+        nextToken?: string | null,
+      } | null,
       timeLeft?: number | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
+    },
+    player:  {
+      __typename: "PlayerConfig",
+      id: string,
+      pieces:  Array< {
+        __typename: "Piece",
+        type: PieceType,
+        count: number,
+      } >,
+      time: number,
+      health: number,
+      moves: number,
+      actionsPerMove: number,
+      rating: number,
+      createdAt: string,
+      updatedAt: string,
+    },
     pieceType: string,
     pieceFrom:  {
       __typename: "Coordinate",
@@ -905,27 +1251,18 @@ export type UpdateMoveActionMutation = {
   } | null,
 };
 
-export type DeleteMoveActionMutationVariables = {
-  input: DeleteMoveActionInput,
-  condition?: ModelMoveActionConditionInput | null,
+export type DeleteActionMutationVariables = {
+  input: DeleteActionInput,
+  condition?: ModelActionConditionInput | null,
 };
 
-export type DeleteMoveActionMutation = {
-  deleteMoveAction?:  {
-    __typename: "MoveAction",
+export type DeleteActionMutation = {
+  deleteAction?:  {
+    __typename: "Action",
     id: string,
-    actionID: string,
-    moveID: string,
-    move?:  {
+    move:  {
       __typename: "Move",
       id: string,
-      gameID: string,
-      moveID: string,
-      player: string,
-      action?:  {
-        __typename: "ModelMoveActionConnection",
-        nextToken?: string | null,
-      } | null,
       game?:  {
         __typename: "Game",
         id: string,
@@ -933,10 +1270,41 @@ export type DeleteMoveActionMutation = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      player:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      },
+      action?:  {
+        __typename: "ModelActionConnection",
+        nextToken?: string | null,
+      } | null,
       timeLeft?: number | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
+    },
+    player:  {
+      __typename: "PlayerConfig",
+      id: string,
+      pieces:  Array< {
+        __typename: "Piece",
+        type: PieceType,
+        count: number,
+      } >,
+      time: number,
+      health: number,
+      moves: number,
+      actionsPerMove: number,
+      rating: number,
+      createdAt: string,
+      updatedAt: string,
+    },
     pieceType: string,
     pieceFrom:  {
       __typename: "Coordinate",
@@ -952,6 +1320,163 @@ export type DeleteMoveActionMutation = {
     },
     createdAt: string,
     updatedAt: string,
+  } | null,
+};
+
+export type CreatePlayerConfigMutationVariables = {
+  input: CreatePlayerConfigInput,
+  condition?: ModelPlayerConfigConditionInput | null,
+};
+
+export type CreatePlayerConfigMutation = {
+  createPlayerConfig?:  {
+    __typename: "PlayerConfig",
+    id: string,
+    pieces:  Array< {
+      __typename: "Piece",
+      type: PieceType,
+      count: number,
+    } >,
+    time: number,
+    health: number,
+    moves: number,
+    actionsPerMove: number,
+    rating: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdatePlayerConfigMutationVariables = {
+  input: UpdatePlayerConfigInput,
+  condition?: ModelPlayerConfigConditionInput | null,
+};
+
+export type UpdatePlayerConfigMutation = {
+  updatePlayerConfig?:  {
+    __typename: "PlayerConfig",
+    id: string,
+    pieces:  Array< {
+      __typename: "Piece",
+      type: PieceType,
+      count: number,
+    } >,
+    time: number,
+    health: number,
+    moves: number,
+    actionsPerMove: number,
+    rating: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeletePlayerConfigMutationVariables = {
+  input: DeletePlayerConfigInput,
+  condition?: ModelPlayerConfigConditionInput | null,
+};
+
+export type DeletePlayerConfigMutation = {
+  deletePlayerConfig?:  {
+    __typename: "PlayerConfig",
+    id: string,
+    pieces:  Array< {
+      __typename: "Piece",
+      type: PieceType,
+      count: number,
+    } >,
+    time: number,
+    health: number,
+    moves: number,
+    actionsPerMove: number,
+    rating: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type GetPendingGameQueryVariables = {
+  id: string,
+};
+
+export type GetPendingGameQuery = {
+  getPendingGame?:  {
+    __typename: "PendingGame",
+    id: string,
+    game:  {
+      __typename: "Game",
+      id: string,
+      playerOne:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      },
+      playerTwo?:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      boardSize:  {
+        __typename: "BoardSize",
+        x: number,
+        y: number,
+        z: number,
+      },
+      mode: GameMode,
+      state:  {
+        __typename: "GameState",
+        state: State,
+        turn: number,
+      },
+      moves?:  {
+        __typename: "ModelMoveConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    expiry: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListPendingGamesQueryVariables = {
+  filter?: ModelPendingGameFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPendingGamesQuery = {
+  listPendingGames?:  {
+    __typename: "ModelPendingGameConnection",
+    items:  Array< {
+      __typename: "PendingGame",
+      id: string,
+      game:  {
+        __typename: "Game",
+        id: string,
+        mode: GameMode,
+        createdAt: string,
+        updatedAt: string,
+      },
+      expiry: number,
+      createdAt: string,
+      updatedAt: string,
+    } >,
+    nextToken?: string | null,
   } | null,
 };
 
@@ -976,8 +1501,10 @@ export type GetGameQuery = {
       moves: number,
       actionsPerMove: number,
       rating: number,
+      createdAt: string,
+      updatedAt: string,
     },
-    playerTwo:  {
+    playerTwo?:  {
       __typename: "PlayerConfig",
       id: string,
       pieces:  Array< {
@@ -990,7 +1517,9 @@ export type GetGameQuery = {
       moves: number,
       actionsPerMove: number,
       rating: number,
-    },
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     boardSize:  {
       __typename: "BoardSize",
       x: number,
@@ -1000,8 +1529,8 @@ export type GetGameQuery = {
     mode: GameMode,
     state:  {
       __typename: "GameState",
-      active: boolean,
-      turn: PlayerTurn,
+      state: State,
+      turn: number,
       result?:  {
         __typename: "GameResult",
         tie: ResultType,
@@ -1011,16 +1540,13 @@ export type GetGameQuery = {
     },
     moves?:  {
       __typename: "ModelMoveConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Move",
         id: string,
-        gameID: string,
-        moveID: string,
-        player: string,
         timeLeft?: number | null,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1037,7 +1563,7 @@ export type ListGamesQueryVariables = {
 export type ListGamesQuery = {
   listGames?:  {
     __typename: "ModelGameConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Game",
       id: string,
       playerOne:  {
@@ -1048,8 +1574,10 @@ export type ListGamesQuery = {
         moves: number,
         actionsPerMove: number,
         rating: number,
+        createdAt: string,
+        updatedAt: string,
       },
-      playerTwo:  {
+      playerTwo?:  {
         __typename: "PlayerConfig",
         id: string,
         time: number,
@@ -1057,7 +1585,9 @@ export type ListGamesQuery = {
         moves: number,
         actionsPerMove: number,
         rating: number,
-      },
+        createdAt: string,
+        updatedAt: string,
+      } | null,
       boardSize:  {
         __typename: "BoardSize",
         x: number,
@@ -1067,8 +1597,8 @@ export type ListGamesQuery = {
       mode: GameMode,
       state:  {
         __typename: "GameState",
-        active: boolean,
-        turn: PlayerTurn,
+        state: State,
+        turn: number,
       },
       moves?:  {
         __typename: "ModelMoveConnection",
@@ -1076,7 +1606,7 @@ export type ListGamesQuery = {
       } | null,
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
+    } >,
     nextToken?: string | null,
   } | null,
 };
@@ -1089,22 +1619,6 @@ export type GetMoveQuery = {
   getMove?:  {
     __typename: "Move",
     id: string,
-    gameID: string,
-    moveID: string,
-    player: string,
-    action?:  {
-      __typename: "ModelMoveActionConnection",
-      items?:  Array< {
-        __typename: "MoveAction",
-        id: string,
-        actionID: string,
-        moveID: string,
-        pieceType: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
     game?:  {
       __typename: "Game",
       id: string,
@@ -1116,8 +1630,10 @@ export type GetMoveQuery = {
         moves: number,
         actionsPerMove: number,
         rating: number,
+        createdAt: string,
+        updatedAt: string,
       },
-      playerTwo:  {
+      playerTwo?:  {
         __typename: "PlayerConfig",
         id: string,
         time: number,
@@ -1125,7 +1641,9 @@ export type GetMoveQuery = {
         moves: number,
         actionsPerMove: number,
         rating: number,
-      },
+        createdAt: string,
+        updatedAt: string,
+      } | null,
       boardSize:  {
         __typename: "BoardSize",
         x: number,
@@ -1135,8 +1653,8 @@ export type GetMoveQuery = {
       mode: GameMode,
       state:  {
         __typename: "GameState",
-        active: boolean,
-        turn: PlayerTurn,
+        state: State,
+        turn: number,
       },
       moves?:  {
         __typename: "ModelMoveConnection",
@@ -1144,6 +1662,33 @@ export type GetMoveQuery = {
       } | null,
       createdAt: string,
       updatedAt: string,
+    } | null,
+    player:  {
+      __typename: "PlayerConfig",
+      id: string,
+      pieces:  Array< {
+        __typename: "Piece",
+        type: PieceType,
+        count: number,
+      } >,
+      time: number,
+      health: number,
+      moves: number,
+      actionsPerMove: number,
+      rating: number,
+      createdAt: string,
+      updatedAt: string,
+    },
+    action?:  {
+      __typename: "ModelActionConnection",
+      items:  Array< {
+        __typename: "Action",
+        id: string,
+        pieceType: string,
+        createdAt: string,
+        updatedAt: string,
+      } >,
+      nextToken?: string | null,
     } | null,
     timeLeft?: number | null,
     createdAt: string,
@@ -1160,16 +1705,9 @@ export type ListMovesQueryVariables = {
 export type ListMovesQuery = {
   listMoves?:  {
     __typename: "ModelMoveConnection",
-    items?:  Array< {
+    items:  Array< {
       __typename: "Move",
       id: string,
-      gameID: string,
-      moveID: string,
-      player: string,
-      action?:  {
-        __typename: "ModelMoveActionConnection",
-        nextToken?: string | null,
-      } | null,
       game?:  {
         __typename: "Game",
         id: string,
@@ -1177,34 +1715,40 @@ export type ListMovesQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      player:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      },
+      action?:  {
+        __typename: "ModelActionConnection",
+        nextToken?: string | null,
+      } | null,
       timeLeft?: number | null,
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
+    } >,
     nextToken?: string | null,
   } | null,
 };
 
-export type GetMoveActionQueryVariables = {
+export type GetActionQueryVariables = {
   id: string,
 };
 
-export type GetMoveActionQuery = {
-  getMoveAction?:  {
-    __typename: "MoveAction",
+export type GetActionQuery = {
+  getAction?:  {
+    __typename: "Action",
     id: string,
-    actionID: string,
-    moveID: string,
-    move?:  {
+    move:  {
       __typename: "Move",
       id: string,
-      gameID: string,
-      moveID: string,
-      player: string,
-      action?:  {
-        __typename: "ModelMoveActionConnection",
-        nextToken?: string | null,
-      } | null,
       game?:  {
         __typename: "Game",
         id: string,
@@ -1212,10 +1756,41 @@ export type GetMoveActionQuery = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      player:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      },
+      action?:  {
+        __typename: "ModelActionConnection",
+        nextToken?: string | null,
+      } | null,
       timeLeft?: number | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
+    },
+    player:  {
+      __typename: "PlayerConfig",
+      id: string,
+      pieces:  Array< {
+        __typename: "Piece",
+        type: PieceType,
+        count: number,
+      } >,
+      time: number,
+      health: number,
+      moves: number,
+      actionsPerMove: number,
+      rating: number,
+      createdAt: string,
+      updatedAt: string,
+    },
     pieceType: string,
     pieceFrom:  {
       __typename: "Coordinate",
@@ -1234,30 +1809,36 @@ export type GetMoveActionQuery = {
   } | null,
 };
 
-export type ListMoveActionsQueryVariables = {
-  filter?: ModelMoveActionFilterInput | null,
+export type ListActionsQueryVariables = {
+  filter?: ModelActionFilterInput | null,
   limit?: number | null,
   nextToken?: string | null,
 };
 
-export type ListMoveActionsQuery = {
-  listMoveActions?:  {
-    __typename: "ModelMoveActionConnection",
-    items?:  Array< {
-      __typename: "MoveAction",
+export type ListActionsQuery = {
+  listActions?:  {
+    __typename: "ModelActionConnection",
+    items:  Array< {
+      __typename: "Action",
       id: string,
-      actionID: string,
-      moveID: string,
-      move?:  {
+      move:  {
         __typename: "Move",
         id: string,
-        gameID: string,
-        moveID: string,
-        player: string,
         timeLeft?: number | null,
         createdAt: string,
         updatedAt: string,
-      } | null,
+      },
+      player:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      },
       pieceType: string,
       pieceFrom:  {
         __typename: "Coordinate",
@@ -1273,8 +1854,222 @@ export type ListMoveActionsQuery = {
       },
       createdAt: string,
       updatedAt: string,
-    } | null > | null,
+    } >,
     nextToken?: string | null,
+  } | null,
+};
+
+export type GetPlayerConfigQueryVariables = {
+  id: string,
+};
+
+export type GetPlayerConfigQuery = {
+  getPlayerConfig?:  {
+    __typename: "PlayerConfig",
+    id: string,
+    pieces:  Array< {
+      __typename: "Piece",
+      type: PieceType,
+      count: number,
+    } >,
+    time: number,
+    health: number,
+    moves: number,
+    actionsPerMove: number,
+    rating: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListPlayerConfigsQueryVariables = {
+  filter?: ModelPlayerConfigFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListPlayerConfigsQuery = {
+  listPlayerConfigs?:  {
+    __typename: "ModelPlayerConfigConnection",
+    items:  Array< {
+      __typename: "PlayerConfig",
+      id: string,
+      pieces:  Array< {
+        __typename: "Piece",
+        type: PieceType,
+        count: number,
+      } >,
+      time: number,
+      health: number,
+      moves: number,
+      actionsPerMove: number,
+      rating: number,
+      createdAt: string,
+      updatedAt: string,
+    } >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type OnCreatePendingGameSubscription = {
+  onCreatePendingGame?:  {
+    __typename: "PendingGame",
+    id: string,
+    game:  {
+      __typename: "Game",
+      id: string,
+      playerOne:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      },
+      playerTwo?:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      boardSize:  {
+        __typename: "BoardSize",
+        x: number,
+        y: number,
+        z: number,
+      },
+      mode: GameMode,
+      state:  {
+        __typename: "GameState",
+        state: State,
+        turn: number,
+      },
+      moves?:  {
+        __typename: "ModelMoveConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    expiry: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdatePendingGameSubscription = {
+  onUpdatePendingGame?:  {
+    __typename: "PendingGame",
+    id: string,
+    game:  {
+      __typename: "Game",
+      id: string,
+      playerOne:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      },
+      playerTwo?:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      boardSize:  {
+        __typename: "BoardSize",
+        x: number,
+        y: number,
+        z: number,
+      },
+      mode: GameMode,
+      state:  {
+        __typename: "GameState",
+        state: State,
+        turn: number,
+      },
+      moves?:  {
+        __typename: "ModelMoveConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    expiry: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeletePendingGameSubscription = {
+  onDeletePendingGame?:  {
+    __typename: "PendingGame",
+    id: string,
+    game:  {
+      __typename: "Game",
+      id: string,
+      playerOne:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      },
+      playerTwo?:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      } | null,
+      boardSize:  {
+        __typename: "BoardSize",
+        x: number,
+        y: number,
+        z: number,
+      },
+      mode: GameMode,
+      state:  {
+        __typename: "GameState",
+        state: State,
+        turn: number,
+      },
+      moves?:  {
+        __typename: "ModelMoveConnection",
+        nextToken?: string | null,
+      } | null,
+      createdAt: string,
+      updatedAt: string,
+    },
+    expiry: number,
+    createdAt: string,
+    updatedAt: string,
   } | null,
 };
 
@@ -1295,8 +2090,10 @@ export type OnCreateGameSubscription = {
       moves: number,
       actionsPerMove: number,
       rating: number,
+      createdAt: string,
+      updatedAt: string,
     },
-    playerTwo:  {
+    playerTwo?:  {
       __typename: "PlayerConfig",
       id: string,
       pieces:  Array< {
@@ -1309,7 +2106,9 @@ export type OnCreateGameSubscription = {
       moves: number,
       actionsPerMove: number,
       rating: number,
-    },
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     boardSize:  {
       __typename: "BoardSize",
       x: number,
@@ -1319,8 +2118,8 @@ export type OnCreateGameSubscription = {
     mode: GameMode,
     state:  {
       __typename: "GameState",
-      active: boolean,
-      turn: PlayerTurn,
+      state: State,
+      turn: number,
       result?:  {
         __typename: "GameResult",
         tie: ResultType,
@@ -1330,16 +2129,13 @@ export type OnCreateGameSubscription = {
     },
     moves?:  {
       __typename: "ModelMoveConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Move",
         id: string,
-        gameID: string,
-        moveID: string,
-        player: string,
         timeLeft?: number | null,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1364,8 +2160,10 @@ export type OnUpdateGameSubscription = {
       moves: number,
       actionsPerMove: number,
       rating: number,
+      createdAt: string,
+      updatedAt: string,
     },
-    playerTwo:  {
+    playerTwo?:  {
       __typename: "PlayerConfig",
       id: string,
       pieces:  Array< {
@@ -1378,7 +2176,9 @@ export type OnUpdateGameSubscription = {
       moves: number,
       actionsPerMove: number,
       rating: number,
-    },
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     boardSize:  {
       __typename: "BoardSize",
       x: number,
@@ -1388,8 +2188,8 @@ export type OnUpdateGameSubscription = {
     mode: GameMode,
     state:  {
       __typename: "GameState",
-      active: boolean,
-      turn: PlayerTurn,
+      state: State,
+      turn: number,
       result?:  {
         __typename: "GameResult",
         tie: ResultType,
@@ -1399,16 +2199,13 @@ export type OnUpdateGameSubscription = {
     },
     moves?:  {
       __typename: "ModelMoveConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Move",
         id: string,
-        gameID: string,
-        moveID: string,
-        player: string,
         timeLeft?: number | null,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1433,8 +2230,10 @@ export type OnDeleteGameSubscription = {
       moves: number,
       actionsPerMove: number,
       rating: number,
+      createdAt: string,
+      updatedAt: string,
     },
-    playerTwo:  {
+    playerTwo?:  {
       __typename: "PlayerConfig",
       id: string,
       pieces:  Array< {
@@ -1447,7 +2246,9 @@ export type OnDeleteGameSubscription = {
       moves: number,
       actionsPerMove: number,
       rating: number,
-    },
+      createdAt: string,
+      updatedAt: string,
+    } | null,
     boardSize:  {
       __typename: "BoardSize",
       x: number,
@@ -1457,8 +2258,8 @@ export type OnDeleteGameSubscription = {
     mode: GameMode,
     state:  {
       __typename: "GameState",
-      active: boolean,
-      turn: PlayerTurn,
+      state: State,
+      turn: number,
       result?:  {
         __typename: "GameResult",
         tie: ResultType,
@@ -1468,16 +2269,13 @@ export type OnDeleteGameSubscription = {
     },
     moves?:  {
       __typename: "ModelMoveConnection",
-      items?:  Array< {
+      items:  Array< {
         __typename: "Move",
         id: string,
-        gameID: string,
-        moveID: string,
-        player: string,
         timeLeft?: number | null,
         createdAt: string,
         updatedAt: string,
-      } | null > | null,
+      } >,
       nextToken?: string | null,
     } | null,
     createdAt: string,
@@ -1489,22 +2287,6 @@ export type OnCreateMoveSubscription = {
   onCreateMove?:  {
     __typename: "Move",
     id: string,
-    gameID: string,
-    moveID: string,
-    player: string,
-    action?:  {
-      __typename: "ModelMoveActionConnection",
-      items?:  Array< {
-        __typename: "MoveAction",
-        id: string,
-        actionID: string,
-        moveID: string,
-        pieceType: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
     game?:  {
       __typename: "Game",
       id: string,
@@ -1516,8 +2298,10 @@ export type OnCreateMoveSubscription = {
         moves: number,
         actionsPerMove: number,
         rating: number,
+        createdAt: string,
+        updatedAt: string,
       },
-      playerTwo:  {
+      playerTwo?:  {
         __typename: "PlayerConfig",
         id: string,
         time: number,
@@ -1525,7 +2309,9 @@ export type OnCreateMoveSubscription = {
         moves: number,
         actionsPerMove: number,
         rating: number,
-      },
+        createdAt: string,
+        updatedAt: string,
+      } | null,
       boardSize:  {
         __typename: "BoardSize",
         x: number,
@@ -1535,8 +2321,8 @@ export type OnCreateMoveSubscription = {
       mode: GameMode,
       state:  {
         __typename: "GameState",
-        active: boolean,
-        turn: PlayerTurn,
+        state: State,
+        turn: number,
       },
       moves?:  {
         __typename: "ModelMoveConnection",
@@ -1544,6 +2330,33 @@ export type OnCreateMoveSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
+    } | null,
+    player:  {
+      __typename: "PlayerConfig",
+      id: string,
+      pieces:  Array< {
+        __typename: "Piece",
+        type: PieceType,
+        count: number,
+      } >,
+      time: number,
+      health: number,
+      moves: number,
+      actionsPerMove: number,
+      rating: number,
+      createdAt: string,
+      updatedAt: string,
+    },
+    action?:  {
+      __typename: "ModelActionConnection",
+      items:  Array< {
+        __typename: "Action",
+        id: string,
+        pieceType: string,
+        createdAt: string,
+        updatedAt: string,
+      } >,
+      nextToken?: string | null,
     } | null,
     timeLeft?: number | null,
     createdAt: string,
@@ -1555,22 +2368,6 @@ export type OnUpdateMoveSubscription = {
   onUpdateMove?:  {
     __typename: "Move",
     id: string,
-    gameID: string,
-    moveID: string,
-    player: string,
-    action?:  {
-      __typename: "ModelMoveActionConnection",
-      items?:  Array< {
-        __typename: "MoveAction",
-        id: string,
-        actionID: string,
-        moveID: string,
-        pieceType: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
     game?:  {
       __typename: "Game",
       id: string,
@@ -1582,8 +2379,10 @@ export type OnUpdateMoveSubscription = {
         moves: number,
         actionsPerMove: number,
         rating: number,
+        createdAt: string,
+        updatedAt: string,
       },
-      playerTwo:  {
+      playerTwo?:  {
         __typename: "PlayerConfig",
         id: string,
         time: number,
@@ -1591,7 +2390,9 @@ export type OnUpdateMoveSubscription = {
         moves: number,
         actionsPerMove: number,
         rating: number,
-      },
+        createdAt: string,
+        updatedAt: string,
+      } | null,
       boardSize:  {
         __typename: "BoardSize",
         x: number,
@@ -1601,8 +2402,8 @@ export type OnUpdateMoveSubscription = {
       mode: GameMode,
       state:  {
         __typename: "GameState",
-        active: boolean,
-        turn: PlayerTurn,
+        state: State,
+        turn: number,
       },
       moves?:  {
         __typename: "ModelMoveConnection",
@@ -1610,6 +2411,33 @@ export type OnUpdateMoveSubscription = {
       } | null,
       createdAt: string,
       updatedAt: string,
+    } | null,
+    player:  {
+      __typename: "PlayerConfig",
+      id: string,
+      pieces:  Array< {
+        __typename: "Piece",
+        type: PieceType,
+        count: number,
+      } >,
+      time: number,
+      health: number,
+      moves: number,
+      actionsPerMove: number,
+      rating: number,
+      createdAt: string,
+      updatedAt: string,
+    },
+    action?:  {
+      __typename: "ModelActionConnection",
+      items:  Array< {
+        __typename: "Action",
+        id: string,
+        pieceType: string,
+        createdAt: string,
+        updatedAt: string,
+      } >,
+      nextToken?: string | null,
     } | null,
     timeLeft?: number | null,
     createdAt: string,
@@ -1621,22 +2449,6 @@ export type OnDeleteMoveSubscription = {
   onDeleteMove?:  {
     __typename: "Move",
     id: string,
-    gameID: string,
-    moveID: string,
-    player: string,
-    action?:  {
-      __typename: "ModelMoveActionConnection",
-      items?:  Array< {
-        __typename: "MoveAction",
-        id: string,
-        actionID: string,
-        moveID: string,
-        pieceType: string,
-        createdAt: string,
-        updatedAt: string,
-      } | null > | null,
-      nextToken?: string | null,
-    } | null,
     game?:  {
       __typename: "Game",
       id: string,
@@ -1648,8 +2460,10 @@ export type OnDeleteMoveSubscription = {
         moves: number,
         actionsPerMove: number,
         rating: number,
+        createdAt: string,
+        updatedAt: string,
       },
-      playerTwo:  {
+      playerTwo?:  {
         __typename: "PlayerConfig",
         id: string,
         time: number,
@@ -1657,7 +2471,9 @@ export type OnDeleteMoveSubscription = {
         moves: number,
         actionsPerMove: number,
         rating: number,
-      },
+        createdAt: string,
+        updatedAt: string,
+      } | null,
       boardSize:  {
         __typename: "BoardSize",
         x: number,
@@ -1667,8 +2483,8 @@ export type OnDeleteMoveSubscription = {
       mode: GameMode,
       state:  {
         __typename: "GameState",
-        active: boolean,
-        turn: PlayerTurn,
+        state: State,
+        turn: number,
       },
       moves?:  {
         __typename: "ModelMoveConnection",
@@ -1677,28 +2493,46 @@ export type OnDeleteMoveSubscription = {
       createdAt: string,
       updatedAt: string,
     } | null,
+    player:  {
+      __typename: "PlayerConfig",
+      id: string,
+      pieces:  Array< {
+        __typename: "Piece",
+        type: PieceType,
+        count: number,
+      } >,
+      time: number,
+      health: number,
+      moves: number,
+      actionsPerMove: number,
+      rating: number,
+      createdAt: string,
+      updatedAt: string,
+    },
+    action?:  {
+      __typename: "ModelActionConnection",
+      items:  Array< {
+        __typename: "Action",
+        id: string,
+        pieceType: string,
+        createdAt: string,
+        updatedAt: string,
+      } >,
+      nextToken?: string | null,
+    } | null,
     timeLeft?: number | null,
     createdAt: string,
     updatedAt: string,
   } | null,
 };
 
-export type OnCreateMoveActionSubscription = {
-  onCreateMoveAction?:  {
-    __typename: "MoveAction",
+export type OnCreateActionSubscription = {
+  onCreateAction?:  {
+    __typename: "Action",
     id: string,
-    actionID: string,
-    moveID: string,
-    move?:  {
+    move:  {
       __typename: "Move",
       id: string,
-      gameID: string,
-      moveID: string,
-      player: string,
-      action?:  {
-        __typename: "ModelMoveActionConnection",
-        nextToken?: string | null,
-      } | null,
       game?:  {
         __typename: "Game",
         id: string,
@@ -1706,10 +2540,41 @@ export type OnCreateMoveActionSubscription = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      player:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      },
+      action?:  {
+        __typename: "ModelActionConnection",
+        nextToken?: string | null,
+      } | null,
       timeLeft?: number | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
+    },
+    player:  {
+      __typename: "PlayerConfig",
+      id: string,
+      pieces:  Array< {
+        __typename: "Piece",
+        type: PieceType,
+        count: number,
+      } >,
+      time: number,
+      health: number,
+      moves: number,
+      actionsPerMove: number,
+      rating: number,
+      createdAt: string,
+      updatedAt: string,
+    },
     pieceType: string,
     pieceFrom:  {
       __typename: "Coordinate",
@@ -1728,22 +2593,13 @@ export type OnCreateMoveActionSubscription = {
   } | null,
 };
 
-export type OnUpdateMoveActionSubscription = {
-  onUpdateMoveAction?:  {
-    __typename: "MoveAction",
+export type OnUpdateActionSubscription = {
+  onUpdateAction?:  {
+    __typename: "Action",
     id: string,
-    actionID: string,
-    moveID: string,
-    move?:  {
+    move:  {
       __typename: "Move",
       id: string,
-      gameID: string,
-      moveID: string,
-      player: string,
-      action?:  {
-        __typename: "ModelMoveActionConnection",
-        nextToken?: string | null,
-      } | null,
       game?:  {
         __typename: "Game",
         id: string,
@@ -1751,10 +2607,41 @@ export type OnUpdateMoveActionSubscription = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      player:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      },
+      action?:  {
+        __typename: "ModelActionConnection",
+        nextToken?: string | null,
+      } | null,
       timeLeft?: number | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
+    },
+    player:  {
+      __typename: "PlayerConfig",
+      id: string,
+      pieces:  Array< {
+        __typename: "Piece",
+        type: PieceType,
+        count: number,
+      } >,
+      time: number,
+      health: number,
+      moves: number,
+      actionsPerMove: number,
+      rating: number,
+      createdAt: string,
+      updatedAt: string,
+    },
     pieceType: string,
     pieceFrom:  {
       __typename: "Coordinate",
@@ -1773,22 +2660,13 @@ export type OnUpdateMoveActionSubscription = {
   } | null,
 };
 
-export type OnDeleteMoveActionSubscription = {
-  onDeleteMoveAction?:  {
-    __typename: "MoveAction",
+export type OnDeleteActionSubscription = {
+  onDeleteAction?:  {
+    __typename: "Action",
     id: string,
-    actionID: string,
-    moveID: string,
-    move?:  {
+    move:  {
       __typename: "Move",
       id: string,
-      gameID: string,
-      moveID: string,
-      player: string,
-      action?:  {
-        __typename: "ModelMoveActionConnection",
-        nextToken?: string | null,
-      } | null,
       game?:  {
         __typename: "Game",
         id: string,
@@ -1796,10 +2674,41 @@ export type OnDeleteMoveActionSubscription = {
         createdAt: string,
         updatedAt: string,
       } | null,
+      player:  {
+        __typename: "PlayerConfig",
+        id: string,
+        time: number,
+        health: number,
+        moves: number,
+        actionsPerMove: number,
+        rating: number,
+        createdAt: string,
+        updatedAt: string,
+      },
+      action?:  {
+        __typename: "ModelActionConnection",
+        nextToken?: string | null,
+      } | null,
       timeLeft?: number | null,
       createdAt: string,
       updatedAt: string,
-    } | null,
+    },
+    player:  {
+      __typename: "PlayerConfig",
+      id: string,
+      pieces:  Array< {
+        __typename: "Piece",
+        type: PieceType,
+        count: number,
+      } >,
+      time: number,
+      health: number,
+      moves: number,
+      actionsPerMove: number,
+      rating: number,
+      createdAt: string,
+      updatedAt: string,
+    },
     pieceType: string,
     pieceFrom:  {
       __typename: "Coordinate",
@@ -1813,6 +2722,63 @@ export type OnDeleteMoveActionSubscription = {
       y: number,
       z: number,
     },
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreatePlayerConfigSubscription = {
+  onCreatePlayerConfig?:  {
+    __typename: "PlayerConfig",
+    id: string,
+    pieces:  Array< {
+      __typename: "Piece",
+      type: PieceType,
+      count: number,
+    } >,
+    time: number,
+    health: number,
+    moves: number,
+    actionsPerMove: number,
+    rating: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdatePlayerConfigSubscription = {
+  onUpdatePlayerConfig?:  {
+    __typename: "PlayerConfig",
+    id: string,
+    pieces:  Array< {
+      __typename: "Piece",
+      type: PieceType,
+      count: number,
+    } >,
+    time: number,
+    health: number,
+    moves: number,
+    actionsPerMove: number,
+    rating: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeletePlayerConfigSubscription = {
+  onDeletePlayerConfig?:  {
+    __typename: "PlayerConfig",
+    id: string,
+    pieces:  Array< {
+      __typename: "Piece",
+      type: PieceType,
+      count: number,
+    } >,
+    time: number,
+    health: number,
+    moves: number,
+    actionsPerMove: number,
+    rating: number,
     createdAt: string,
     updatedAt: string,
   } | null,

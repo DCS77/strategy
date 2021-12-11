@@ -2,11 +2,12 @@ import React, { useState, useRef } from 'react';
 import { useStateRef } from 'use-state-ref';
 import { Switch, Route, useLocation, useHistory, withRouter } from 'react-router-dom';
 import Home from './pages/home';
-import Game from './pages/game';
+import Play from './pages/play';
+import TV from './pages/tv';
 import BottomBar from './components/bottomBar/bottomBar';
 import TopBarGroup from './components/topBar/topBarGroup';
 import GameTabBar from './components/tabBar/gameTabBar';
-import { TabDetails, GameTabDetail, InfoTabDetail } from './types';
+import { TabType, TabDetails, TabDetail} from './types';
 import './App.css';
 
 function App() {
@@ -17,31 +18,11 @@ function App() {
   const app = useRef<HTMLDivElement>(null);
   const history = useHistory();
 
-  function onCloseTab(ID: string) {
-    const splitPath = window.location.pathname.split('/');
-    if(splitPath[2] === ID) {
-      let newPath = '/';
-      if(tabsRef.current && tabsRef.current.length > 1) {
-        let tabIndex = tabsRef.current.findIndex(tab => { return tab.ID === ID });
-
-        newPath = tabIndex === tabsRef.current.length - 1 ?
-          `/play/${tabsRef.current[tabIndex - 1].ID}` :
-          `/play/${tabsRef.current[tabIndex + 1].ID}`;
-      }
-      history.push(newPath);
-    }
-
-    if(tabsRef.current){
-      let newTabs = tabsRef.current.filter((item:GameTabDetail|InfoTabDetail) => item.ID !== ID);
-      setTabs(newTabs);
-    }
-  }
-
   function onClickThemeSwitch(checked: boolean) {
     setTheme(checked ? 'dark' : 'light');
   }
 
-  function onTabBarHeightChange(height: Number) {
+  function onTabBarHeightChange(height: number) {
     if(height >= 0 && height < 20) {
       setGameTabBarSize(0);
     }
@@ -56,34 +37,57 @@ function App() {
     }
   }
 
-  // Added temporarily to test adding of game tabs
-  function MakeID(length: number) {
-    var result           = '';
-    var characters       = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    var charactersLength = characters.length;
-    for ( var i = 0; i < length; i++ ) {
-      result += characters.charAt(Math.floor(Math.random() * charactersLength));
+  function onCloseTab(ID: string) {
+    const splitPath = window.location.pathname.split('/');
+    if(splitPath[2] === ID || ID === 'tv') {
+      let newPath = '/';
+      if(tabsRef.current && tabsRef.current.length > 1) {
+        let tabIndex = tabsRef.current.findIndex(tab => { return tab.ID === ID });
+
+        newPath = tabIndex === tabsRef.current.length - 1 ?
+          `/play/${tabsRef.current[tabIndex - 1].ID}` :
+          `/play/${tabsRef.current[tabIndex + 1].ID}`;
+      }
+      history.push(newPath);
     }
-    return result;
+
+    if(tabsRef.current){
+      let newTabs = tabsRef.current.filter((item: TabDetail) => item.ID !== ID);
+      setTabs(newTabs);
+    }
   }
 
-  // Added temporarily to test adding of game tabs
-  function AddGameTab() {
-    let ID = MakeID(2);
-    let game2:GameTabDetail = {
-      GameID: `/play/${ID}`,
-      Title: ID,
-      Player: 'Sam',
-      Rating: 1647,
-      ID: ID,
-      closeTabHandler: onCloseTab
-    };
-    setTabs([...tabs, game2]);
+  function AddTab(ID: string, path: string, title: string, type: TabType) {
+    let found = tabs.find(tab => tab.ID === ID);
+
+    if(!found) {
+      let tab:TabDetail = {
+        ID: ID,
+        path: `/${path}`,
+        title: title,
+        type: type,
+        closeTabHandler: onCloseTab
+      };
+      setTabs([...tabs, tab]);
+    }
   }
 
-  function PlayGame() {
+  function ChangePath(path: string) {
+    history.push(`${path}`);
+  }
+
+  function GameTab() {
     const splitPath = useLocation().pathname.split('/');
-    return <Game onCreateGame={AddGameTab} ID={splitPath[2]}/>
+    return <Play 
+      onCreateGame={(ID: string, title: string) => AddTab(ID, `play/${ID}`, title, TabType.Game)}
+      changePath={(path: string) => ChangePath(path)}
+      createTab={AddTab}
+      ID={splitPath[2]}
+    />
+  }
+
+  function TVTab() {
+    return <TV createTab={AddTab}/>
   }
 
   return (
@@ -92,16 +96,16 @@ function App() {
         theme={theme}
         onClickThemeSwitch={onClickThemeSwitch}/>
       <div id='page' className='page'>
-        <GameTabBar Tabs={tabs} onHeightChange={onTabBarHeightChange}/>
+        <GameTabBar tabs={tabs} onHeightChange={onTabBarHeightChange}/>
         <Switch>
           <Route path='/play'>
-            <PlayGame/>
+            <GameTab/>
           </Route>
           <Route path='/info'>
             Info 1
           </Route>
           <Route path='/tv'>
-            Arena TV
+            <TVTab/>
           </Route>
           <Route path='/ai'>
             Play AI

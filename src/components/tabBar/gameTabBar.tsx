@@ -1,47 +1,32 @@
 import React, { useState, useEffect } from 'react';
 import useResizeObserver from 'use-resize-observer';
-import { TabType, TabDetails, GameTabDetail, InfoTabDetail } from '../../types';
+import { TabDetail, TabDetails } from '../../types';
 import TabBarItem from './tabBarItem';
 import './gameTabBar.css';
 import '../../App.css';
 
 interface GameTabBarProps {
-  Tabs: TabDetails;
-  onHeightChange: (height: Number) => void;
+  tabs: TabDetails;
+  onHeightChange: (height: number) => void;
 }
 
 interface TabListProps {
-  Ready: Boolean;
-  Tabs: TabDetails;
-  onHeightChange: (height: Number) => void;
+  ready: boolean;
+  tabs: TabDetails;
+  onHeightChange: (height: number) => void;
 }
 
-function CreateTabBarItem(Props: GameTabDetail|InfoTabDetail) {
-  if('GameID' in Props){
-    return (
-      <TabBarItem
-        key={Props.ID}
-        ID={Props.ID}
-        Type={TabType.Game}
-        Title={Props.Title}
-        Player={Props.Player}
-        Rating={Props.Rating}
-        to={Props.GameID}
-        closeTabHandler={Props.closeTabHandler}
-      />
-    );
-  } else if('InfoID' in Props){
-    return (
-      <TabBarItem
-        key={Props.ID}
-        ID={Props.ID}
-        Type={TabType.Info}
-        Title={Props.Title}
-        to={Props.InfoID}
-        closeTabHandler={Props.closeTabHandler}
-      />
-    );
-  }
+function CreateTabBarItem(Props: TabDetail) {
+  return (
+    <TabBarItem
+      key={Props.ID}
+      ID={Props.ID}
+      title={Props.title}
+      type={Props.type}
+      to={Props.path}
+      closeTabHandler={Props.closeTabHandler}
+    />
+  );
 }
 
 function GameTabBar(Props: GameTabBarProps) {
@@ -54,10 +39,10 @@ function GameTabBar(Props: GameTabBarProps) {
   }, [Props, height]);
 
   function TabList(Props: TabListProps) {
-    if(Props.Ready) {
+    if(Props.ready) {
       return (
         <React.Fragment>
-          { Props.Tabs.map((item: GameTabDetail|InfoTabDetail) => CreateTabBarItem(item)) }
+          { Props.tabs.map((item: TabDetail) => CreateTabBarItem(item)) }
         </React.Fragment>
       );
     }
@@ -68,7 +53,7 @@ function GameTabBar(Props: GameTabBarProps) {
     <div ref={ref}>
       <div className='game-tab-bar passero no-select'>
         <div className='game-tab-bar-inner'>
-          <TabList Ready={ready} Tabs={Props.Tabs} onHeightChange={Props.onHeightChange}/>
+          <TabList ready={ready} tabs={Props.tabs} onHeightChange={Props.onHeightChange}/>
         </div>
       </div>
     </div>
