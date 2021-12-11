@@ -41,6 +41,12 @@ type PlayerConfig @model {
   rating: Int!
 }
 
+type Army @model {
+  id: ID!
+  player: ID!
+  pieces: [Piece!]!
+}
+
 enum GameMode { standard no_turns }
 
 type Piece {
@@ -48,7 +54,7 @@ type Piece {
   count: Int!
 }
 
-enum PieceType { deer wolf hawk }
+enum PieceType { adventurer bloodletter excavator knight messenger smuggler }
 
 type BoardSize {
   x: Int!
