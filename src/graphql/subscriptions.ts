@@ -2,6 +2,150 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const onCreatePendingGame = /* GraphQL */ `
+  subscription OnCreatePendingGame {
+    onCreatePendingGame {
+      id
+      game {
+        id
+        playerOne {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        playerTwo {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        boardSize {
+          x
+          y
+          z
+        }
+        mode
+        state {
+          state
+          turn
+        }
+        moves {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      expiry
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePendingGame = /* GraphQL */ `
+  subscription OnUpdatePendingGame {
+    onUpdatePendingGame {
+      id
+      game {
+        id
+        playerOne {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        playerTwo {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        boardSize {
+          x
+          y
+          z
+        }
+        mode
+        state {
+          state
+          turn
+        }
+        moves {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      expiry
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeletePendingGame = /* GraphQL */ `
+  subscription OnDeletePendingGame {
+    onDeletePendingGame {
+      id
+      game {
+        id
+        playerOne {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        playerTwo {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        boardSize {
+          x
+          y
+          z
+        }
+        mode
+        state {
+          state
+          turn
+        }
+        moves {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      expiry
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const onCreateGame = /* GraphQL */ `
   subscription OnCreateGame {
     onCreateGame {
@@ -17,6 +161,8 @@ export const onCreateGame = /* GraphQL */ `
         moves
         actionsPerMove
         rating
+        createdAt
+        updatedAt
       }
       playerTwo {
         id
@@ -29,6 +175,8 @@ export const onCreateGame = /* GraphQL */ `
         moves
         actionsPerMove
         rating
+        createdAt
+        updatedAt
       }
       boardSize {
         x
@@ -37,7 +185,7 @@ export const onCreateGame = /* GraphQL */ `
       }
       mode
       state {
-        active
+        state
         turn
         result {
           tie
@@ -48,9 +196,6 @@ export const onCreateGame = /* GraphQL */ `
       moves {
         items {
           id
-          gameID
-          moveID
-          player
           timeLeft
           createdAt
           updatedAt
@@ -77,6 +222,8 @@ export const onUpdateGame = /* GraphQL */ `
         moves
         actionsPerMove
         rating
+        createdAt
+        updatedAt
       }
       playerTwo {
         id
@@ -89,6 +236,8 @@ export const onUpdateGame = /* GraphQL */ `
         moves
         actionsPerMove
         rating
+        createdAt
+        updatedAt
       }
       boardSize {
         x
@@ -97,7 +246,7 @@ export const onUpdateGame = /* GraphQL */ `
       }
       mode
       state {
-        active
+        state
         turn
         result {
           tie
@@ -108,9 +257,6 @@ export const onUpdateGame = /* GraphQL */ `
       moves {
         items {
           id
-          gameID
-          moveID
-          player
           timeLeft
           createdAt
           updatedAt
@@ -137,6 +283,8 @@ export const onDeleteGame = /* GraphQL */ `
         moves
         actionsPerMove
         rating
+        createdAt
+        updatedAt
       }
       playerTwo {
         id
@@ -149,6 +297,8 @@ export const onDeleteGame = /* GraphQL */ `
         moves
         actionsPerMove
         rating
+        createdAt
+        updatedAt
       }
       boardSize {
         x
@@ -157,7 +307,7 @@ export const onDeleteGame = /* GraphQL */ `
       }
       mode
       state {
-        active
+        state
         turn
         result {
           tie
@@ -168,9 +318,6 @@ export const onDeleteGame = /* GraphQL */ `
       moves {
         items {
           id
-          gameID
-          moveID
-          player
           timeLeft
           createdAt
           updatedAt
@@ -186,20 +333,6 @@ export const onCreateMove = /* GraphQL */ `
   subscription OnCreateMove {
     onCreateMove {
       id
-      gameID
-      moveID
-      player
-      action {
-        items {
-          id
-          actionID
-          moveID
-          pieceType
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       game {
         id
         playerOne {
@@ -209,6 +342,8 @@ export const onCreateMove = /* GraphQL */ `
           moves
           actionsPerMove
           rating
+          createdAt
+          updatedAt
         }
         playerTwo {
           id
@@ -217,6 +352,8 @@ export const onCreateMove = /* GraphQL */ `
           moves
           actionsPerMove
           rating
+          createdAt
+          updatedAt
         }
         boardSize {
           x
@@ -225,7 +362,7 @@ export const onCreateMove = /* GraphQL */ `
         }
         mode
         state {
-          active
+          state
           turn
         }
         moves {
@@ -233,6 +370,29 @@ export const onCreateMove = /* GraphQL */ `
         }
         createdAt
         updatedAt
+      }
+      player {
+        id
+        pieces {
+          type
+          count
+        }
+        time
+        health
+        moves
+        actionsPerMove
+        rating
+        createdAt
+        updatedAt
+      }
+      action {
+        items {
+          id
+          pieceType
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
       timeLeft
       createdAt
@@ -244,20 +404,6 @@ export const onUpdateMove = /* GraphQL */ `
   subscription OnUpdateMove {
     onUpdateMove {
       id
-      gameID
-      moveID
-      player
-      action {
-        items {
-          id
-          actionID
-          moveID
-          pieceType
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       game {
         id
         playerOne {
@@ -267,6 +413,8 @@ export const onUpdateMove = /* GraphQL */ `
           moves
           actionsPerMove
           rating
+          createdAt
+          updatedAt
         }
         playerTwo {
           id
@@ -275,6 +423,8 @@ export const onUpdateMove = /* GraphQL */ `
           moves
           actionsPerMove
           rating
+          createdAt
+          updatedAt
         }
         boardSize {
           x
@@ -283,7 +433,7 @@ export const onUpdateMove = /* GraphQL */ `
         }
         mode
         state {
-          active
+          state
           turn
         }
         moves {
@@ -291,6 +441,29 @@ export const onUpdateMove = /* GraphQL */ `
         }
         createdAt
         updatedAt
+      }
+      player {
+        id
+        pieces {
+          type
+          count
+        }
+        time
+        health
+        moves
+        actionsPerMove
+        rating
+        createdAt
+        updatedAt
+      }
+      action {
+        items {
+          id
+          pieceType
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
       timeLeft
       createdAt
@@ -302,20 +475,6 @@ export const onDeleteMove = /* GraphQL */ `
   subscription OnDeleteMove {
     onDeleteMove {
       id
-      gameID
-      moveID
-      player
-      action {
-        items {
-          id
-          actionID
-          moveID
-          pieceType
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       game {
         id
         playerOne {
@@ -325,6 +484,8 @@ export const onDeleteMove = /* GraphQL */ `
           moves
           actionsPerMove
           rating
+          createdAt
+          updatedAt
         }
         playerTwo {
           id
@@ -333,6 +494,8 @@ export const onDeleteMove = /* GraphQL */ `
           moves
           actionsPerMove
           rating
+          createdAt
+          updatedAt
         }
         boardSize {
           x
@@ -341,7 +504,7 @@ export const onDeleteMove = /* GraphQL */ `
         }
         mode
         state {
-          active
+          state
           turn
         }
         moves {
@@ -350,33 +513,75 @@ export const onDeleteMove = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      player {
+        id
+        pieces {
+          type
+          count
+        }
+        time
+        health
+        moves
+        actionsPerMove
+        rating
+        createdAt
+        updatedAt
+      }
+      action {
+        items {
+          id
+          pieceType
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       timeLeft
       createdAt
       updatedAt
     }
   }
 `;
-export const onCreateMoveAction = /* GraphQL */ `
-  subscription OnCreateMoveAction {
-    onCreateMoveAction {
+export const onCreateAction = /* GraphQL */ `
+  subscription OnCreateAction {
+    onCreateAction {
       id
-      actionID
-      moveID
       move {
         id
-        gameID
-        moveID
-        player
-        action {
-          nextToken
-        }
         game {
           id
           mode
           createdAt
           updatedAt
         }
+        player {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        action {
+          nextToken
+        }
         timeLeft
+        createdAt
+        updatedAt
+      }
+      player {
+        id
+        pieces {
+          type
+          count
+        }
+        time
+        health
+        moves
+        actionsPerMove
+        rating
         createdAt
         updatedAt
       }
@@ -396,27 +601,46 @@ export const onCreateMoveAction = /* GraphQL */ `
     }
   }
 `;
-export const onUpdateMoveAction = /* GraphQL */ `
-  subscription OnUpdateMoveAction {
-    onUpdateMoveAction {
+export const onUpdateAction = /* GraphQL */ `
+  subscription OnUpdateAction {
+    onUpdateAction {
       id
-      actionID
-      moveID
       move {
         id
-        gameID
-        moveID
-        player
-        action {
-          nextToken
-        }
         game {
           id
           mode
           createdAt
           updatedAt
         }
+        player {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        action {
+          nextToken
+        }
         timeLeft
+        createdAt
+        updatedAt
+      }
+      player {
+        id
+        pieces {
+          type
+          count
+        }
+        time
+        health
+        moves
+        actionsPerMove
+        rating
         createdAt
         updatedAt
       }
@@ -436,27 +660,46 @@ export const onUpdateMoveAction = /* GraphQL */ `
     }
   }
 `;
-export const onDeleteMoveAction = /* GraphQL */ `
-  subscription OnDeleteMoveAction {
-    onDeleteMoveAction {
+export const onDeleteAction = /* GraphQL */ `
+  subscription OnDeleteAction {
+    onDeleteAction {
       id
-      actionID
-      moveID
       move {
         id
-        gameID
-        moveID
-        player
-        action {
-          nextToken
-        }
         game {
           id
           mode
           createdAt
           updatedAt
         }
+        player {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        action {
+          nextToken
+        }
         timeLeft
+        createdAt
+        updatedAt
+      }
+      player {
+        id
+        pieces {
+          type
+          count
+        }
+        time
+        health
+        moves
+        actionsPerMove
+        rating
         createdAt
         updatedAt
       }
@@ -471,6 +714,60 @@ export const onDeleteMoveAction = /* GraphQL */ `
         y
         z
       }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onCreatePlayerConfig = /* GraphQL */ `
+  subscription OnCreatePlayerConfig {
+    onCreatePlayerConfig {
+      id
+      pieces {
+        type
+        count
+      }
+      time
+      health
+      moves
+      actionsPerMove
+      rating
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdatePlayerConfig = /* GraphQL */ `
+  subscription OnUpdatePlayerConfig {
+    onUpdatePlayerConfig {
+      id
+      pieces {
+        type
+        count
+      }
+      time
+      health
+      moves
+      actionsPerMove
+      rating
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeletePlayerConfig = /* GraphQL */ `
+  subscription OnDeletePlayerConfig {
+    onDeletePlayerConfig {
+      id
+      pieces {
+        type
+        count
+      }
+      time
+      health
+      moves
+      actionsPerMove
+      rating
       createdAt
       updatedAt
     }

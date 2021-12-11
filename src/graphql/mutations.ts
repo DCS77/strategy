@@ -2,6 +2,159 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createPendingGame = /* GraphQL */ `
+  mutation CreatePendingGame(
+    $input: CreatePendingGameInput!
+    $condition: ModelPendingGameConditionInput
+  ) {
+    createPendingGame(input: $input, condition: $condition) {
+      id
+      game {
+        id
+        playerOne {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        playerTwo {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        boardSize {
+          x
+          y
+          z
+        }
+        mode
+        state {
+          state
+          turn
+        }
+        moves {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      expiry
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePendingGame = /* GraphQL */ `
+  mutation UpdatePendingGame(
+    $input: UpdatePendingGameInput!
+    $condition: ModelPendingGameConditionInput
+  ) {
+    updatePendingGame(input: $input, condition: $condition) {
+      id
+      game {
+        id
+        playerOne {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        playerTwo {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        boardSize {
+          x
+          y
+          z
+        }
+        mode
+        state {
+          state
+          turn
+        }
+        moves {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      expiry
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePendingGame = /* GraphQL */ `
+  mutation DeletePendingGame(
+    $input: DeletePendingGameInput!
+    $condition: ModelPendingGameConditionInput
+  ) {
+    deletePendingGame(input: $input, condition: $condition) {
+      id
+      game {
+        id
+        playerOne {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        playerTwo {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        boardSize {
+          x
+          y
+          z
+        }
+        mode
+        state {
+          state
+          turn
+        }
+        moves {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      expiry
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createGame = /* GraphQL */ `
   mutation CreateGame(
     $input: CreateGameInput!
@@ -20,6 +173,8 @@ export const createGame = /* GraphQL */ `
         moves
         actionsPerMove
         rating
+        createdAt
+        updatedAt
       }
       playerTwo {
         id
@@ -32,6 +187,8 @@ export const createGame = /* GraphQL */ `
         moves
         actionsPerMove
         rating
+        createdAt
+        updatedAt
       }
       boardSize {
         x
@@ -40,7 +197,7 @@ export const createGame = /* GraphQL */ `
       }
       mode
       state {
-        active
+        state
         turn
         result {
           tie
@@ -51,9 +208,6 @@ export const createGame = /* GraphQL */ `
       moves {
         items {
           id
-          gameID
-          moveID
-          player
           timeLeft
           createdAt
           updatedAt
@@ -83,6 +237,8 @@ export const updateGame = /* GraphQL */ `
         moves
         actionsPerMove
         rating
+        createdAt
+        updatedAt
       }
       playerTwo {
         id
@@ -95,6 +251,8 @@ export const updateGame = /* GraphQL */ `
         moves
         actionsPerMove
         rating
+        createdAt
+        updatedAt
       }
       boardSize {
         x
@@ -103,7 +261,7 @@ export const updateGame = /* GraphQL */ `
       }
       mode
       state {
-        active
+        state
         turn
         result {
           tie
@@ -114,9 +272,6 @@ export const updateGame = /* GraphQL */ `
       moves {
         items {
           id
-          gameID
-          moveID
-          player
           timeLeft
           createdAt
           updatedAt
@@ -146,6 +301,8 @@ export const deleteGame = /* GraphQL */ `
         moves
         actionsPerMove
         rating
+        createdAt
+        updatedAt
       }
       playerTwo {
         id
@@ -158,6 +315,8 @@ export const deleteGame = /* GraphQL */ `
         moves
         actionsPerMove
         rating
+        createdAt
+        updatedAt
       }
       boardSize {
         x
@@ -166,7 +325,7 @@ export const deleteGame = /* GraphQL */ `
       }
       mode
       state {
-        active
+        state
         turn
         result {
           tie
@@ -177,9 +336,6 @@ export const deleteGame = /* GraphQL */ `
       moves {
         items {
           id
-          gameID
-          moveID
-          player
           timeLeft
           createdAt
           updatedAt
@@ -198,20 +354,6 @@ export const createMove = /* GraphQL */ `
   ) {
     createMove(input: $input, condition: $condition) {
       id
-      gameID
-      moveID
-      player
-      action {
-        items {
-          id
-          actionID
-          moveID
-          pieceType
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       game {
         id
         playerOne {
@@ -221,6 +363,8 @@ export const createMove = /* GraphQL */ `
           moves
           actionsPerMove
           rating
+          createdAt
+          updatedAt
         }
         playerTwo {
           id
@@ -229,6 +373,8 @@ export const createMove = /* GraphQL */ `
           moves
           actionsPerMove
           rating
+          createdAt
+          updatedAt
         }
         boardSize {
           x
@@ -237,7 +383,7 @@ export const createMove = /* GraphQL */ `
         }
         mode
         state {
-          active
+          state
           turn
         }
         moves {
@@ -245,6 +391,29 @@ export const createMove = /* GraphQL */ `
         }
         createdAt
         updatedAt
+      }
+      player {
+        id
+        pieces {
+          type
+          count
+        }
+        time
+        health
+        moves
+        actionsPerMove
+        rating
+        createdAt
+        updatedAt
+      }
+      action {
+        items {
+          id
+          pieceType
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
       timeLeft
       createdAt
@@ -259,20 +428,6 @@ export const updateMove = /* GraphQL */ `
   ) {
     updateMove(input: $input, condition: $condition) {
       id
-      gameID
-      moveID
-      player
-      action {
-        items {
-          id
-          actionID
-          moveID
-          pieceType
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       game {
         id
         playerOne {
@@ -282,6 +437,8 @@ export const updateMove = /* GraphQL */ `
           moves
           actionsPerMove
           rating
+          createdAt
+          updatedAt
         }
         playerTwo {
           id
@@ -290,6 +447,8 @@ export const updateMove = /* GraphQL */ `
           moves
           actionsPerMove
           rating
+          createdAt
+          updatedAt
         }
         boardSize {
           x
@@ -298,7 +457,7 @@ export const updateMove = /* GraphQL */ `
         }
         mode
         state {
-          active
+          state
           turn
         }
         moves {
@@ -306,6 +465,29 @@ export const updateMove = /* GraphQL */ `
         }
         createdAt
         updatedAt
+      }
+      player {
+        id
+        pieces {
+          type
+          count
+        }
+        time
+        health
+        moves
+        actionsPerMove
+        rating
+        createdAt
+        updatedAt
+      }
+      action {
+        items {
+          id
+          pieceType
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
       timeLeft
       createdAt
@@ -320,20 +502,6 @@ export const deleteMove = /* GraphQL */ `
   ) {
     deleteMove(input: $input, condition: $condition) {
       id
-      gameID
-      moveID
-      player
-      action {
-        items {
-          id
-          actionID
-          moveID
-          pieceType
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       game {
         id
         playerOne {
@@ -343,6 +511,8 @@ export const deleteMove = /* GraphQL */ `
           moves
           actionsPerMove
           rating
+          createdAt
+          updatedAt
         }
         playerTwo {
           id
@@ -351,6 +521,8 @@ export const deleteMove = /* GraphQL */ `
           moves
           actionsPerMove
           rating
+          createdAt
+          updatedAt
         }
         boardSize {
           x
@@ -359,7 +531,7 @@ export const deleteMove = /* GraphQL */ `
         }
         mode
         state {
-          active
+          state
           turn
         }
         moves {
@@ -368,36 +540,78 @@ export const deleteMove = /* GraphQL */ `
         createdAt
         updatedAt
       }
+      player {
+        id
+        pieces {
+          type
+          count
+        }
+        time
+        health
+        moves
+        actionsPerMove
+        rating
+        createdAt
+        updatedAt
+      }
+      action {
+        items {
+          id
+          pieceType
+          createdAt
+          updatedAt
+        }
+        nextToken
+      }
       timeLeft
       createdAt
       updatedAt
     }
   }
 `;
-export const createMoveAction = /* GraphQL */ `
-  mutation CreateMoveAction(
-    $input: CreateMoveActionInput!
-    $condition: ModelMoveActionConditionInput
+export const createAction = /* GraphQL */ `
+  mutation CreateAction(
+    $input: CreateActionInput!
+    $condition: ModelActionConditionInput
   ) {
-    createMoveAction(input: $input, condition: $condition) {
+    createAction(input: $input, condition: $condition) {
       id
-      actionID
-      moveID
       move {
         id
-        gameID
-        moveID
-        player
-        action {
-          nextToken
-        }
         game {
           id
           mode
           createdAt
           updatedAt
         }
+        player {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        action {
+          nextToken
+        }
         timeLeft
+        createdAt
+        updatedAt
+      }
+      player {
+        id
+        pieces {
+          type
+          count
+        }
+        time
+        health
+        moves
+        actionsPerMove
+        rating
         createdAt
         updatedAt
       }
@@ -417,30 +631,49 @@ export const createMoveAction = /* GraphQL */ `
     }
   }
 `;
-export const updateMoveAction = /* GraphQL */ `
-  mutation UpdateMoveAction(
-    $input: UpdateMoveActionInput!
-    $condition: ModelMoveActionConditionInput
+export const updateAction = /* GraphQL */ `
+  mutation UpdateAction(
+    $input: UpdateActionInput!
+    $condition: ModelActionConditionInput
   ) {
-    updateMoveAction(input: $input, condition: $condition) {
+    updateAction(input: $input, condition: $condition) {
       id
-      actionID
-      moveID
       move {
         id
-        gameID
-        moveID
-        player
-        action {
-          nextToken
-        }
         game {
           id
           mode
           createdAt
           updatedAt
         }
+        player {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        action {
+          nextToken
+        }
         timeLeft
+        createdAt
+        updatedAt
+      }
+      player {
+        id
+        pieces {
+          type
+          count
+        }
+        time
+        health
+        moves
+        actionsPerMove
+        rating
         createdAt
         updatedAt
       }
@@ -460,30 +693,49 @@ export const updateMoveAction = /* GraphQL */ `
     }
   }
 `;
-export const deleteMoveAction = /* GraphQL */ `
-  mutation DeleteMoveAction(
-    $input: DeleteMoveActionInput!
-    $condition: ModelMoveActionConditionInput
+export const deleteAction = /* GraphQL */ `
+  mutation DeleteAction(
+    $input: DeleteActionInput!
+    $condition: ModelActionConditionInput
   ) {
-    deleteMoveAction(input: $input, condition: $condition) {
+    deleteAction(input: $input, condition: $condition) {
       id
-      actionID
-      moveID
       move {
         id
-        gameID
-        moveID
-        player
-        action {
-          nextToken
-        }
         game {
           id
           mode
           createdAt
           updatedAt
         }
+        player {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        action {
+          nextToken
+        }
         timeLeft
+        createdAt
+        updatedAt
+      }
+      player {
+        id
+        pieces {
+          type
+          count
+        }
+        time
+        health
+        moves
+        actionsPerMove
+        rating
         createdAt
         updatedAt
       }
@@ -498,6 +750,69 @@ export const deleteMoveAction = /* GraphQL */ `
         y
         z
       }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createPlayerConfig = /* GraphQL */ `
+  mutation CreatePlayerConfig(
+    $input: CreatePlayerConfigInput!
+    $condition: ModelPlayerConfigConditionInput
+  ) {
+    createPlayerConfig(input: $input, condition: $condition) {
+      id
+      pieces {
+        type
+        count
+      }
+      time
+      health
+      moves
+      actionsPerMove
+      rating
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updatePlayerConfig = /* GraphQL */ `
+  mutation UpdatePlayerConfig(
+    $input: UpdatePlayerConfigInput!
+    $condition: ModelPlayerConfigConditionInput
+  ) {
+    updatePlayerConfig(input: $input, condition: $condition) {
+      id
+      pieces {
+        type
+        count
+      }
+      time
+      health
+      moves
+      actionsPerMove
+      rating
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deletePlayerConfig = /* GraphQL */ `
+  mutation DeletePlayerConfig(
+    $input: DeletePlayerConfigInput!
+    $condition: ModelPlayerConfigConditionInput
+  ) {
+    deletePlayerConfig(input: $input, condition: $condition) {
+      id
+      pieces {
+        type
+        count
+      }
+      time
+      health
+      moves
+      actionsPerMove
+      rating
       createdAt
       updatedAt
     }

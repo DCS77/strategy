@@ -1,36 +1,37 @@
+type PendingGame @model {
+  id: ID!
+  game: Game! @connection
+  expiry: Int! # UTC Epoch Time in milliseconds
+}
+
 type Game @model {
   id: ID!
-  playerOne: PlayerConfig!
-  playerTwo: PlayerConfig!
+  playerOne: PlayerConfig! @connection
+  playerTwo: PlayerConfig @connection
   boardSize: BoardSize!
   mode: GameMode!
   state: GameState!
-  moves: [Move!]! @connection(keyName: "byMove", fields: ["id"])
+  moves: [Move!]! @connection(name: "GameMoves")
 }
 
-enum GameMode { standard no_turns }
-
-type Move @model @key(name: "byMove", fields: ["gameID", "moveID"]) {
+type Move @model {
   id: ID!
-  gameID: ID!
-  moveID: ID!
-  player: ID!
-  action: [MoveAction!]! @connection(keyName: "byAction", fields: ["id"])
-  game: Game @connection(fields: ["gameID"])
-  timeLeft: Int
+  game: Game @connection(name: "GameMoves")
+  player: PlayerConfig! @connection
+  action: [Action!]! @connection(name: "MoveActions")
+  timeLeft: Int # Milliseconds
 }
 
-type MoveAction @model @key(name: "byAction", fields: ["moveID", "actionID"]) {
+type Action @model {
   id: ID!
-  actionID: ID!
-  moveID: ID!
-  move: Move @connection(fields: ["moveID"])
+  move: Move! @connection(name: "MoveActions")
+  player: PlayerConfig! @connection
   pieceType: String!
   pieceFrom: Coordinate!
   pieceTo: Coordinate!
 }
 
-type PlayerConfig {
+type PlayerConfig @model {
   id: ID!
   pieces: [Piece!]!
   time: Int!
@@ -39,6 +40,8 @@ type PlayerConfig {
   actionsPerMove: Int!
   rating: Int!
 }
+
+enum GameMode { standard no_turns }
 
 type Piece {
   type: PieceType!
@@ -60,8 +63,8 @@ type Coordinate {
 }
 
 type GameState {
-  active: Boolean!
-  turn: PlayerTurn!
+  state: State!
+  turn: Int!
   result: GameResult
 }
 
@@ -71,7 +74,7 @@ type GameResult {
   winner: ID
 }
 
-enum PlayerTurn { one two no_one }
+enum State { pending active paused done }
 enum ResultType { win tie cancel }
 enum WinMethod { points moves time forfeit }
 

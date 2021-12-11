@@ -2,6 +2,77 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const getPendingGame = /* GraphQL */ `
+  query GetPendingGame($id: ID!) {
+    getPendingGame(id: $id) {
+      id
+      game {
+        id
+        playerOne {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        playerTwo {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        boardSize {
+          x
+          y
+          z
+        }
+        mode
+        state {
+          state
+          turn
+        }
+        moves {
+          nextToken
+        }
+        createdAt
+        updatedAt
+      }
+      expiry
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPendingGames = /* GraphQL */ `
+  query ListPendingGames(
+    $filter: ModelPendingGameFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPendingGames(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        game {
+          id
+          mode
+          createdAt
+          updatedAt
+        }
+        expiry
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
 export const getGame = /* GraphQL */ `
   query GetGame($id: ID!) {
     getGame(id: $id) {
@@ -17,6 +88,8 @@ export const getGame = /* GraphQL */ `
         moves
         actionsPerMove
         rating
+        createdAt
+        updatedAt
       }
       playerTwo {
         id
@@ -29,6 +102,8 @@ export const getGame = /* GraphQL */ `
         moves
         actionsPerMove
         rating
+        createdAt
+        updatedAt
       }
       boardSize {
         x
@@ -37,7 +112,7 @@ export const getGame = /* GraphQL */ `
       }
       mode
       state {
-        active
+        state
         turn
         result {
           tie
@@ -48,9 +123,6 @@ export const getGame = /* GraphQL */ `
       moves {
         items {
           id
-          gameID
-          moveID
-          player
           timeLeft
           createdAt
           updatedAt
@@ -78,6 +150,8 @@ export const listGames = /* GraphQL */ `
           moves
           actionsPerMove
           rating
+          createdAt
+          updatedAt
         }
         playerTwo {
           id
@@ -86,6 +160,8 @@ export const listGames = /* GraphQL */ `
           moves
           actionsPerMove
           rating
+          createdAt
+          updatedAt
         }
         boardSize {
           x
@@ -94,7 +170,7 @@ export const listGames = /* GraphQL */ `
         }
         mode
         state {
-          active
+          state
           turn
         }
         moves {
@@ -111,20 +187,6 @@ export const getMove = /* GraphQL */ `
   query GetMove($id: ID!) {
     getMove(id: $id) {
       id
-      gameID
-      moveID
-      player
-      action {
-        items {
-          id
-          actionID
-          moveID
-          pieceType
-          createdAt
-          updatedAt
-        }
-        nextToken
-      }
       game {
         id
         playerOne {
@@ -134,6 +196,8 @@ export const getMove = /* GraphQL */ `
           moves
           actionsPerMove
           rating
+          createdAt
+          updatedAt
         }
         playerTwo {
           id
@@ -142,6 +206,8 @@ export const getMove = /* GraphQL */ `
           moves
           actionsPerMove
           rating
+          createdAt
+          updatedAt
         }
         boardSize {
           x
@@ -150,7 +216,7 @@ export const getMove = /* GraphQL */ `
         }
         mode
         state {
-          active
+          state
           turn
         }
         moves {
@@ -158,6 +224,29 @@ export const getMove = /* GraphQL */ `
         }
         createdAt
         updatedAt
+      }
+      player {
+        id
+        pieces {
+          type
+          count
+        }
+        time
+        health
+        moves
+        actionsPerMove
+        rating
+        createdAt
+        updatedAt
+      }
+      action {
+        items {
+          id
+          pieceType
+          createdAt
+          updatedAt
+        }
+        nextToken
       }
       timeLeft
       createdAt
@@ -174,17 +263,24 @@ export const listMoves = /* GraphQL */ `
     listMoves(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        gameID
-        moveID
-        player
-        action {
-          nextToken
-        }
         game {
           id
           mode
           createdAt
           updatedAt
+        }
+        player {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        action {
+          nextToken
         }
         timeLeft
         createdAt
@@ -194,27 +290,46 @@ export const listMoves = /* GraphQL */ `
     }
   }
 `;
-export const getMoveAction = /* GraphQL */ `
-  query GetMoveAction($id: ID!) {
-    getMoveAction(id: $id) {
+export const getAction = /* GraphQL */ `
+  query GetAction($id: ID!) {
+    getAction(id: $id) {
       id
-      actionID
-      moveID
       move {
         id
-        gameID
-        moveID
-        player
-        action {
-          nextToken
-        }
         game {
           id
           mode
           createdAt
           updatedAt
         }
+        player {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
+          createdAt
+          updatedAt
+        }
+        action {
+          nextToken
+        }
         timeLeft
+        createdAt
+        updatedAt
+      }
+      player {
+        id
+        pieces {
+          type
+          count
+        }
+        time
+        health
+        moves
+        actionsPerMove
+        rating
         createdAt
         updatedAt
       }
@@ -234,23 +349,28 @@ export const getMoveAction = /* GraphQL */ `
     }
   }
 `;
-export const listMoveActions = /* GraphQL */ `
-  query ListMoveActions(
-    $filter: ModelMoveActionFilterInput
+export const listActions = /* GraphQL */ `
+  query ListActions(
+    $filter: ModelActionFilterInput
     $limit: Int
     $nextToken: String
   ) {
-    listMoveActions(filter: $filter, limit: $limit, nextToken: $nextToken) {
+    listActions(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        actionID
-        moveID
         move {
           id
-          gameID
-          moveID
-          player
           timeLeft
+          createdAt
+          updatedAt
+        }
+        player {
+          id
+          time
+          health
+          moves
+          actionsPerMove
+          rating
           createdAt
           updatedAt
         }
@@ -265,6 +385,49 @@ export const listMoveActions = /* GraphQL */ `
           y
           z
         }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;
+export const getPlayerConfig = /* GraphQL */ `
+  query GetPlayerConfig($id: ID!) {
+    getPlayerConfig(id: $id) {
+      id
+      pieces {
+        type
+        count
+      }
+      time
+      health
+      moves
+      actionsPerMove
+      rating
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listPlayerConfigs = /* GraphQL */ `
+  query ListPlayerConfigs(
+    $filter: ModelPlayerConfigFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listPlayerConfigs(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        pieces {
+          type
+          count
+        }
+        time
+        health
+        moves
+        actionsPerMove
+        rating
         createdAt
         updatedAt
       }
