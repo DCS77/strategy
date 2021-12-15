@@ -59,6 +59,8 @@ function Play(Props: PlayProps) {
   useEffect(() => {
     if(Props.ID) {
       Props.createTab(Props.ID, `play/${Props.ID}`, `Play ${Props.ID}`, TabType.Game);
+    } else {
+      Props.createTab('play', 'play', `Multiplayer`, TabType.Multiplayer);
     }
   });
 

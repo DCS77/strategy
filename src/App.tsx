@@ -4,6 +4,7 @@ import { Switch, Route, useLocation, useHistory, withRouter } from 'react-router
 import Home from './pages/home';
 import AI from './pages/ai';
 import Army from './pages/army/army';
+import CreateArmy from './pages/army/createArmy';
 import Leaderboards from './pages/leaderboards';
 import Learn from './pages/learn';
 import Play from './pages/play';
@@ -83,7 +84,7 @@ function App() {
 
   function GameTab() {
     const splitPath = useLocation().pathname.split('/');
-    return <Play 
+    return <Play
       onCreateGame={(ID: string, title: string) => AddTab(ID, `play/${ID}`, title, TabType.Game)}
       changePath={(path: string) => ChangePath(path)}
       createTab={AddTab}
@@ -91,8 +92,13 @@ function App() {
     />
   }
 
+  function ArmyTab() {
+    const splitPath = useLocation().pathname.split('/');
+    return <Army createTab={AddTab} ID={splitPath[2]}/>
+  }
+
   function AITab() { return <AI createTab={AddTab}/> }
-  function ArmyTab() { return <Army createTab={AddTab}/> }
+  function CreateArmyTab() { return <CreateArmy createTab={AddTab}/> }
   function LeaderboardsTab() { return <Leaderboards createTab={AddTab}/> }
   function LearnTab() { return <Learn createTab={AddTab}/> }
   function TVTab() { return <TV createTab={AddTab}/> }
@@ -122,6 +128,9 @@ function App() {
           </Route>
           <Route path='/army'>
             <ArmyTab/>
+          </Route>
+          <Route path='/create'>
+            <CreateArmyTab/>
           </Route>
           <Route path='/leaderboards'>
             <LeaderboardsTab/>
