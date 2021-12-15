@@ -818,3 +818,63 @@ export const deletePlayerConfig = /* GraphQL */ `
     }
   }
 `;
+export const createArmy = /* GraphQL */ `
+  mutation CreateArmy(
+    $input: CreateArmyInput!
+    $condition: ModelArmyConditionInput
+  ) {
+    createArmy(input: $input, condition: $condition) {
+      id
+      player
+      name
+      wins
+      losses
+      pieces {
+        type
+        count
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const updateArmy = /* GraphQL */ `
+  mutation UpdateArmy(
+    $input: UpdateArmyInput!
+    $condition: ModelArmyConditionInput
+  ) {
+    updateArmy(input: $input, condition: $condition) {
+      id
+      player
+      name
+      wins
+      losses
+      pieces {
+        type
+        count
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const deleteArmy = /* GraphQL */ `
+  mutation DeleteArmy(
+    $input: DeleteArmyInput!
+    $condition: ModelArmyConditionInput
+  ) {
+    deleteArmy(input: $input, condition: $condition) {
+      id
+      player
+      name
+      wins
+      losses
+      pieces {
+        type
+        count
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;

@@ -24,6 +24,8 @@
 .theme-light {
   --bar-color: #fff;
   --bar-tint: #dedede;
+  --standout-bar-color: #999;
+  --standout-bar-color-tint: #666;
   --page-color: #ccc;
   --page-gradient: linear-gradient(#ddd, #eee);
   --font-color: #000;
@@ -33,6 +35,8 @@
   --tab-bar-item-color: #ccc;
   --tab-bar-item-highlighted-color: #fff;
   --tab-border-color: #bbb;
+  --army-container-color: #bbb;
+  --piece-container-color: #ccc;
   --switch-color: #000;
   --svg-filter: brightness(3) invert(0);
   --bar-height: 22px;
@@ -46,6 +50,8 @@
 .theme-dark {
   --bar-color: #000;
   --bar-tint: #333333;
+  --standout-bar-color: #666;
+  --standout-bar-color-tint: #999;
   --page-color: #333;
   --page-gradient: linear-gradient(#222, #333);
   --font-color: #fff;
@@ -55,11 +61,14 @@
   --tab-bar-item-color: #444;
   --tab-bar-item-highlighted-color: #000;
   --tab-border-color: #444;
+  --army-container-color: #444;
+  --piece-container-color: #333;
   --switch-color: #fff;
   --svg-filter: brightness(0) invert(1);
   --bar-height: 22px;
   --max-tab-bar-height: 52px;
   --used-space-height: calc(2 * var(--bar-height) + var(--current-tab-bar-height));
+  
 
   --board-player-details-color: #444;
   --board-primary-color: #333;
@@ -153,6 +162,19 @@ a:hover > * {
   padding-right: 4px;
 }
 
+.tall-buttons {
+  display: flex;
+  height: 100px;
+}
+
+.standout-bar-item {
+  background-color: var(--standout-bar-color);
+}
+
+.standout-bar-item:hover {
+  background-color: var(--standout-bar-color-tint);
+}
+
 .left-group {
   flex: 1;
   display: flex;
@@ -161,7 +183,7 @@ a:hover > * {
   text-align: left;
 }
 
-.center-group {
+.centre-group {
   flex: 1;
   display: flex;
   justify-content: center;

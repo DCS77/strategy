@@ -44,6 +44,9 @@ type PlayerConfig @model {
 type Army @model {
   id: ID!
   player: ID!
+  name: String!
+  wins: Int!
+  losses: Int!
   pieces: [Piece!]!
 }
 
@@ -54,7 +57,7 @@ type Piece {
   count: Int!
 }
 
-enum PieceType { adventurer bloodletter excavator knight messenger smuggler }
+enum PieceType { adventurer commoner engineer knight messenger smuggler }
 
 type BoardSize {
   x: Int!

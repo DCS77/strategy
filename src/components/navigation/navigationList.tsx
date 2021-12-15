@@ -9,14 +9,14 @@ function NavigationList() {
 
   return (
     <React.Fragment>
-    <BarItem to='/tv' newTab={true}>
-      <span className='wide-screen'>
-        <span className='inline flex-center all-spaced'><Television/>{t('Arena TV')}</span>
-      </span>
-      <span className='narrow-screen'>
-        <span className='inline flex-center'><Television/></span>
-      </span>
-    </BarItem>
+      <BarItem to='/tv' newTab={true}>
+        <span className='wide-screen'>
+          <span className='inline flex-center all-spaced'><Television/>{t('Arena TV')}</span>
+        </span>
+        <span className='narrow-screen'>
+          <span className='inline flex-center'><Television/></span>
+        </span>
+      </BarItem>
       <BarItem to='/play' newTab={true}>
         <span className='wide-screen'>
           <span className='inline flex-center all-spaced'><Users/>{t('Multiplayer')}</span>

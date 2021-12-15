@@ -18,6 +18,14 @@
   overflow: scroll;
 }
 
+.armyColumn {
+  float: left;
+  width: 60%;
+  min-height: calc(100vh - var(--used-space-height));
+  max-height: calc(100vh - var(--used-space-height));
+  overflow: scroll;
+}
+
 .rightColumn {
   float: left;
   width: 20%;
@@ -70,4 +78,41 @@
   min-height: calc(40vh - var(--used-space-height));
   max-height: calc(40vh - var(--used-space-height));
   overflow: scroll;
+}
+
+.column30 {
+  float: left;
+  width: 30%;
+}
+
+.column70 {
+  float: left;
+  width: 70%;
+}
+
+.pieceRow:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.padded {
+  padding: 10px;
+  margin: 10px;
+}
+
+.armyContainer {
+  background-color: var(--army-container-color);
+  padding: 10px;
+  margin: 10px;
+}
+
+.pieceContainer {
+  background-color: var(--piece-container-color);
+  padding: 5px;
+  margin: 5px;
+}
+
+p {
+  padding-bottom: 15px;
 }

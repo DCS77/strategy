@@ -10,7 +10,7 @@ function SiteStats() {
   const { t } = useTranslation('translation', { i18n });
 
   return (
-    <span className='center-group inline'>
+    <span className='centre-group inline'>
       <BarItem to='/tv'>
         <span className='inline flex-center all-spaced'><Television/>TV</span>
       </BarItem>

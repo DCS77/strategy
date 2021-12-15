@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import useResizeObserver from 'use-resize-observer';
 import { TabDetail, TabDetails } from '../../types';
 import TabBarItem from './tabBarItem';

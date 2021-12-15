@@ -83,9 +83,12 @@ export type Piece = {
 };
 
 export enum PieceType {
-  deer = "deer",
-  wolf = "wolf",
-  hawk = "hawk",
+  adventurer = "adventurer",
+  commoner = "commoner",
+  engineer = "engineer",
+  knight = "knight",
+  messenger = "messenger",
+  smuggler = "smuggler",
 }
 
 
@@ -369,12 +372,23 @@ export type DeletePlayerConfigInput = {
   id: string,
 };
 
-export type ModelPendingGameFilterInput = {
-  id?: ModelIDInput | null,
-  expiry?: ModelIntInput | null,
-  and?: Array< ModelPendingGameFilterInput | null > | null,
-  or?: Array< ModelPendingGameFilterInput | null > | null,
-  not?: ModelPendingGameFilterInput | null,
+export type CreateArmyInput = {
+  id?: string | null,
+  player: string,
+  name: string,
+  wins: number,
+  losses: number,
+  pieces: Array< PieceInput >,
+};
+
+export type ModelArmyConditionInput = {
+  player?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  wins?: ModelIntInput | null,
+  losses?: ModelIntInput | null,
+  and?: Array< ModelArmyConditionInput | null > | null,
+  or?: Array< ModelArmyConditionInput | null > | null,
+  not?: ModelArmyConditionInput | null,
 };
 
 export type ModelIDInput = {
@@ -391,6 +405,39 @@ export type ModelIDInput = {
   attributeExists?: boolean | null,
   attributeType?: ModelAttributeTypes | null,
   size?: ModelSizeInput | null,
+};
+
+export type Army = {
+  __typename: "Army",
+  id: string,
+  player: string,
+  name: string,
+  wins: number,
+  losses: number,
+  pieces:  Array<Piece >,
+  createdAt: string,
+  updatedAt: string,
+};
+
+export type UpdateArmyInput = {
+  id: string,
+  player?: string | null,
+  name?: string | null,
+  wins?: number | null,
+  losses?: number | null,
+  pieces?: Array< PieceInput > | null,
+};
+
+export type DeleteArmyInput = {
+  id: string,
+};
+
+export type ModelPendingGameFilterInput = {
+  id?: ModelIDInput | null,
+  expiry?: ModelIntInput | null,
+  and?: Array< ModelPendingGameFilterInput | null > | null,
+  or?: Array< ModelPendingGameFilterInput | null > | null,
+  not?: ModelPendingGameFilterInput | null,
 };
 
 export type ModelPendingGameConnection = {
@@ -444,6 +491,23 @@ export type ModelPlayerConfigFilterInput = {
 export type ModelPlayerConfigConnection = {
   __typename: "ModelPlayerConfigConnection",
   items:  Array<PlayerConfig >,
+  nextToken?: string | null,
+};
+
+export type ModelArmyFilterInput = {
+  id?: ModelIDInput | null,
+  player?: ModelIDInput | null,
+  name?: ModelStringInput | null,
+  wins?: ModelIntInput | null,
+  losses?: ModelIntInput | null,
+  and?: Array< ModelArmyFilterInput | null > | null,
+  or?: Array< ModelArmyFilterInput | null > | null,
+  not?: ModelArmyFilterInput | null,
+};
+
+export type ModelArmyConnection = {
+  __typename: "ModelArmyConnection",
+  items:  Array<Army >,
   nextToken?: string | null,
 };
 
@@ -1395,6 +1459,75 @@ export type DeletePlayerConfigMutation = {
   } | null,
 };
 
+export type CreateArmyMutationVariables = {
+  input: CreateArmyInput,
+  condition?: ModelArmyConditionInput | null,
+};
+
+export type CreateArmyMutation = {
+  createArmy?:  {
+    __typename: "Army",
+    id: string,
+    player: string,
+    name: string,
+    wins: number,
+    losses: number,
+    pieces:  Array< {
+      __typename: "Piece",
+      type: PieceType,
+      count: number,
+    } >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type UpdateArmyMutationVariables = {
+  input: UpdateArmyInput,
+  condition?: ModelArmyConditionInput | null,
+};
+
+export type UpdateArmyMutation = {
+  updateArmy?:  {
+    __typename: "Army",
+    id: string,
+    player: string,
+    name: string,
+    wins: number,
+    losses: number,
+    pieces:  Array< {
+      __typename: "Piece",
+      type: PieceType,
+      count: number,
+    } >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type DeleteArmyMutationVariables = {
+  input: DeleteArmyInput,
+  condition?: ModelArmyConditionInput | null,
+};
+
+export type DeleteArmyMutation = {
+  deleteArmy?:  {
+    __typename: "Army",
+    id: string,
+    player: string,
+    name: string,
+    wins: number,
+    losses: number,
+    pieces:  Array< {
+      __typename: "Piece",
+      type: PieceType,
+      count: number,
+    } >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
 export type GetPendingGameQueryVariables = {
   id: string,
 };
@@ -1904,6 +2037,56 @@ export type ListPlayerConfigsQuery = {
       moves: number,
       actionsPerMove: number,
       rating: number,
+      createdAt: string,
+      updatedAt: string,
+    } >,
+    nextToken?: string | null,
+  } | null,
+};
+
+export type GetArmyQueryVariables = {
+  id: string,
+};
+
+export type GetArmyQuery = {
+  getArmy?:  {
+    __typename: "Army",
+    id: string,
+    player: string,
+    name: string,
+    wins: number,
+    losses: number,
+    pieces:  Array< {
+      __typename: "Piece",
+      type: PieceType,
+      count: number,
+    } >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type ListArmiesQueryVariables = {
+  filter?: ModelArmyFilterInput | null,
+  limit?: number | null,
+  nextToken?: string | null,
+};
+
+export type ListArmiesQuery = {
+  listArmies?:  {
+    __typename: "ModelArmyConnection",
+    items:  Array< {
+      __typename: "Army",
+      id: string,
+      player: string,
+      name: string,
+      wins: number,
+      losses: number,
+      pieces:  Array< {
+        __typename: "Piece",
+        type: PieceType,
+        count: number,
+      } >,
       createdAt: string,
       updatedAt: string,
     } >,
@@ -2779,6 +2962,60 @@ export type OnDeletePlayerConfigSubscription = {
     moves: number,
     actionsPerMove: number,
     rating: number,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnCreateArmySubscription = {
+  onCreateArmy?:  {
+    __typename: "Army",
+    id: string,
+    player: string,
+    name: string,
+    wins: number,
+    losses: number,
+    pieces:  Array< {
+      __typename: "Piece",
+      type: PieceType,
+      count: number,
+    } >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnUpdateArmySubscription = {
+  onUpdateArmy?:  {
+    __typename: "Army",
+    id: string,
+    player: string,
+    name: string,
+    wins: number,
+    losses: number,
+    pieces:  Array< {
+      __typename: "Piece",
+      type: PieceType,
+      count: number,
+    } >,
+    createdAt: string,
+    updatedAt: string,
+  } | null,
+};
+
+export type OnDeleteArmySubscription = {
+  onDeleteArmy?:  {
+    __typename: "Army",
+    id: string,
+    player: string,
+    name: string,
+    wins: number,
+    losses: number,
+    pieces:  Array< {
+      __typename: "Piece",
+      type: PieceType,
+      count: number,
+    } >,
     createdAt: string,
     updatedAt: string,
   } | null,

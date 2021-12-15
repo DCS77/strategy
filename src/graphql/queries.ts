@@ -435,3 +435,44 @@ export const listPlayerConfigs = /* GraphQL */ `
     }
   }
 `;
+export const getArmy = /* GraphQL */ `
+  query GetArmy($id: ID!) {
+    getArmy(id: $id) {
+      id
+      player
+      name
+      wins
+      losses
+      pieces {
+        type
+        count
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const listArmies = /* GraphQL */ `
+  query ListArmies(
+    $filter: ModelArmyFilterInput
+    $limit: Int
+    $nextToken: String
+  ) {
+    listArmies(filter: $filter, limit: $limit, nextToken: $nextToken) {
+      items {
+        id
+        player
+        name
+        wins
+        losses
+        pieces {
+          type
+          count
+        }
+        createdAt
+        updatedAt
+      }
+      nextToken
+    }
+  }
+`;

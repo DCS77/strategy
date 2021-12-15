@@ -3,7 +3,7 @@ import { useStateRef } from 'use-state-ref';
 import { Switch, Route, useLocation, useHistory, withRouter } from 'react-router-dom';
 import Home from './pages/home';
 import AI from './pages/ai';
-import Army from './pages/army';
+import Army from './pages/army/army';
 import Leaderboards from './pages/leaderboards';
 import Learn from './pages/learn';
 import Play from './pages/play';

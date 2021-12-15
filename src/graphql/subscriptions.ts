@@ -773,3 +773,54 @@ export const onDeletePlayerConfig = /* GraphQL */ `
     }
   }
 `;
+export const onCreateArmy = /* GraphQL */ `
+  subscription OnCreateArmy {
+    onCreateArmy {
+      id
+      player
+      name
+      wins
+      losses
+      pieces {
+        type
+        count
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onUpdateArmy = /* GraphQL */ `
+  subscription OnUpdateArmy {
+    onUpdateArmy {
+      id
+      player
+      name
+      wins
+      losses
+      pieces {
+        type
+        count
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const onDeleteArmy = /* GraphQL */ `
+  subscription OnDeleteArmy {
+    onDeleteArmy {
+      id
+      player
+      name
+      wins
+      losses
+      pieces {
+        type
+        count
+      }
+      createdAt
+      updatedAt
+    }
+  }
+`;
