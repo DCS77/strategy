@@ -32,7 +32,7 @@
   "SelectOneToViewAndEdit": " 表示および編集するものを1つ選択するか、[+]ボタンをクリックして新しいものを作成します。",
   "ClickPlusToGetStarted": " 開始するには、側面にある[+]ボタンをクリックします。",
   "SelectPiecesUse50Points": "ご希望の駒をお選びください。 チームごとに最大50ポイントを使用します。",
-  "NoPiecesAdded": "ピースを追加していません。",
+  "You have not added any pieces.": "ピースを追加していません。",
   "SelectPieceToSeeDetailsAddToArmy": "ピースタイプを選択して詳細を確認し、軍に追加します。",
   "Adventurer": "冒険家",
   "Commoner": "町人",

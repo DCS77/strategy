@@ -62,6 +62,10 @@ export function PieceCharacter(type: PieceType) {
   }
 }
 
+export function CountPoints(pieces: Piece[]) {
+  return pieces.map(piece => piece.count * PieceCost(piece.type)).reduce((prev, next) => prev + next);
+}
+
 export function AddPiece(
   points: number,
   pieces: Piece[],

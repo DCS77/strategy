@@ -31,7 +31,7 @@
   "SelectOneToViewAndEdit": " Select one to view and edit, or click the Plus button (+) to create a new one.",
   "ClickPlusToGetStarted": " Click the Plus button (+) on the side to get started.",
   "SelectPiecesUse50Points": "Select the pieces you want. Use up to 50 points per team.",
-  "NoPiecesAdded": "You have not added any pieces.",
+  "You have not added any pieces.": "You have not added any pieces.",
   "SelectPieceToSeeDetailsAddToArmy": "Select a piece type to see details and add it to your army.",
   "Adventurer": "Adventurer",
   "Commoner": "Commoner",

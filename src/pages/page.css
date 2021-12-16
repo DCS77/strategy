@@ -105,13 +105,27 @@
   background-color: var(--army-container-color);
   padding: 10px;
   margin: 10px;
+  overflow-x: scroll;
 }
 
 .pieceContainer {
   background-color: var(--piece-container-color);
   padding: 5px;
   margin: 5px;
-  height: 10px;
+  height: 20px;
+}
+
+.narrowPieceContainer {
+  background-color: var(--piece-container-color);
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 1px;
+  padding-right: 1px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 1px;
+  margin-right: 1px;
+  height: 20px;
 }
 
 .pieceCounts {

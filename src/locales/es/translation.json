@@ -32,7 +32,7 @@
   "SelectOneToViewAndEdit": " Seleccione uno para verlo y editarlo, o haga clic en el botón más (+) para crear uno nuevo.",
   "ClickPlusToGetStarted": " Haga clic en el botón más (+) en el costado para comenzar.",
   "SelectPiecesUse50Points": "Seleccione las piezas que desee. Usa hasta 50 puntos por equipo.",
-  "NoPiecesAdded": "No ha añadido ninguna pieza.",
+  "You have not added any pieces.": "No ha añadido ninguna pieza.",
   "SelectPieceToSeeDetailsAddToArmy": "Selecciona un tipo de pieza para ver los detalles y agrégala al ejército.",
   "Adventurer": "Aventurero",
   "Commoner": "Plebeyo",

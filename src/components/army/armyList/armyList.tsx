@@ -10,7 +10,7 @@ interface UserArmyListProps {
 function ArmyItems(army: ArmyType) {
   const history = useHistory();
   return (
-    <BarItem key={army.id} mouseUpHandler={() => history.push(`army/${army.id}`)}>{army.name}</BarItem>
+    <BarItem key={army.id} mouseUpHandler={() => history.push(`/army/${army.id}`)}>{army.name}</BarItem>
   );
 }
 
