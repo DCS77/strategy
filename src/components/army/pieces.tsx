@@ -18,7 +18,29 @@ export function PieceCost(type: PieceType) {
   }
 }
 
-export function GetPieceIcon(type: PieceType){
+export function PieceStrength(type: PieceType) {
+  switch(type) {
+    case PieceType.adventurer: return 3;
+    case PieceType.commoner: return 1;
+    case PieceType.engineer: return 1;
+    case PieceType.knight: return 5;
+    case PieceType.messenger: return 1;
+    case PieceType.smuggler: return 1;
+  }
+}
+
+export function PieceSpeed(type: PieceType) {
+  switch(type) {
+    case PieceType.adventurer: return 3;
+    case PieceType.commoner: return 1;
+    case PieceType.engineer: return 1;
+    case PieceType.knight: return 3;
+    case PieceType.messenger: return 4;
+    case PieceType.smuggler: return 2;
+  }
+}
+
+export function PieceIcon(type: PieceType){
   switch(type) {
     case PieceType.adventurer: return <PersonSimpleWalk/>;
     case PieceType.commoner: return <Storefront/>;
@@ -46,6 +68,10 @@ export function AddPiece(
   type: PieceType,
   updateArmy: (pieces: Piece[], points: number) => void
 ) {
+  if(points - PieceCost(type) < 0) {
+    return;
+  }
+
   const localPieces = _.cloneDeep(pieces);
   let found = localPieces.find( piece => piece.type === type );
   if(found) {
@@ -55,5 +81,23 @@ export function AddPiece(
     localPieces.push(newPiece);
   }
 
+  SortByTypeName(localPieces);
+
   updateArmy(localPieces, points - PieceCost(type));
+}
+
+export function SortByTypeName(pieces: Piece[]) {
+  pieces.sort((a, b) => a.type.localeCompare(b.type));
+}
+
+export function SortByCount(pieces: Piece[]) {
+  pieces.sort((a, b) => b.count - a.count);
+}
+
+export function SortByStrength(pieces: Piece[]) {
+  pieces.sort((a, b) => PieceStrength(b.type) - PieceStrength(a.type));
+}
+
+export function SortBySpeed(pieces: Piece[]) {
+  pieces.sort((a, b) => PieceSpeed(b.type) - PieceSpeed(a.type));
 }
