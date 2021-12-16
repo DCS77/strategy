@@ -143,6 +143,11 @@ a:hover > * {
 
 .hidden > * { display:none !important; }
 
+.hidden-selectable {
+  opacity: 0;
+  font-size: 0;
+}
+
 .inline {
   white-space: nowrap;
 }

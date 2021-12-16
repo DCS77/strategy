@@ -4,7 +4,7 @@ import '../../App.css';
 import ArmyPage from '../../components/army/armyPage';
 import PieceButtons from '../../components/army/pieceButtons/pieceButtons';
 import PieceDescription from '../../components/army/pieceDescription/pieceDescription';
-import { AddPiece, GetPieceIcon, Piece } from '../../components/army/pieces';
+import { AddPiece, PieceIcon, Piece, PieceCharacter } from '../../components/army/pieces';
 import { PieceType } from '../../API';
 import { TabType } from '../../types';
 import tc from '../../localesComplex/translateArmy';
@@ -19,9 +19,14 @@ interface CurrentArmyPiecesProps {
   pieces: Piece[];
 }
 
+function HiddenPieceType(type: PieceType) {
+  return (<span className='hidden-selectable'>{PieceCharacter(type)}</span>)
+}
+
 function ArmyPieceCount(piece: Piece){
   return (
-    <span key={piece.type} title={piece.type} className='bar-spaced pieceContainer'>{GetPieceIcon(piece.type)} {piece.count}</span>
+    <span key={piece.type} title={piece.type} className='bar-spaced pieceContainer'>
+      {PieceIcon(piece.type)} {HiddenPieceType(piece.type)}{piece.count}</span>
   );
 }
 

@@ -29,6 +29,17 @@ export function GetPieceIcon(type: PieceType){
   }
 }
 
+export function PieceCharacter(type: PieceType) {
+  switch(type) {
+    case PieceType.adventurer: return 'A';
+    case PieceType.commoner: return 'C';
+    case PieceType.engineer: return 'E';
+    case PieceType.knight: return 'K';
+    case PieceType.messenger: return 'M';
+    case PieceType.smuggler: return 'S';
+  }
+}
+
 export function AddPiece(
   points: number,
   pieces: Piece[],
