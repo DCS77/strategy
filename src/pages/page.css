@@ -111,6 +111,13 @@
   background-color: var(--piece-container-color);
   padding: 5px;
   margin: 5px;
+  height: 10px;
+}
+
+.pieceCounts {
+  display: flex;
+  white-space: nowrap;
+  width: 100%;
 }
 
 p {

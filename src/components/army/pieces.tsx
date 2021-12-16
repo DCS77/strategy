@@ -86,6 +86,27 @@ export function AddPiece(
   updateArmy(localPieces, points - PieceCost(type));
 }
 
+export function RemovePiece(
+  points: number,
+  pieces: Piece[],
+  type: PieceType,
+  updateArmy: (pieces: Piece[], points: number) => void
+) {
+  let localPieces = _.cloneDeep(pieces);
+  let found = localPieces.find( piece => piece.type === type );
+  if(found && found.count > 0) {
+    found.count--;
+  } else {
+    return;
+  }
+
+  if(found.count === 0) {
+    localPieces = localPieces.filter(piece => piece.count > 0);
+  }
+
+  updateArmy(localPieces, points + PieceCost(type));
+}
+
 export function SortByTypeName(pieces: Piece[]) {
   pieces.sort((a, b) => a.type.localeCompare(b.type));
 }

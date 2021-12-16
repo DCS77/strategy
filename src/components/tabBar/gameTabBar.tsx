@@ -51,7 +51,7 @@ function GameTabBar(Props: GameTabBarProps) {
 
   return (
     <div ref={ref}>
-      <div className='game-tab-bar passero no-select'>
+      <div className='game-tab-bar passero'>
         <div className='game-tab-bar-inner'>
           <TabList ready={ready} tabs={Props.tabs} onHeightChange={Props.onHeightChange}/>
         </div>

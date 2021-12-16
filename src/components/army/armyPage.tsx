@@ -54,7 +54,7 @@ function ArmyPage(Props: ArmyPageProps) {
         <div className='navSection'>
           <NavigationList/>
         </div>
-        <div className='selectTeam no-select'>
+        <div className='selectTeam'>
           <BarItem mouseUpHandler={ShowHomePage}>{t('Your Armies')}</BarItem>
           <ArmyList armies={armies}/>
           <BarItem mouseUpHandler={ShowCreateArmyPage}><Plus/></BarItem>

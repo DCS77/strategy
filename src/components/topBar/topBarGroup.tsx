@@ -12,18 +12,18 @@ interface TopBarProps {
 
 function TopBarGroup(Props: TopBarProps) {
   const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
-  const [accountDropdownClass, setAccountDropdownClass] = useState('no-select passero hidden');
+  const [accountDropdownClass, setAccountDropdownClass] = useState('passero hidden');
   const [accountMouseDown, setAccountMouseDown] = useState(false);
   const accountDropdown = useRef<HTMLDivElement>(null);
   
   const [languageDropdownVisible, setLanguageDropdownVisible] = useState(false);
-  const [languageDropdownClass, setLanguageDropdownClass] = useState('no-select passero hidden');
+  const [languageDropdownClass, setLanguageDropdownClass] = useState('passero hidden');
   const [languageMouseDown, setLanguageMouseDown] = useState(false);
   const languageDropdown = useRef<HTMLDivElement>(null);
 
   function ToggleAccountDropdown(visible: boolean) {
     setAccountDropdownVisible(visible);
-    setAccountDropdownClass(visible ? 'no-select passero' : 'no-select passero hidden');
+    setAccountDropdownClass(visible ? 'passero' : 'passero hidden');
     if (visible && accountDropdown.current !== null) {
       accountDropdown.current.focus();
     }
@@ -50,7 +50,7 @@ function TopBarGroup(Props: TopBarProps) {
 
   function ToggleLanguageDropdown(visible: boolean) {
     setLanguageDropdownVisible(visible);
-    setLanguageDropdownClass(visible ? 'no-select passero' : 'no-select passero hidden');
+    setLanguageDropdownClass(visible ? 'passero' : 'passero hidden');
     if (visible && languageDropdown.current !== null) {
       languageDropdown.current.focus();
     }

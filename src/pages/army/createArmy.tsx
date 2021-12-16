@@ -2,9 +2,10 @@ import React, { useEffect, useState } from 'react';
 import '../page.css';
 import '../../App.css';
 import ArmyPage from '../../components/army/armyPage';
+import ArmyPieceCounts from '../../components/army/armyPieceCounts/armyPieceCounts';
 import PieceButtons from '../../components/army/pieceButtons/pieceButtons';
 import PieceDescription from '../../components/army/pieceDescription/pieceDescription';
-import { AddPiece, PieceIcon, Piece, PieceCharacter } from '../../components/army/pieces';
+import { AddPiece, RemovePiece, Piece } from '../../components/army/pieces';
 import { PieceType } from '../../API';
 import { TabType } from '../../types';
 import tc from '../../localesComplex/translateArmy';
@@ -13,35 +14,6 @@ import { useTranslation } from 'react-i18next';
 
 interface ArmyProps {
   createTab: (ID: string, path: string, title: string, type: TabType) => void;
-}
-
-interface CurrentArmyPiecesProps {
-  pieces: Piece[];
-}
-
-function HiddenPieceType(type: PieceType) {
-  return (<span className='hidden-selectable'>{PieceCharacter(type)}</span>)
-}
-
-function ArmyPieceCount(piece: Piece){
-  return (
-    <span key={piece.type} title={piece.type} className='bar-spaced pieceContainer'>
-      {PieceIcon(piece.type)} {HiddenPieceType(piece.type)}{piece.count}</span>
-  );
-}
-
-function CurrentArmyPieces(Props: CurrentArmyPiecesProps) {
-  const { t } = useTranslation('translation', { i18n });
-  
-  if(Props.pieces.length === 0) {
-    return (<div>{t('NoPiecesAdded')}</div>);
-  }
-
-  return (
-    <span>
-      { Props.pieces.map((piece: Piece) => ArmyPieceCount(piece)) }
-    </span>
-  );
 }
 
 function CreatePage() {
@@ -71,7 +43,9 @@ function CreatePage() {
       <div className=''>
         <h3>{tc('PointsRemaining', points)}</h3>
         <div className='armyContainer'>
-          <CurrentArmyPieces pieces={pieces}/>
+          <ArmyPieceCounts
+            pieces={pieces}
+            removePiece={(type: PieceType) => RemovePiece(points, pieces, type, UpdateArmy)}/>
         </div>
       </div>
       <br/>

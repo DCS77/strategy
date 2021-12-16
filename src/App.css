@@ -104,6 +104,10 @@ a:hover > * {
   background-color: var(--bar-tint);
 }
 
+.pointingCursor {
+  cursor: pointer;
+}
+
 .page {
   box-sizing: border-box;
   min-height: 100vh;
@@ -182,7 +186,7 @@ a:hover > * {
 
 .left-group {
   flex: 1;
-  display: flex;
+  display: inline-flex;
   justify-content: flex-start;
   align-items: center;
   text-align: left;
@@ -190,7 +194,7 @@ a:hover > * {
 
 .centre-group {
   flex: 1;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -198,7 +202,7 @@ a:hover > * {
 
 .right-group {
   flex: 1;
-  display: flex;
+  display: inline-flex;
   justify-content: flex-end;
   align-items: center;
   text-align: right;

@@ -6,10 +6,12 @@ interface BarItemProps {
   icon?: string;
   to?: string;
   link?: string;
+  inline?: boolean;
   newTab?: boolean;
   tabItem?: boolean;
   largeButtons?: boolean;
   standout?: boolean;
+  disableStyle?: boolean;
   children: React.ReactNode;
   mouseUpHandler?: () => void;
   mouseDownHandler?: () => void;
@@ -19,6 +21,7 @@ interface LinkProps {
   to?: string;
   link?: string;
   newTab?: boolean;
+  disableStyle?: boolean;
   children: React.ReactNode;
 }
 
@@ -40,7 +43,7 @@ function ItemLink(Props: LinkProps){
     );
   } else {
     return (
-      <span className='on-click-link'>
+      <span className={Props.disableStyle ? '' : 'on-click-link'}>
         {Props.children}
       </span>
     );
@@ -49,16 +52,18 @@ function ItemLink(Props: LinkProps){
 
 function BarItem(Props: BarItemProps) {
   return (
-    <div className='itemContainer hover-tint' onMouseUp={Props.mouseUpHandler} onMouseDown={Props.mouseDownHandler}>
-      <ItemLink to={Props.to} link={Props.link} newTab={Props.newTab}>
-        <div className={`item ${Props.tabItem ? 'tab-item' : ''}
-                              ${Props.largeButtons ? 'large-buttons' : ''}
-                              ${Props.standout ? 'standout-bar-item' : ''}`}>
+    <span className='itemContainer no-select' onMouseUp={Props.mouseUpHandler} onMouseDown={Props.mouseDownHandler}>
+      <ItemLink to={Props.to} link={Props.link} newTab={Props.newTab} disableStyle={Props.disableStyle}>
+        <span className={`pointingCursor
+                          ${Props.inline ? '' : 'item'}
+                          ${Props.tabItem ? 'tab-item' : ''}
+                          ${Props.largeButtons ? 'large-buttons' : ''}
+                          ${Props.standout ? 'standout-bar-item' : ''}`}>
           {Props.icon ? (<img src={Props.icon} alt='icon'/>) : null}
           {Props.children}
-        </div>
+        </span>
       </ItemLink>
-    </div>
+    </span>
   );
 };
 
