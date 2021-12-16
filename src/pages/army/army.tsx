@@ -7,6 +7,9 @@ import { listArmies } from '../../graphql/queries';
 import { API, graphqlOperation } from 'aws-amplify';
 import { Army as ArmyType, ListArmiesQuery } from '../../API';
 import { GraphQLResult } from '@aws-amplify/api';
+import tc from '../../localesComplex/translateArmy';
+import i18n from '../../i18nextConf';
+import { useTranslation } from 'react-i18next';
 
 interface ArmyProps {
   ID?: string;
@@ -30,6 +33,8 @@ function SelectedArmy(Props: SelectedArmyProps) {
 }
 
 function CentrePage(Props: CentrePageProps) {
+  const { t } = useTranslation('translation', { i18n });
+
   if(Props.ID){
     return <SelectedArmy ID={Props.ID}/>
   }
@@ -37,17 +42,18 @@ function CentrePage(Props: CentrePageProps) {
   return (
   <React.Fragment>
     <div>
-      <h1>Your Armies</h1>
-      You have {Props.armies.length} armies.
+      <h1>{t('Your Armies')}</h1>
+      {tc('YouHaveXArmies', Props.armies.length)}
       {Props.armies.length ?
-        ` Select one to view and edit, or click the Plus (+) button to create a new one.` :
-        ` Click the Plus (+) button on the side to get started.`}
+        t('SelectOneToViewAndEdit') :
+        t('ClickPlusToGetStarted')}
     </div>
   </React.Fragment>)
 }
 
 function Army(Props: ArmyProps) {
   const [armies, updateArmies] = useState<ArmyType[]>([]);
+  const { t } = useTranslation('translation', { i18n });
 
   async function getPageData() {
     try {
@@ -61,14 +67,14 @@ function Army(Props: ArmyProps) {
   }
 
   useEffect(() => {
-    Props.createTab('army', 'army', 'Your Army', TabType.Army);
+    Props.createTab('army', 'army', t('Your Army'), TabType.Army);
 
     let isMounted = true;
     getPageData().then(result => {
       if (isMounted) updateArmies(result ? result : []);
     });
     return () => { isMounted = false };
-  }, [Props]);
+  }, [Props, t]);
 
   return (
     <ArmyPage>

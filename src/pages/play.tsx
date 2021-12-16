@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 import './page.css';
 import '../App.css';
-import NavigationList from '../components/navigation/navigationList';
 import Board from '../components/board/board';
+import NavigationList from '../components/navigation/navigationList';
 import { TabType } from '../types';
+import i18n from '../i18nextConf';
+import { useTranslation } from 'react-i18next';
 
 interface PlayProps {
   ID?: string;
@@ -13,6 +15,8 @@ interface PlayProps {
 }
 
 function ShowGame(Props: PlayProps) {
+  const { t } = useTranslation('translation', { i18n });
+
   return (
     <div className='full-size gameRow'>
       <div className='leftColumn'>
@@ -20,7 +24,7 @@ function ShowGame(Props: PlayProps) {
           <NavigationList/>
         </div>
         <div className='moveHistory'>
-          Move History
+          {t('Move History')}
         </div>
       </div>
       <div className='boardColumn'>
@@ -28,10 +32,10 @@ function ShowGame(Props: PlayProps) {
       </div>
       <div className='rightColumn'>
         <div className='opponentSection'>
-          Opponent Details, Team and Actions
+          {t('Opponent Details')}
         </div>
         <div className='chatSection'>
-          Chat
+          {t('Chat')}
         </div>
       </div>
     </div>
@@ -56,11 +60,13 @@ function SearchForGame(Props: PlayProps){
 }
 
 function Play(Props: PlayProps) {
+  const { t } = useTranslation('translation', { i18n });
+
   useEffect(() => {
     if(Props.ID) {
       Props.createTab(Props.ID, `play/${Props.ID}`, `Play ${Props.ID}`, TabType.Game);
     } else {
-      Props.createTab('play', 'play', `Multiplayer`, TabType.Multiplayer);
+      Props.createTab('play', 'play', t('Multiplayer'), TabType.Multiplayer);
     }
   });
 
@@ -81,7 +87,7 @@ function Play(Props: PlayProps) {
         Games being searched for
       </div>
       <div className='rightColumn'>
-        Chat
+        {t('Chat')}
       </div>
     </div>
   )

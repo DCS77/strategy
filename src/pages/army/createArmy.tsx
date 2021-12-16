@@ -7,6 +7,9 @@ import PieceDescription from '../../components/army/pieceDescription/pieceDescri
 import { AddPiece, GetPieceIcon, Piece } from '../../components/army/pieces';
 import { PieceType } from '../../API';
 import { TabType } from '../../types';
+import tc from '../../localesComplex/translateArmy';
+import i18n from '../../i18nextConf';
+import { useTranslation } from 'react-i18next';
 
 interface ArmyProps {
   createTab: (ID: string, path: string, title: string, type: TabType) => void;
@@ -23,8 +26,10 @@ function ArmyPieceCount(piece: Piece){
 }
 
 function CurrentArmyPieces(Props: CurrentArmyPiecesProps) {
+  const { t } = useTranslation('translation', { i18n });
+  
   if(Props.pieces.length === 0) {
-    return (<div>You have not added any pieces.</div>);
+    return (<div>{t('NoPiecesAdded')}</div>);
   }
 
   return (
@@ -38,6 +43,7 @@ function CreatePage() {
   const [selectedPiece, updateSelectedPiece] = useState<PieceType | undefined>(undefined);
   const [pieces, updatePieces] = useState<Piece[]>([]);
   const [points, updatePoints] = useState<number>(50);
+  const { t } = useTranslation('translation', { i18n });
 
   function UpdateArmy(pieces: Piece[], points: number) {
     updatePieces(pieces);
@@ -51,14 +57,14 @@ function CreatePage() {
   return (
   <React.Fragment>
     <div>
-      <h1>Create an Army</h1>
-      Select the pieces you want. Use up to 50 points per team.
+      <h1>{t('Create an Army')}</h1>
+      {t('SelectPiecesUse50Points')}
     </div>
     
     <div className='pieceRow'>
       <br/>
       <div className=''>
-        <h3>{points} points remaining</h3>
+        <h3>{tc('PointsRemaining', points)}</h3>
         <div className='armyContainer'>
           <CurrentArmyPieces pieces={pieces}/>
         </div>
@@ -78,9 +84,11 @@ function CreatePage() {
 }
 
 function CreateArmy(Props: ArmyProps) {
+  const { t } = useTranslation('translation', { i18n });
+
   useEffect(() => {
-    Props.createTab('create', 'create', 'Create an Army', TabType.Create);
-  }, [Props]);
+    Props.createTab('create', 'create', t('Create an Army'), TabType.Create);
+  }, [Props, t]);
 
   return (
     <ArmyPage>

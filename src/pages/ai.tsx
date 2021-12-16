@@ -4,14 +4,18 @@ import '../App.css';
 import NavigationList from '../components/navigation/navigationList';
 import Board from '../components/board/board';
 import { TabType } from '../types';
+import i18n from '../i18nextConf';
+import { useTranslation } from 'react-i18next';
 
 interface AIProps {
   createTab: (ID: string, path: string, title: string, type: TabType) => void;
 }
 
 function AI(Props: AIProps) {
+  const { t } = useTranslation('translation', { i18n });
+
   useEffect(() => {
-    Props.createTab('ai', 'ai', 'Play AI', TabType.Game);
+    Props.createTab('ai', 'ai', t('Play AI'), TabType.Game);
   });
 
   return (
@@ -21,7 +25,7 @@ function AI(Props: AIProps) {
           <NavigationList/>
         </div>
         <div className='moveHistory'>
-          Move History
+          {t('Move History')}
         </div>
       </div>
       <div className='boardColumn'>
@@ -29,10 +33,10 @@ function AI(Props: AIProps) {
       </div>
       <div className='rightColumn'>
         <div className='opponentSection'>
-          Opponent Details and Team
+          {t('Opponent Details')}
         </div>
         <div className='chatSection'>
-          Chat
+          {t('Chat')}
         </div>
       </div>
     </div>

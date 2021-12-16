@@ -3,12 +3,16 @@ import './page.css';
 import '../App.css';
 import NavigationList from '../components/navigation/navigationList';
 import { TabType } from '../types';
+import i18n from '../i18nextConf';
+import { useTranslation } from 'react-i18next';
 
 interface LearnProps {
   createTab: (ID: string, path: string, title: string, type: TabType) => void;
 }
 
 function Learn(Props: LearnProps) {
+  const { t } = useTranslation('translation', { i18n });
+
   useEffect(() => {
     Props.createTab('learn', 'learn', 'Learn to play', TabType.Learn);
   });
@@ -20,7 +24,7 @@ function Learn(Props: LearnProps) {
           <NavigationList/>
         </div>
         <div className='selectLesson'>
-          Select a lesson
+          {t('Select a lesson')}
         </div>
       </div>
       <div className='learnColumn'>
@@ -28,10 +32,10 @@ function Learn(Props: LearnProps) {
       </div>
       <div className='rightColumn'>
         <div className='actionSection'>
-          Process and actions
+          {t('Actions')}
         </div>
         <div className='chatSection'>
-          Chat
+          {t('Chat')}
         </div>
       </div>
     </div>
