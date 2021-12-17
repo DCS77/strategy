@@ -45,7 +45,7 @@ function App() {
   function onCloseTab(ID: string) {
     const splitPath = window.location.pathname.split('/');
     console.log('closing tab: ', ID, splitPath);
-    if((splitPath[1] === 'play' && splitPath[2] === ID) || (splitPath[1] === ID)) {
+    if(((splitPath[1] === 'play' || splitPath[1] === 'army') && splitPath[2] === ID) || (splitPath[1] === ID)) {
       let newPath = '/';
       if(tabsRef.current && tabsRef.current.length > 1) {
         let tabIndex = tabsRef.current.findIndex(tab => { return tab.ID === ID });

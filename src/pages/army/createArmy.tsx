@@ -87,7 +87,7 @@ function CreateArmy(Props: ArmyProps) {
       Props.createTab('create', 'create', t('Create an Army'), TabType.Create);
     }
     else {
-      Props.createTab(`army/${Props.army.id}`, `army/${Props.army.id}`, t(`Edit ${Props.army.name}`), TabType.Edit);
+      Props.createTab(Props.army.id, `army/${Props.army.id}`, t(`Edit ${Props.army.name}`), TabType.Edit);
     }
   }, [Props, t]);
 
