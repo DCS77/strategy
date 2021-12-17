@@ -8,6 +8,7 @@ import { useTranslation } from 'react-i18next';
 interface ArmyPiecesProps {
   pieces: Piece[];
   removePiece?: (type: PieceType) => void;
+  saveArmy?: (pieces: Piece[]) => void;
 }
 
 interface ArmyPieceCountProps {
@@ -48,9 +49,11 @@ export function ArmyPieceCounts(Props: ArmyPiecesProps) {
     updateCopyText('Copied!');
   }
 
-  function SaveArmy(pieces: Piece[]) {
-    console.log('save called');
-    updateSaveText('Saved!');
+  function SaveArmy() {
+    if(Props.saveArmy) {
+      Props.saveArmy(Props.pieces);
+      updateSaveText('Saved!');
+    }
   }
   
   if(Props.pieces.length === 0) {
@@ -71,7 +74,7 @@ export function ArmyPieceCounts(Props: ArmyPiecesProps) {
         <BarItem mouseUpHandler={() => CopyPiecesToClipboard(Props.pieces)} disableStyle={true}>
           <span className='pieceContainer'>{copyText}</span>
         </BarItem>
-        <BarItem mouseUpHandler={() => SaveArmy(Props.pieces)} disableStyle={true}>
+        <BarItem mouseUpHandler={() => SaveArmy()} disableStyle={true}>
           <span className='pieceContainer'>{saveText}</span>
         </BarItem>
       </span>

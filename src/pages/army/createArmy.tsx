@@ -47,6 +47,16 @@ function CreatePage(Props: CreatePageProps) {
     updateSelectedPiece(type);
   }
 
+  function SaveArmy(pieces: Piece[]) {
+    if (pieces && armyName.current !== null) {
+      if(armyName.current.value) {
+        // Save army/name
+      } else {
+        // Print name blank message
+      }
+    }
+  }
+
   return (
   <React.Fragment>
     <div>
@@ -62,7 +72,8 @@ function CreatePage(Props: CreatePageProps) {
         <div className='armyContainer'>
           <ArmyPieceCounts
             pieces={pieces}
-            removePiece={(type: PieceType) => RemovePiece(points, pieces, type, UpdateArmy)}/>
+            removePiece={(type: PieceType) => RemovePiece(points, pieces, type, UpdateArmy)}
+            saveArmy={SaveArmy}/>
         </div>
       </div>
       <br/>
