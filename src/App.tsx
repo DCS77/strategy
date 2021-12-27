@@ -176,51 +176,21 @@ function App() {
         <div id='page' className='page'>
           <GameTabBar onHeightChange={onTabBarHeightChange}/>
           <Switch>
-            <Route path='/play'>
-              <GameTab/>
-            </Route>
-            <Route path='/info'>
-              Info 1
-            </Route>
-            <Route path='/tv'>
-              <TVTab/>
-            </Route>
-            <Route path='/ai'>
-              <AITab/>
-            </Route>
-            <Route path='/learn'>
-              <LearnTab/>
-            </Route>
-            <Route path='/army'>
-              <ArmyTab/>
-            </Route>
-            <Route path='/create'>
-              <CreateArmyTab/>
-            </Route>
-            <Route path='/leaderboards'>
-              <LeaderboardsTab/>
-            </Route>
-            <Route path='/online'>
-              Online
-            </Route>
-            <Route path='/live'>
-              Active games
-            </Route>
-            <Route path='/contact'>
-              Contact
-            </Route>
-            <Route path='/donate'>
-              Donate
-            </Route>
-            <Route path='/terms'>
-              Terms
-            </Route>
-            <Route path='/privacy'>
-              Privacy
-            </Route>
-            <Route path='/'>
-              <Home/>
-            </Route>
+            <Route path='/play'><GameTab/></Route>
+            <Route path='/info'>Info 1</Route>
+            <Route path='/tv'><TVTab/></Route>
+            <Route path='/ai'><AITab/></Route>
+            <Route path='/learn'><LearnTab/></Route>
+            <Route path='/army'><ArmyTab/></Route>
+            <Route path='/create'><CreateArmyTab/></Route>
+            <Route path='/leaderboards'><LeaderboardsTab/></Route>
+            <Route path='/online'>Online</Route>
+            <Route path='/live'>Active games</Route>
+            <Route path='/contact'>Contact</Route>
+            <Route path='/donate'>Donate</Route>
+            <Route path='/terms'>Terms</Route>
+            <Route path='/privacy'>Privacy</Route>
+            <Route path='/'><Home/></Route>
           </Switch>
         </div>
         <BottomBar/>
