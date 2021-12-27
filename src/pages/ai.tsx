@@ -6,16 +6,19 @@ import Board from '../components/board/board';
 import { TabType } from '../types';
 import i18n from '../i18nextConf';
 import { useTranslation } from 'react-i18next';
+import { useStateValue } from '../state/state';
 
-interface AIProps {
-  createTab: (ID: string, path: string, title: string, type: TabType) => void;
-}
-
-function AI(Props: AIProps) {
+function AI() {
+  const { dispatch } = useStateValue();
   const { t } = useTranslation('translation', { i18n });
 
   useEffect(() => {
-    Props.createTab('ai', 'ai', t('Play AI'), TabType.Game);
+    dispatch({
+      type: 'addTab',
+      value: {
+        id: 'ai', path: '/ai', title: t('Play AI'), type: TabType.Game
+      }
+    });
   });
 
   return (

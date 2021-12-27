@@ -6,9 +6,11 @@ import i18n from '../../../i18nextConf';
 import { useTranslation } from 'react-i18next';
 
 interface ArmyPiecesProps {
+  id?: string;
   pieces: Piece[];
   removePiece?: (type: PieceType) => void;
   saveArmy?: (pieces: Piece[]) => void;
+  deleteArmy?: (id: string) => void;
 }
 
 interface ArmyPieceCountProps {
@@ -55,6 +57,15 @@ export function ArmyPieceCounts(Props: ArmyPiecesProps) {
       updateSaveText('Saved!');
     }
   }
+
+  function DeleteArmy() {
+    if(Props.id && Props.deleteArmy) {
+      Props.deleteArmy(Props.id);
+    }
+    else if(Props.saveArmy) {
+      Props.saveArmy([]);
+    }
+  }
   
   if(Props.pieces.length === 0) {
     return (<div>{t('You have not added any pieces.')}</div>);
@@ -76,6 +87,9 @@ export function ArmyPieceCounts(Props: ArmyPiecesProps) {
         </BarItem>
         <BarItem mouseUpHandler={() => SaveArmy()} disableStyle={true}>
           <span className='pieceContainer'>{saveText}</span>
+        </BarItem>
+        <BarItem mouseUpHandler={() => DeleteArmy()} disableStyle={true}>
+          <span className='pieceContainer'>Delete</span>
         </BarItem>
       </span>
     </span>

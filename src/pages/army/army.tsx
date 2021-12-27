@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import '../page.css';
 import '../../App.css';
 import ArmyPage from '../../components/army/armyPage';
@@ -12,23 +12,18 @@ import { GraphQLResult } from '@aws-amplify/api';
 import tc from '../../localesComplex/translateArmy';
 import i18n from '../../i18nextConf';
 import { useTranslation } from 'react-i18next';
+import { useStateValue } from '../../state/state';
 
 interface ArmyProps {
   ID?: string;
-  createTab: (ID: string, path: string, title: string, type: TabType) => void;
 }
 
 interface CentrePageProps {
   ID?: string;
-  fetchedData: boolean;
-  armies: ArmyType[];
 }
 
 interface SelectArmyPageProps {
   ID?: string;
-  fetchedData: boolean;
-  armies: ArmyType[];
-  createTab: (ID: string, path: string, title: string, type: TabType) => void;
 }
 
 interface ViewArmyProps {
@@ -40,16 +35,17 @@ function ViewArmy(Props: ViewArmyProps) {
     <React.Fragment>
       <span className='heading-input padding-left'>{Props.army.name}</span>
       <div className='armyContainer'>
-        <ArmyPieceCounts pieces={Props.army.pieces}/>
+        <ArmyPieceCounts pieces={Props.army.pieces} id={Props.army.id}/>
       </div>
     </React.Fragment>
   );
 }
 
 function CentrePage(Props: CentrePageProps) {
+  const { state } = useStateValue();
   const { t } = useTranslation('translation', { i18n });
 
-  if(!Props.fetchedData) {
+  if(!state.fetchedData.userArmies) {
     return <React.Fragment/>
   }
 
@@ -57,8 +53,8 @@ function CentrePage(Props: CentrePageProps) {
   <React.Fragment>
     <div>
       <h1>{t('Your Armies')}</h1>
-      {tc('YouHaveXArmies', Props.armies.length)}
-      {Props.armies.length ?
+      {tc('YouHaveXArmies', state.userArmies.length)}
+      {state.userArmies.length ?
         t('SelectOneToViewAndEdit') :
         t('ClickPlusToGetStarted')}
     </div>
@@ -66,7 +62,9 @@ function CentrePage(Props: CentrePageProps) {
 }
 
 function ArmyPageSelector(Props: SelectArmyPageProps) {
-  if(!Props.fetchedData) {
+  const { state } = useStateValue();
+
+  if(!state.fetchedData.userArmies) {
     return (
       <ArmyPage>
       </ArmyPage>
@@ -76,17 +74,17 @@ function ArmyPageSelector(Props: SelectArmyPageProps) {
   if(!Props.ID) {
     return (
       <ArmyPage>
-        <CentrePage armies={Props.armies} ID={Props.ID} fetchedData={Props.fetchedData}/>
+        <CentrePage ID={Props.ID}/>
       </ArmyPage>
     );
   }
 
-  let userArmy = Props.armies.find(army => army.id === Props.ID);
+  let userArmy = state.userArmies.find(army => army.id === Props.ID);
   if(userArmy) {
-    return <CreateArmy army={userArmy} createTab={Props.createTab}/>
+    return <CreateArmy army={userArmy}/>
   }
 
-  let globalArmy = Props.armies.find(army => army.id === Props.ID);
+  let globalArmy = state.userArmies.find(army => army.id === Props.ID);
   if(globalArmy) {
     return (
       <ArmyPage>
@@ -103,8 +101,7 @@ function ArmyPageSelector(Props: SelectArmyPageProps) {
 }
 
 function Army(Props: ArmyProps) {
-  const [armies, updateArmies] = useState<ArmyType[]>([]);
-  const [fetchedData, updateFetchedData] = useState(false);
+  const {state, dispatch} = useStateValue();
   const { t } = useTranslation('translation', { i18n });
 
   async function getPageData() {
@@ -115,24 +112,40 @@ function Army(Props: ArmyProps) {
     catch(error) {
       console.log('Error: ', error);
     }
+
     return [];
   }
 
   useEffect(() => {
-    Props.createTab('army', 'army', t('Your Army'), TabType.Army);
+    if(!Props.ID) {
+      dispatch({
+        type: 'addTab',
+        value: {
+          id: 'army', path: '/army', title: t('Your Army'), type: TabType.Army
+        }
+      });
+    }
 
     let isMounted = true;
-    getPageData().then(result => {
-      if (isMounted) {
-        updateArmies(result ? result : []);
-        updateFetchedData(true);
-      }
-    });
+
+    if(!state.fetchedData.userArmies) {
+      getPageData().then(result => {
+        if (isMounted) {
+          dispatch({
+            type: 'setUserArmies',
+            value: result ? result : []
+          });
+        }
+      });
+    }
+
     return () => { isMounted = false };
-  }, [Props, t]);
+  }, [state.fetchedData.userArmies, dispatch, Props, t]);
 
   return (
-    <ArmyPageSelector armies={armies} ID={Props.ID} fetchedData={fetchedData} createTab={Props.createTab}/>
+    <React.Fragment>
+      <ArmyPageSelector ID={Props.ID}/>
+    </React.Fragment>
   )
 };
 

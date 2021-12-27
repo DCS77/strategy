@@ -7,19 +7,20 @@ interface UserArmyListProps {
   armies: ArmyType[];
 }
 
-function ArmyItems(army: ArmyType) {
+function ArmyList(Props: UserArmyListProps) {
   const history = useHistory();
-  return (
-    <BarItem key={army.id} mouseUpHandler={() => history.push(`/army/${army.id}`)}>{army.name}</BarItem>
-  );
-}
 
-function UserArmyList(Props: UserArmyListProps) {
+  function ArmyItem(army: ArmyType) {
+    return (
+      <BarItem key={army.id} mouseUpHandler={() => history.push(`/army/${army.id}`)}>{army.name}</BarItem>
+    );
+  }
+  
   return (
     <React.Fragment>
-      { Props.armies.map((army: ArmyType) => ArmyItems(army)) }
+      { Props.armies.map((army: ArmyType) => ArmyItem(army)) }
     </React.Fragment>
   );
 };
 
-export default UserArmyList;
+export default ArmyList;

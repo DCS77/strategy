@@ -63,7 +63,10 @@ export function PieceCharacter(type: PieceType) {
 }
 
 export function CountPoints(pieces: Piece[]) {
-  return pieces.map(piece => piece.count * PieceCost(piece.type)).reduce((prev, next) => prev + next);
+  if(pieces.length > 0) {
+    return pieces.map(piece => piece.count * PieceCost(piece.type)).reduce((prev, next) => prev + next);
+  }
+  return 0;
 }
 
 export function AddPiece(

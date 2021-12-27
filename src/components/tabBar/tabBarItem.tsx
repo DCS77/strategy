@@ -1,4 +1,5 @@
 import React from 'react';
+import { useStateValue } from '../../state/state';
 import { TabType } from '../../types';
 import BarItem from '../items/barItem';
 import { Asterisk, X } from 'phosphor-react';
@@ -8,7 +9,7 @@ import './gameTabBar.css';
 import '../../App.css';
 
 interface TabBarItemProps {
-  ID: string;
+  id: string;
   type: TabType,
   title?: string;
   player?: string;
@@ -16,7 +17,6 @@ interface TabBarItemProps {
   to?: string;
   link?: string;
   newTab?: boolean;
-  closeTabHandler: (ID: string, type: TabType) => void;
 }
 
 function GetEnumText(type: TabType){
@@ -29,10 +29,14 @@ function GetEnumText(type: TabType){
 }
 
 function TabBarItem(Props: TabBarItemProps) {
+  const { dispatch } = useStateValue();
   const { t } = useTranslation('translation', { i18n });
 
   function CloseTab(){
-    Props.closeTabHandler(Props.ID, Props.type);
+    dispatch({
+      type: 'closeTab',
+      value: { id: Props.id, type: Props.type }
+    });
   }
 
   function IsActiveTab(){
@@ -42,7 +46,7 @@ function TabBarItem(Props: TabBarItemProps) {
   function GetTabText(Props: TabBarItemProps){
     let title = Props.title ? Props.title : '';
     let rating = Props.rating ? `(${Props.rating})` : '';
-    let id = Props.ID && (Props.type === TabType.Game || Props.type === TabType.Info) ? `#${Props.ID}` : '';
+    let id = Props.id && (Props.type === TabType.Game || Props.type === TabType.Info) ? `#${Props.id}` : '';
     let props = [t(title), Props.player, id, rating];
     let text = props.filter(Boolean).join(' ');
     return (<span className='tab-text'>{text.length > 1 ? text : GetEnumText(Props.type)}</span>);

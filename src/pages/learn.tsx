@@ -3,18 +3,21 @@ import './page.css';
 import '../App.css';
 import NavigationList from '../components/navigation/navigationList';
 import { TabType } from '../types';
+import { useStateValue } from '../state/state';
 import i18n from '../i18nextConf';
 import { useTranslation } from 'react-i18next';
 
-interface LearnProps {
-  createTab: (ID: string, path: string, title: string, type: TabType) => void;
-}
-
-function Learn(Props: LearnProps) {
+function Learn() {
+  const { dispatch } = useStateValue();
   const { t } = useTranslation('translation', { i18n });
 
   useEffect(() => {
-    Props.createTab('learn', 'learn', 'Learn to play', TabType.Learn);
+    dispatch({
+      type: 'addTab',
+      value: {
+        id: 'learn', path: '/learn', title: t('Learn to play'), type: TabType.Learn
+      }
+    });
   });
 
   return (

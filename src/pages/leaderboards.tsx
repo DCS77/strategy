@@ -3,18 +3,21 @@ import './page.css';
 import '../App.css';
 import NavigationList from '../components/navigation/navigationList';
 import { TabType } from '../types';
+import { useStateValue } from '../state/state';
 import i18n from '../i18nextConf';
 import { useTranslation } from 'react-i18next';
 
-interface ArmyProps {
-  createTab: (ID: string, path: string, title: string, type: TabType) => void;
-}
-
-function Army(Props: ArmyProps) {
+function Army() {
+  const { dispatch } = useStateValue();
   const { t } = useTranslation('translation', { i18n });
 
   useEffect(() => {
-    Props.createTab('leaderboards', 'leaderboards', t('Leaderboards'), TabType.Leaderboards);
+    dispatch({
+      type: 'addTab',
+      value: {
+        id: 'leaderboards', path: '/leaderboards', title: t('Leaderboards'), type: TabType.Leaderboards
+      }
+    });
   });
 
   return (

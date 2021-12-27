@@ -6,11 +6,10 @@ import NavigationList from '../components/navigation/navigationList';
 import { TabType } from '../types';
 import i18n from '../i18nextConf';
 import { useTranslation } from 'react-i18next';
+import { useStateValue } from '../state/state';
 
 interface PlayProps {
   ID?: string;
-  onCreateGame: (ID: string, title: string) => void;
-  createTab: (ID: string, path: string, title: string, type: TabType) => void;
   changePath: (path: string) => void;
 }
 
@@ -53,20 +52,41 @@ function MakeID(length: number) {
   return result;
 }
 
-function SearchForGame(Props: PlayProps){
-  let id = MakeID(2);
-  Props.onCreateGame(id, `Game ${id}`);
-  Props.changePath(`/play/${id}`);
-}
-
 function Play(Props: PlayProps) {
+  const { dispatch } = useStateValue();
   const { t } = useTranslation('translation', { i18n });
+
+  function SearchForGame(Props: PlayProps){
+    let id = MakeID(2);
+
+    dispatch({
+      type: 'addTab',
+      value: {
+        id: id,
+        path: `/play/${id}`,
+        title: `Game ${id}`,
+        type: TabType.Game
+      }
+    });
+
+    Props.changePath(`/play/${id}`);
+  }
 
   useEffect(() => {
     if(Props.ID) {
-      Props.createTab(Props.ID, `play/${Props.ID}`, `Play ${Props.ID}`, TabType.Game);
+      dispatch({
+        type: 'addTab',
+        value: {
+          id: Props.ID, path: `/play/${Props.ID}`, title: `Game ${Props.ID}`, type: TabType.Game
+        }
+      });
     } else {
-      Props.createTab('play', 'play', t('Multiplayer'), TabType.Multiplayer);
+      dispatch({
+        type: 'addTab',
+        value: { 
+          id: 'play', path: `/play`, title: t('Multiplayer'), type: TabType.Multiplayer
+        }
+      });
     }
   });
 

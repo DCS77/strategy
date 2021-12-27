@@ -1,35 +1,34 @@
 import React, { useEffect, useState } from 'react';
+import { useStateValue } from '../../state/state';
 import useResizeObserver from 'use-resize-observer';
-import { TabDetail, TabDetails } from '../../types';
+import { TabDetail } from '../../types';
 import TabBarItem from './tabBarItem';
 import './gameTabBar.css';
 import '../../App.css';
 
 interface GameTabBarProps {
-  tabs: TabDetails;
   onHeightChange: (height: number) => void;
 }
 
 interface TabListProps {
   ready: boolean;
-  tabs: TabDetails;
   onHeightChange: (height: number) => void;
 }
 
 function CreateTabBarItem(Props: TabDetail) {
   return (
     <TabBarItem
-      key={Props.ID}
-      ID={Props.ID}
+      key={Props.id}
+      id={Props.id}
       title={Props.title}
       type={Props.type}
       to={Props.path}
-      closeTabHandler={Props.closeTabHandler}
     />
   );
 }
 
 function GameTabBar(Props: GameTabBarProps) {
+  const { state } = useStateValue();
   const [ready, setReady] = useState(false);
   const { ref, height = 1 } = useResizeObserver<HTMLDivElement>();
 
@@ -42,7 +41,7 @@ function GameTabBar(Props: GameTabBarProps) {
     if(Props.ready) {
       return (
         <React.Fragment>
-          { Props.tabs.map((item: TabDetail) => CreateTabBarItem(item)) }
+          { state.tabs.map((item: TabDetail) => CreateTabBarItem(item)) }
         </React.Fragment>
       );
     }
@@ -53,7 +52,7 @@ function GameTabBar(Props: GameTabBarProps) {
     <div ref={ref}>
       <div className='game-tab-bar passero'>
         <div className='game-tab-bar-inner'>
-          <TabList ready={ready} tabs={Props.tabs} onHeightChange={Props.onHeightChange}/>
+          <TabList ready={ready} onHeightChange={Props.onHeightChange}/>
         </div>
       </div>
     </div>
