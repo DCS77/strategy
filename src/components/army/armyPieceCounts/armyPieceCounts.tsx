@@ -62,9 +62,17 @@ export function ArmyPieceCounts(Props: ArmyPiecesProps) {
     if(Props.id && Props.deleteArmy) {
       Props.deleteArmy(Props.id);
     }
-    else if(Props.saveArmy) {
-      Props.saveArmy([]);
+  }
+
+  function DeleteButton() {
+    if(Props.id && Props.deleteArmy) {
+      return (
+        <BarItem mouseUpHandler={() => DeleteArmy()} disableStyle={true}>
+          <span className='pieceContainer'>Delete</span>
+        </BarItem>
+      )
     }
+    return null;
   }
   
   if(Props.pieces.length === 0) {
@@ -88,9 +96,7 @@ export function ArmyPieceCounts(Props: ArmyPiecesProps) {
         <BarItem mouseUpHandler={() => SaveArmy()} disableStyle={true}>
           <span className='pieceContainer'>{saveText}</span>
         </BarItem>
-        <BarItem mouseUpHandler={() => DeleteArmy()} disableStyle={true}>
-          <span className='pieceContainer'>Delete</span>
-        </BarItem>
+        <DeleteButton/>
       </span>
     </span>
   );

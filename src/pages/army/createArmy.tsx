@@ -136,6 +136,8 @@ function CreatePage(Props: CreatePageProps) {
 
   function DeleteArmy(id: string) {
     if(armyID) {
+      DeleteArmyDB(armyID);
+
       dispatch({
         type: 'deleteUserArmy',
         value: {
