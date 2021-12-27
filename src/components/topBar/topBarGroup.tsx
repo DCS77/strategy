@@ -5,12 +5,7 @@ import TopBar from './topBar';
 import './topBar.css';
 import '../../App.css';
 
-interface TopBarProps {
-  theme: string;
-  onClickThemeSwitch: (checked: boolean) => void;
-}
-
-function TopBarGroup(Props: TopBarProps) {
+function TopBarGroup() {
   const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
   const [accountDropdownClass, setAccountDropdownClass] = useState('passero hidden');
   const [accountMouseDown, setAccountMouseDown] = useState(false);
@@ -78,8 +73,6 @@ function TopBarGroup(Props: TopBarProps) {
   return (
     <React.Fragment>
       <TopBar
-        theme={Props.theme}
-        onClickThemeSwitch={Props.onClickThemeSwitch}
         onAccountMouseUp={AccountMouseUp}
         onAccountMouseDown={AccountMouseDown}
         onLanguageMouseUp={LanguageMouseUp}

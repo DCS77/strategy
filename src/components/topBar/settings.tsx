@@ -5,11 +5,10 @@ import BarItem from '../items/barItem';
 import { Translate, PaintRoller, CaretDown, User } from 'phosphor-react';
 import i18n from '../../i18nextConf';
 import { useTranslation } from 'react-i18next';
+import { useStateValue } from '../../state/state';
 import '../../App.css';
 
 interface SettingsProps {
-  theme: string;
-  onClickThemeSwitch: (checked: boolean) => void;
   onAccountMouseUp: () => void;
   onAccountMouseDown: () => void;
   onLanguageMouseUp: () => void;
@@ -18,6 +17,14 @@ interface SettingsProps {
 
 function Settings(Props: SettingsProps) {
   const { t } = useTranslation('translation', { i18n });
+  const { state, dispatch } = useStateValue();
+
+  function ToggleTheme(checked: boolean) {
+    dispatch({
+      type: 'changeTheme',
+      value: checked ? 'dark' : 'light'
+    });
+  }
 
   return (
     <React.Fragment>
@@ -34,8 +41,8 @@ function Settings(Props: SettingsProps) {
           <PaintRoller/>
           <Switch
             alt='Change theme'
-            checked={Props.theme === 'dark'}
-            clickHandler={Props.onClickThemeSwitch}
+            checked={state.pageLayout.theme === 'dark'}
+            clickHandler={ToggleTheme}
           />
         </span>
       </BarItem>

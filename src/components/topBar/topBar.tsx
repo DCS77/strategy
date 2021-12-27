@@ -1,4 +1,5 @@
 import React from 'react';
+import { useStateValue } from '../../state/state';
 import SiteIdentity from './siteIdentity';
 import SiteStats from './siteStats';
 import Settings from './settings';
@@ -6,8 +7,6 @@ import './topBar.css';
 import '../../App.css';
 
 interface TopBarProps {
-  theme: string;
-  onClickThemeSwitch: (checked: boolean) => void;
   onAccountMouseUp: () => void;
   onAccountMouseDown: () => void;
   onLanguageMouseUp: () => void;
@@ -15,14 +14,14 @@ interface TopBarProps {
 }
 
 function TopBar(Props: TopBarProps) {
+  const { state } = useStateValue();
+
   return (
-    <div className={'header passero theme-' + Props.theme}>
+    <div className={'header passero theme-' + state.pageLayout.theme}>
       <span className='left-group'><SiteIdentity/></span>
       <span className='centre-group'><SiteStats/></span>
       <span className='right-group'>
         <Settings
-          theme={Props.theme}
-          onClickThemeSwitch={Props.onClickThemeSwitch}
           onAccountMouseUp={Props.onAccountMouseUp}
           onAccountMouseDown={Props.onAccountMouseDown}
           onLanguageMouseUp={Props.onLanguageMouseUp}
