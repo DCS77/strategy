@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "serviceConfiguration": {
+    "serviceName": "AppSync",
+    "defaultAuthType": {
+      "mode": "API_KEY",
+      "expirationTime": 365,
+      "keyDescription": ""
+    },
+    "conflictResolution": {},
+    "apiName": "playjoda",
+    "gqlSchemaPath": "/Users/mew/Documents/Development/joda/strategy-games/strategy/amplify/backend/api/playjoda/schema.graphql"
+  }
+}
