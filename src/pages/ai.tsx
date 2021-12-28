@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react';
 import './page.css';
 import '../App.css';
+import { useTranslation } from 'react-i18next';
 import NavigationList from '../components/navigation/navigationList';
 import Board from '../components/board/board';
 import { TabType } from '../types';
 import i18n from '../i18nextConf';
-import { useTranslation } from 'react-i18next';
 import { useStateValue } from '../state/state';
 
-function AI() {
+const AI = () => {
   const { dispatch } = useStateValue();
   const { t } = useTranslation('translation', { i18n });
 
@@ -16,8 +16,8 @@ function AI() {
     dispatch({
       type: 'addTab',
       value: {
-        id: 'ai', path: '/ai', title: t('Play AI'), type: TabType.Game
-      }
+        id: 'ai', path: '/ai', title: t('Play AI'), type: TabType.Game,
+      },
     });
   });
 
@@ -25,14 +25,14 @@ function AI() {
     <div className='full-size gameRow'>
       <div className='leftColumn'>
         <div className='navSection'>
-          <NavigationList/>
+          <NavigationList />
         </div>
         <div className='moveHistory'>
           {t('Move History')}
         </div>
       </div>
       <div className='boardColumn'>
-        <Board/>
+        <Board />
       </div>
       <div className='rightColumn'>
         <div className='opponentSection'>
@@ -43,7 +43,7 @@ function AI() {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default AI;

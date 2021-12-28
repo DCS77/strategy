@@ -15,6 +15,7 @@ interface BarItemProps {
   children: React.ReactNode;
   mouseUpHandler?: () => void;
   mouseDownHandler?: () => void;
+  onBlur?: () => void;
 }
 
 interface LinkProps {
@@ -25,42 +26,63 @@ interface LinkProps {
   children: React.ReactNode;
 }
 
-function ItemLink(Props: LinkProps){
-  const [hrefTarget] = useState(Props.newTab ? '_blank' : '');
+const ItemLink = (Props: LinkProps) => {
+  const {
+    children, disableStyle, link, newTab, to,
+  } = Props;
+  const [hrefTarget] = useState(newTab ? '_blank' : '');
 
-  if(Props.to) {
+  if (to) {
     return (
-      <Link to={Props.to}>
-        {Props.children}
+      <Link to={to}>
+        {children}
       </Link>
     );
-  } 
-  else if(Props.link) {
+  }
+  if (link) {
     return (
-      <a href={Props.link} target={hrefTarget}>
-        {Props.children}
+      <a href={link} target={hrefTarget}>
+        {children}
       </a>
     );
-  } else {
-    return (
-      <span className={Props.disableStyle ? '' : 'on-click-link'}>
-        {Props.children}
-      </span>
-    );
   }
-}
-
-function BarItem(Props: BarItemProps) {
   return (
-    <span className='itemContainer no-select' onMouseUp={Props.mouseUpHandler} onMouseDown={Props.mouseDownHandler}>
-      <ItemLink to={Props.to} link={Props.link} newTab={Props.newTab} disableStyle={Props.disableStyle}>
+    <span className={disableStyle ? '' : 'on-click-link'}>
+      {children}
+    </span>
+  );
+};
+
+const BarItem = (Props: BarItemProps) => {
+  const {
+    children, disableStyle, icon, inline, largeButtons, link,
+    mouseDownHandler, mouseUpHandler, onBlur, newTab, standout, tabItem, to,
+  } = Props;
+
+  const ButtonPressed = (event: any) => {
+    if (mouseUpHandler) {
+      mouseUpHandler();
+    }
+  };
+
+  return (
+    <span
+      className='itemContainer no-select'
+      onBlur={onBlur}
+      onMouseUp={ButtonPressed}
+      onMouseDown={mouseDownHandler}
+      role='button'
+      tabIndex={0}
+    >
+      <ItemLink to={to} link={link} newTab={newTab} disableStyle={disableStyle}>
         <span className={`pointingCursor
-                          ${Props.inline ? '' : 'item'}
-                          ${Props.tabItem ? 'tab-item' : ''}
-                          ${Props.largeButtons ? 'large-buttons' : ''}
-                          ${Props.standout ? 'standout-bar-item' : ''}`}>
-          {Props.icon ? (<img src={Props.icon} alt='icon'/>) : null}
-          {Props.children}
+                            ${inline ? '' : 'item'}
+                            ${tabItem ? 'tab-item' : ''}
+                            ${largeButtons ? 'large-buttons' : ''}
+                            ${standout ? 'standout-bar-item' : ''}`}
+        >
+          {icon ? (<img src={icon} alt='icon' />) : null}
+          {children}
         </span>
       </ItemLink>
     </span>

@@ -13,19 +13,22 @@ interface TopBarProps {
   onLanguageMouseDown: () => void;
 }
 
-function TopBar(Props: TopBarProps) {
+const TopBar = (Props: TopBarProps) => {
   const { state } = useStateValue();
+  const {
+    onLanguageMouseUp, onLanguageMouseDown, onAccountMouseUp, onAccountMouseDown,
+  } = Props;
 
   return (
-    <div className={'header passero theme-' + state.pageLayout.theme}>
-      <span className='left-group'><SiteIdentity/></span>
-      <span className='centre-group'><SiteStats/></span>
+    <div className={`header passero theme-${state.pageLayout.theme}`}>
+      <span className='left-group'><SiteIdentity /></span>
+      <span className='centre-group'><SiteStats /></span>
       <span className='right-group'>
         <Settings
-          onAccountMouseUp={Props.onAccountMouseUp}
-          onAccountMouseDown={Props.onAccountMouseDown}
-          onLanguageMouseUp={Props.onLanguageMouseUp}
-          onLanguageMouseDown={Props.onLanguageMouseDown}
+          onAccountMouseUp={onAccountMouseUp}
+          onAccountMouseDown={onAccountMouseDown}
+          onLanguageMouseUp={onLanguageMouseUp}
+          onLanguageMouseDown={onLanguageMouseDown}
         />
       </span>
     </div>

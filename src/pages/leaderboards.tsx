@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import './page.css';
 import '../App.css';
+import { useTranslation } from 'react-i18next';
 import NavigationList from '../components/navigation/navigationList';
 import { TabType } from '../types';
 import { useStateValue } from '../state/state';
 import i18n from '../i18nextConf';
-import { useTranslation } from 'react-i18next';
 
-function Army() {
+const Army = () => {
   const { dispatch } = useStateValue();
   const { t } = useTranslation('translation', { i18n });
 
@@ -15,8 +15,8 @@ function Army() {
     dispatch({
       type: 'addTab',
       value: {
-        id: 'leaderboards', path: '/leaderboards', title: t('Leaderboards'), type: TabType.Leaderboards
-      }
+        id: 'leaderboards', path: '/leaderboards', title: t('Leaderboards'), type: TabType.Leaderboards,
+      },
     });
   });
 
@@ -24,23 +24,23 @@ function Army() {
     <div className='full-size gameRow'>
       <div className='leftColumn'>
         <div className='navSection'>
-          <NavigationList/>
+          <NavigationList />
         </div>
         <div className='selectTeam'>
           {t('Historic Leaderboards')}
-          <br/>
+          <br />
           Clicking history leaderboard opens in new tab to allow comparison?
         </div>
       </div>
       <div className='learnColumn'>
         {t('Leaderboards')}
-        <br/>
+        <br />
         CountryFlag, Name, Wins, Draws, Losses, Points
       </div>
       <div className='rightColumn'>
         <div className='actionSection'>
           {t('Player Details')}
-          <br/>
+          <br />
           e.g. View teams, follow (see team updates), request game
         </div>
         <div className='chatSection'>
@@ -48,7 +48,7 @@ function Army() {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default Army;

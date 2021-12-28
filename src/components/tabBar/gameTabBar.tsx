@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useStateValue } from '../../state/state';
 import useResizeObserver from 'use-resize-observer';
+import { useStateValue } from '../../state/state';
 import { TabDetail } from '../../types';
 import TabBarItem from './tabBarItem';
 import './gameTabBar.css';
@@ -15,44 +15,50 @@ interface TabListProps {
   onHeightChange: (height: number) => void;
 }
 
-function CreateTabBarItem(Props: TabDetail) {
+const CreateTabBarItem = (Props: TabDetail) => {
+  const {
+    id, path, title, type,
+  } = Props;
   return (
     <TabBarItem
-      key={Props.id}
-      id={Props.id}
-      title={Props.title}
-      type={Props.type}
-      to={Props.path}
+      key={id}
+      id={id}
+      title={title}
+      type={type}
+      to={path}
     />
   );
-}
+};
 
-function GameTabBar(Props: GameTabBarProps) {
+const TabList = (Props: TabListProps) => {
   const { state } = useStateValue();
-  const [ready, setReady] = useState(false);
+  const { ready } = Props;
+
+  if (ready) {
+    return (
+      <>
+        { state.tabs.map((item: TabDetail) => CreateTabBarItem(item)) }
+      </>
+    );
+  }
+  return null;
+};
+
+const GameTabBar = (Props: GameTabBarProps) => {
+  const [isReady, setIsReady] = useState(false);
   const { ref, height = 1 } = useResizeObserver<HTMLDivElement>();
+  const { onHeightChange } = Props;
 
   useEffect(() => {
-    setReady(true);
-    Props.onHeightChange(height);
+    setIsReady(true);
+    onHeightChange(height);
   }, [Props, height]);
-
-  function TabList(Props: TabListProps) {
-    if(Props.ready) {
-      return (
-        <React.Fragment>
-          { state.tabs.map((item: TabDetail) => CreateTabBarItem(item)) }
-        </React.Fragment>
-      );
-    }
-    return null;
-  }
 
   return (
     <div ref={ref}>
       <div className='game-tab-bar passero'>
         <div className='game-tab-bar-inner'>
-          <TabList ready={ready} onHeightChange={Props.onHeightChange}/>
+          <TabList ready={isReady} onHeightChange={onHeightChange} />
         </div>
       </div>
     </div>

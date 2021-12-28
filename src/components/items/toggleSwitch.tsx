@@ -7,16 +7,20 @@ interface ToggleProps {
   clickHandler: (checked: boolean) => void;
 }
 
-function Switch(Props: ToggleProps) {
+const Switch = (Props: ToggleProps) => {
+  const { alt, checked, clickHandler } = Props;
+
   function onClickSwitch(event: any) {
-    Props.clickHandler(event.target.checked);
+    clickHandler(event.target.checked);
   }
 
   return (
-    <label className='switch'>
-      <input checked={Props.checked} alt={Props.alt} onChange={onClickSwitch} type='checkbox'></input>
-      <span className='slider round'></span>
-    </label>
+    <div className='switch' role='checkbox' aria-checked={checked}>
+      <label htmlFor='themeSelector'>
+        <input id='themeSelector' checked={checked} alt={alt} onChange={onClickSwitch} type='checkbox' />
+        <span className='slider round' />
+      </label>
+    </div>
   );
 };
 

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import BarItem from '../../items/barItem';
 import { PieceIcon, Piece, PieceCharacter } from '../pieces';
 import { PieceType } from '../../../API';
 import i18n from '../../../i18nextConf';
-import { useTranslation } from 'react-i18next';
 
 interface ArmyPiecesProps {
   id?: string;
@@ -18,88 +18,104 @@ interface ArmyPieceCountProps {
   removePiece: (type: PieceType) => void;
 }
 
-function ArmyPieceCount(Props: ArmyPieceCountProps){
+interface DeleteProps {
+  id?: string;
+  deleteArmy?: (id: string) => void;
+}
+
+const ArmyPieceCount = (Props: ArmyPieceCountProps) => {
+  const { piece, removePiece } = Props;
   return (
-    <BarItem mouseUpHandler={() => Props.removePiece(Props.piece.type)} disableStyle={true}>
+    <BarItem mouseUpHandler={() => removePiece(piece.type)} disableStyle>
       <span className='wide-screen'>
-        <span title={Props.piece.type} className='bar-spaced pieceContainer'>
-          {PieceIcon(Props.piece.type)} {Props.piece.count}</span>
+        <span title={piece.type} className='bar-spaced pieceContainer'>
+          {PieceIcon(piece.type)}
+          {' '}
+          {piece.count}
+        </span>
       </span>
       <span className='narrow-screen'>
-        <span title={Props.piece.type} className='bar-spaced narrowPieceContainer'>
-          {PieceIcon(Props.piece.type)} {Props.piece.count}</span>
+        <span title={piece.type} className='bar-spaced narrowPieceContainer'>
+          {PieceIcon(piece.type)}
+          {' '}
+          {piece.count}
+        </span>
       </span>
     </BarItem>
   );
+};
+
+function DeleteArmy(Props: DeleteProps) {
+  const { deleteArmy, id } = Props;
+  if (id && deleteArmy) {
+    deleteArmy(id);
+  }
 }
 
-export function ArmyPieceCounts(Props: ArmyPiecesProps) {
+const DeleteButton = (Props: DeleteProps) => {
+  const { deleteArmy, id } = Props;
+  if (id && deleteArmy) {
+    return (
+      <BarItem mouseUpHandler={() => DeleteArmy(Props)} disableStyle>
+        <span className='pieceContainer'>Delete</span>
+      </BarItem>
+    );
+  }
+  return null;
+};
+
+export const ArmyPieceCounts = (Props: ArmyPiecesProps) => {
   const [copyText, updateCopyText] = useState('Copy');
   const [saveText, updateSaveText] = useState('Save');
   const { t } = useTranslation('translation', { i18n });
+  const {
+    deleteArmy, id, pieces, removePiece, saveArmy,
+  } = Props;
 
   useEffect(() => {
     updateCopyText('Copy');
     updateSaveText('Save');
   }, [Props]);
 
-  function CopyPiecesToClipboard(pieces: Piece[]) {
-    let pieceText = pieces.map(function(piece) {
-      return `${PieceCharacter(piece.type)}${piece.count}`;
-    }).join(' ');
+  function CopyPiecesToClipboard(piecesToCopy: Piece[]) {
+    const pieceText = piecesToCopy.map((piece) => `${PieceCharacter(piece.type)}${piece.count}`).join(' ');
     navigator.clipboard.writeText(pieceText);
     updateCopyText('Copied!');
   }
 
   function SaveArmy() {
-    if(Props.saveArmy) {
-      Props.saveArmy(Props.pieces);
+    if (saveArmy) {
+      saveArmy(pieces);
       updateSaveText('Saved!');
     }
   }
 
-  function DeleteArmy() {
-    if(Props.id && Props.deleteArmy) {
-      Props.deleteArmy(Props.id);
-    }
-  }
-
-  function DeleteButton() {
-    if(Props.id && Props.deleteArmy) {
-      return (
-        <BarItem mouseUpHandler={() => DeleteArmy()} disableStyle={true}>
-          <span className='pieceContainer'>Delete</span>
-        </BarItem>
-      )
-    }
-    return null;
-  }
-  
-  if(Props.pieces.length === 0) {
+  if (pieces.length === 0) {
     return (<div>{t('You have not added any pieces.')}</div>);
   }
 
   return (
     <span className='pieceCounts'>
       <span className='left-group scroll-x'>
-        { Props.pieces.map((piece: Piece) => 
+        { pieces.map((piece: Piece) => (
           <ArmyPieceCount
             key={piece.type}
             piece={piece}
-            removePiece={Props.removePiece ? Props.removePiece : () => {}}/>
-          ) }
+            removePiece={removePiece || (() => {})}
+          />
+        )) }
       </span>
       <span className='right-group'>
-        <BarItem mouseUpHandler={() => CopyPiecesToClipboard(Props.pieces)} disableStyle={true}>
+        <BarItem mouseUpHandler={() => CopyPiecesToClipboard(pieces)} disableStyle>
           <span className='pieceContainer'>{copyText}</span>
         </BarItem>
-        <BarItem mouseUpHandler={() => SaveArmy()} disableStyle={true}>
+        <BarItem mouseUpHandler={() => SaveArmy()} disableStyle>
           <span className='pieceContainer'>{saveText}</span>
         </BarItem>
-        <DeleteButton/>
+        <DeleteButton id={id} deleteArmy={deleteArmy} />
       </span>
     </span>
   );
-}
+};
 
 export default ArmyPieceCounts;

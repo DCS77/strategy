@@ -1,20 +1,24 @@
 import React, { useEffect, useState, useRef } from 'react';
 import '../page.css';
 import '../../App.css';
+import { useTranslation } from 'react-i18next';
+import { API, graphqlOperation } from 'aws-amplify';
+import { GraphQLResult } from '@aws-amplify/api';
 import ArmyPage from '../../components/army/armyPage';
 import ArmyPieceCounts from '../../components/army/armyPieceCounts/armyPieceCounts';
 import PieceButtons from '../../components/army/pieceButtons/pieceButtons';
 import PieceDescription from '../../components/army/pieceDescription/pieceDescription';
-import { AddPiece, CountPoints, RemovePiece, Piece } from '../../components/army/pieces';
-import { Army as ArmyType, CreateArmyMutation, DeleteArmyInput, DeleteArmyMutation, PieceType, UpdateArmyInput } from '../../API';
+import {
+  AddPiece, CountPoints, RemovePiece, Piece,
+} from '../../components/army/pieces';
+import {
+  Army as ArmyType, CreateArmyMutation, DeleteArmyInput, DeleteArmyMutation, PieceType, UpdateArmyInput,
+} from '../../API';
 import { TabType } from '../../types';
 import tc from '../../localesComplex/translateArmy';
 import i18n from '../../i18nextConf';
-import { useTranslation } from 'react-i18next';
 import { useStateValue } from '../../state/state';
 import { createArmy, deleteArmy, updateArmy } from '../../graphql/mutations';
-import { API, graphqlOperation } from 'aws-amplify';
-import { GraphQLResult } from '@aws-amplify/api';
 
 interface CreatePageProps {
   army?: ArmyType;
@@ -24,80 +28,80 @@ interface ArmyProps {
   army?: ArmyType;
 }
 
-function CreatePage(Props: CreatePageProps) {
-  const {dispatch} = useStateValue();
+const CreatePage = (Props: CreatePageProps) => {
+  const { dispatch } = useStateValue();
   const [selectedPiece, updateSelectedPiece] = useState<PieceType | undefined>(undefined);
   const [pieces, updatePieces] = useState<Piece[]>([]);
   const [points, updatePoints] = useState<number>(50);
   const [armyID, updateArmyID] = useState<string | undefined>(undefined);
   const armyName = useRef<HTMLInputElement>(null);
   const { t } = useTranslation('translation', { i18n });
+  const { army } = Props;
 
   useEffect(() => {
-    if(Props.army) {
+    if (army) {
       if (armyName.current !== null) {
-        armyName.current.value = Props.army.name;
+        armyName.current.value = army.name;
       }
-      updateArmyID(Props.army.id);
-      updatePieces(Props.army.pieces);
-      updatePoints(50 - CountPoints(Props.army.pieces));
+      updateArmyID(army.id);
+      updatePieces(army.pieces);
+      updatePoints(50 - CountPoints(army.pieces));
     }
   }, [Props]);
 
-  async function CreateArmyDB(army: ArmyType) {
+  async function CreateArmyDB(newArmy: ArmyType) {
     try {
-      return await API.graphql(graphqlOperation(createArmy, {input: army})) as GraphQLResult<CreateArmyMutation>;
-    }
-    catch(error) {
+      return await API.graphql(graphqlOperation(createArmy, { input: newArmy })) as GraphQLResult<CreateArmyMutation>;
+    } catch (error) {
       return undefined;
     }
   }
 
-  async function UpdateArmyDB(id: string, name: string, pieces: Piece[]) {
+  async function UpdateArmyDB(id: string, newName: string, newPieces: Piece[]) {
     try {
-      const update = {id: id, name: name, pieces: pieces} as UpdateArmyInput;
+      const update = { id, name: newName, pieces: newPieces } as UpdateArmyInput;
       return await API.graphql(graphqlOperation(updateArmy, { input: update })) as GraphQLResult<CreateArmyMutation>;
-    }
-    catch(error) {
+    } catch (error) {
       return undefined;
     }
   }
 
   async function DeleteArmyDB(id: string) {
     try {
-      const deleteInput = {id: id} as DeleteArmyInput;
-      return await API.graphql(graphqlOperation(deleteArmy, { input: deleteInput })) as GraphQLResult<DeleteArmyMutation>;
-    }
-    catch(error) {
+      const deleteInput = { id } as DeleteArmyInput;
+      return await API.graphql(
+        graphqlOperation(deleteArmy, { input: deleteInput }),
+      ) as GraphQLResult<DeleteArmyMutation>;
+    } catch (error) {
       return undefined;
     }
   }
 
-  function UpdateArmyPiecePoints(pieces: Piece[], points: number) {
-    updatePieces(pieces);
-    updatePoints(points);
+  function UpdateArmyPiecePoints(newPieces: Piece[], newPoints: number) {
+    updatePieces(newPieces);
+    updatePoints(newPoints);
   }
 
   function SelectPiece(type: PieceType) {
     updateSelectedPiece(type);
   }
 
-  function SaveArmy(pieces: Piece[]) {
-    if (pieces && armyName.current !== null) {
+  function SaveArmy(newPieces: Piece[]) {
+    if (newPieces && armyName.current !== null) {
       const name = armyName.current.value;
-      if(name) {
+      if (name) {
         let localArmyID = armyID;
-        if(!localArmyID) {
-          let newArmy = {
-            name: name,
-            pieces: pieces,
+        if (!localArmyID) {
+          const newArmy = {
+            name,
+            pieces: newPieces,
             player: 'PlayerID',
             wins: 0,
-            losses: 0
+            losses: 0,
           } as ArmyType;
 
-          CreateArmyDB(newArmy).then(result => {
-            if(result) {
+          CreateArmyDB(newArmy).then((result) => {
+            if (result) {
               localArmyID = result?.data?.createArmy?.id;
               updateArmyID(localArmyID);
             } else {
@@ -108,22 +112,22 @@ function CreatePage(Props: CreatePageProps) {
               type: 'addUserArmy',
               value: {
                 id: localArmyID,
-                name: name,
-                pieces:  pieces
-              }
+                name,
+                pieces: newPieces,
+              },
             });
           });
           updateArmyID('newgame');
         } else {
-          UpdateArmyDB(localArmyID, armyName.current.value, pieces);
+          UpdateArmyDB(localArmyID, armyName.current.value, newPieces);
 
           dispatch({
             type: 'addUserArmy',
             value: {
               id: localArmyID,
-              name: name,
-              pieces:  pieces
-            }
+              name,
+              pieces: newPieces,
+            },
           });
         }
 
@@ -135,81 +139,88 @@ function CreatePage(Props: CreatePageProps) {
   }
 
   function DeleteArmy(id: string) {
-    if(armyID) {
+    if (armyID) {
       DeleteArmyDB(armyID);
 
       dispatch({
         type: 'deleteUserArmy',
         value: {
-          id: id
-        }
+          id,
+        },
       });
     }
   }
 
   return (
-  <React.Fragment>
-    <div>
-      <h1>{Props.army ? t('Edit Army') : t('Create an Army')}</h1>
-      {t('SelectPiecesUse50Points')}
-    </div>
-    
-    <div className='pieceRow'>
-      <br/>
+    <>
       <div>
-        <input className='heading-input padding-left' type='text' placeholder='Enter name for team...' ref={armyName}/>
-        <h3 className='padding-left'>{tc('PointsRemaining', points)}</h3>
-        <div className='armyContainer'>
-          <ArmyPieceCounts
-            id={armyID}
-            pieces={pieces}
-            removePiece={(type: PieceType) => RemovePiece(points, pieces, type, UpdateArmyPiecePoints)}
-            saveArmy={SaveArmy}
-            deleteArmy={DeleteArmy}/>
+        <h1>{army ? t('Edit Army') : t('Create an Army')}</h1>
+        {t('SelectPiecesUse50Points')}
+      </div>
+
+      <div className='pieceRow'>
+        <br />
+        <div>
+          <input
+            className='heading-input padding-left'
+            type='text'
+            placeholder='Enter name for team...'
+            ref={armyName}
+          />
+          <h3 className='padding-left'>{tc('PointsRemaining', points)}</h3>
+          <div className='armyContainer'>
+            <ArmyPieceCounts
+              id={armyID}
+              pieces={pieces}
+              removePiece={(type: PieceType) => RemovePiece(points, pieces, type, UpdateArmyPiecePoints)}
+              saveArmy={SaveArmy}
+              deleteArmy={DeleteArmy}
+            />
+          </div>
+        </div>
+        <br />
+        <div className='column30'>
+          <PieceButtons selectPiece={SelectPiece} />
+        </div>
+        <div className='column70'>
+          <PieceDescription
+            type={selectedPiece}
+            addPiece={(type: PieceType) => AddPiece(points, pieces, type, UpdateArmyPiecePoints)}
+          />
         </div>
       </div>
-      <br/>
-      <div className='column30'>
-        <PieceButtons selectPiece={SelectPiece}/>
-      </div>
-      <div className='column70'>
-        <PieceDescription
-          type={selectedPiece}
-          addPiece={(type: PieceType) => AddPiece(points, pieces, type, UpdateArmyPiecePoints)}
-        />
-      </div>
-    </div>
-  </React.Fragment>)
-}
+    </>
+  );
+};
 
-function CreateArmy(Props: ArmyProps) {
+const CreateArmy = (Props: ArmyProps) => {
   const { dispatch } = useStateValue();
   const { t } = useTranslation('translation', { i18n });
+  const { army } = Props;
 
   useEffect(() => {
-    if(!Props.army) {
+    if (!army) {
       dispatch({
         type: 'addTab',
-        value: { 
-          id: 'create', path: `/create`, title: t('Create an Army'), type: TabType.Create
-        }
+        value: {
+          id: 'create', path: '/create', title: t('Create an Army'), type: TabType.Create,
+        },
       });
-    }
-    else {
+    } else {
       dispatch({
         type: 'addTab',
-        value: { 
-          id: Props.army.id, path: `/army/${Props.army.id}`, title: t(`Edit ${Props.army.name}`), type: TabType.Edit
-        }
+        value: {
+          id: army.id, path: `/army/${army.id}`, title: t(`Edit ${army.name}`), type: TabType.Edit,
+        },
       });
     }
   }, [dispatch, Props, t]);
 
   return (
     <ArmyPage>
-      <CreatePage army={Props.army}/>
+      <CreatePage army={army} />
     </ArmyPage>
-  )
+  );
 };
 
 export default CreateArmy;

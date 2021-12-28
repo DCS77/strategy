@@ -1,4 +1,6 @@
-import React, {createContext, Dispatch, Reducer, useContext, useReducer} from 'react';
+import React, {
+  createContext, Dispatch, Reducer, useContext, useReducer,
+} from 'react';
 import { Army as ArmyType } from '../API';
 import { TabDetail, TabDetails } from '../types';
 
@@ -45,6 +47,8 @@ export const StateContext = createContext({} as InitContextProps);
 
 export const StateProvider: React.FC<StateProviderProps> = ({ reducer, initialState, children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  // eslint-disable-next-line react/jsx-no-constructed-context-values
   const value = { state, dispatch };
 
   return (

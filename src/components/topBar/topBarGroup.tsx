@@ -5,12 +5,12 @@ import TopBar from './topBar';
 import './topBar.css';
 import '../../App.css';
 
-function TopBarGroup() {
+const TopBarGroup = () => {
   const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
   const [accountDropdownClass, setAccountDropdownClass] = useState('passero hidden');
   const [accountMouseDown, setAccountMouseDown] = useState(false);
   const accountDropdown = useRef<HTMLDivElement>(null);
-  
+
   const [languageDropdownVisible, setLanguageDropdownVisible] = useState(false);
   const [languageDropdownClass, setLanguageDropdownClass] = useState('passero hidden');
   const [languageMouseDown, setLanguageMouseDown] = useState(false);
@@ -24,22 +24,22 @@ function TopBarGroup() {
     }
   }
 
-  function AccountMouseUp(){
+  function AccountMouseUp() {
     ToggleAccountDropdown(!accountDropdownVisible);
     setAccountMouseDown(false);
   }
 
-  function AccountMouseDown(){
+  function AccountMouseDown() {
     setAccountMouseDown(true);
   }
 
-  function AccountBlur(){
-    if(!accountMouseDown){
+  function AccountBlur() {
+    if (!accountMouseDown) {
       ToggleAccountDropdown(false);
     }
   }
 
-  function CloseAccountMenu(){
+  function CloseAccountMenu() {
     ToggleAccountDropdown(false);
   }
 
@@ -51,40 +51,43 @@ function TopBarGroup() {
     }
   }
 
-  function LanguageMouseUp(){
+  function LanguageMouseUp() {
     ToggleLanguageDropdown(!languageDropdownVisible);
     setLanguageMouseDown(false);
   }
 
-  function LanguageMouseDown(){
+  function LanguageMouseDown() {
+    if (languageDropdown.current) {
+      languageDropdown.current.focus();
+    }
     setLanguageMouseDown(true);
   }
 
-  function LanguageBlur(){
-    if(!languageMouseDown){
+  function LanguageBlur() {
+    if (!languageMouseDown) {
       ToggleLanguageDropdown(false);
     }
   }
 
-  function CloseLanguageMenu(){
+  function CloseLanguageMenu() {
     ToggleLanguageDropdown(false);
   }
 
   return (
-    <React.Fragment>
+    <>
       <TopBar
         onAccountMouseUp={AccountMouseUp}
         onAccountMouseDown={AccountMouseDown}
         onLanguageMouseUp={LanguageMouseUp}
         onLanguageMouseDown={LanguageMouseDown}
       />
-      <div ref={accountDropdown} className={accountDropdownClass} tabIndex={0} onBlur={AccountBlur}>
-        <AccountDropdownMenu onClickAnyItem={CloseAccountMenu}/>
+      <div ref={accountDropdown} className={accountDropdownClass}>
+        <AccountDropdownMenu onClickAnyItem={CloseAccountMenu} onBlur={AccountBlur} />
       </div>
-      <div ref={languageDropdown} className={languageDropdownClass} tabIndex={1} onBlur={LanguageBlur}>
-        <LanguageDropdownMenu onClickAnyItem={CloseLanguageMenu}/>
+      <div ref={languageDropdown} className={languageDropdownClass}>
+        <LanguageDropdownMenu onClickAnyItem={CloseLanguageMenu} onBlur={LanguageBlur} />
       </div>
-    </React.Fragment>
+    </>
   );
 };
 

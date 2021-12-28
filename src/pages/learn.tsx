@@ -1,13 +1,13 @@
 import React, { useEffect } from 'react';
 import './page.css';
 import '../App.css';
+import { useTranslation } from 'react-i18next';
 import NavigationList from '../components/navigation/navigationList';
 import { TabType } from '../types';
 import { useStateValue } from '../state/state';
 import i18n from '../i18nextConf';
-import { useTranslation } from 'react-i18next';
 
-function Learn() {
+const Learn = () => {
   const { dispatch } = useStateValue();
   const { t } = useTranslation('translation', { i18n });
 
@@ -15,8 +15,8 @@ function Learn() {
     dispatch({
       type: 'addTab',
       value: {
-        id: 'learn', path: '/learn', title: t('Learn to play'), type: TabType.Learn
-      }
+        id: 'learn', path: '/learn', title: t('Learn to play'), type: TabType.Learn,
+      },
     });
   });
 
@@ -24,7 +24,7 @@ function Learn() {
     <div className='full-size gameRow'>
       <div className='leftColumn'>
         <div className='navSection'>
-          <NavigationList/>
+          <NavigationList />
         </div>
         <div className='selectLesson'>
           {t('Select a lesson')}
@@ -42,7 +42,7 @@ function Learn() {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default Learn;

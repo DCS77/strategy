@@ -18,48 +18,63 @@ interface GridProps {
   rows: number;
 }
 
-function Cell(Props: CellProps) {
+const Cell = (Props: CellProps) => {
+  const { colIndex, cols, rowIndex } = Props;
   return (
-    <div className={`list w-${Props.cols}`}> 
-      <span id={`cell-${Props.rowIndex}-${Props.colIndex}`} >Cell</span>
+    <div className={`list w-${cols}`}>
+      <span id={`cell-${rowIndex}-${colIndex}`}>Cell</span>
     </div>
-  )
-}
+  );
+};
 
-function Row(Props: RowProps) {
-  const Cols = (Array.from(new Array(Props.cols), (val, index) => <Cell key={`board-cell-${Props.index}-${index}`} cols={Props.cols} colIndex={index} rowIndex={Props.index}/>));
+const Row = (Props: RowProps) => {
+  const { cols, index, rows } = Props;
+  const Cols = (Array.from(new Array(cols), (val, colIndex) => (
+    <Cell
+      key={`board-cell-${index}-${colIndex}`}
+      cols={cols}
+      colIndex={colIndex}
+      rowIndex={index}
+    />
+  )));
 
-  const oddEven = Props.index % 2 === 0 ? 'even' : 'odd';
+  const oddEven = index % 2 === 0 ? 'even' : 'odd';
 
   return (
-    <div className={`boardRow ${oddEven} h-${Props.rows}`}>
+    <div className={`boardRow ${oddEven} h-${rows}`}>
       {Cols}
     </div>
-  )
-}
+  );
+};
 
-function Grid(Props: GridProps) {
-  const Rows = (Array.from(new Array(Props.rows), (val, index) => <Row key={`board-row-${index}`} index={index} rows={Props.rows} cols={Props.cols}/>));
+const Grid = (Props: GridProps) => {
+  const { cols, rows } = Props;
+  const Rows = (Array.from(new Array(rows), (val, index) => (
+    <Row
+      key={`board-row-${index}`}
+      index={index}
+      rows={rows}
+      cols={cols}
+    />
+  )));
 
   return (
     <div className='board'>
       {Rows}
     </div>
-  )
-}
+  );
+};
 
-function Board() {
-  return (
-    <React.Fragment>
-      <div className='playerDetails'>
-        Player Details
-      </div>
-        <Grid cols={5} rows={9}/>
-      <div className='playerDetails'>
-        Player Details
-      </div>
-    </React.Fragment>
-  )
-}
+const Board = () => (
+  <>
+    <div className='playerDetails'>
+      Player Details
+    </div>
+    <Grid cols={5} rows={9} />
+    <div className='playerDetails'>
+      Player Details
+    </div>
+  </>
+);
 
 export default Board;
