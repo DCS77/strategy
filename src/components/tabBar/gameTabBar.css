@@ -5,7 +5,6 @@
   align-items: center;
   text-align: left;
   background-color: var(--tab-bar-color);
-  min-height: 0;
   width: 100%;
   overflow: auto;
 }
@@ -13,7 +12,6 @@
 .game-tab-bar-inner {
   display: flex;
   flex-flow: row wrap;
-  max-height: var(--max-tab-bar-height);
   overflow-y: scroll;
 }
 

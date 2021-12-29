@@ -120,8 +120,12 @@ a:hover > * {
   background-color: var(--bar-tint);
 }
 
-.pointingCursor {
+.pointing-cursor {
   cursor: pointer;
+}
+
+.default-cursor {
+  cursor: default;
 }
 
 .page {
@@ -138,10 +142,31 @@ a:hover > * {
   font-family: 'Passero One', regular;
 }
 
-.narrow-screen { display: none; }
+.narrow-dimensions {
+  --row-height: calc(30vh - var(--used-space-height));
+  --board-height: 600px;
+  --board-min-width: 700px;
+  --board-width: 100%;
+}
+
+.wide-dimensions {
+  --row-height: calc(100vh - var(--used-space-height));
+  --board-height: calc(100vh - var(--used-space-height));
+  --board-min-width: 700px;
+  --board-width: 60%;
+}
+
+.narrow-screen {
+  display: none;
+}
+
 @media (max-width: 700px) {
-  .narrow-screen { display: inline-block; }
-  .wide-screen { display: none; }
+  .narrow-screen {
+    display: inline-block;
+  }
+  .wide-screen {
+    display: none;
+  }
 }
 
 .full-size {
@@ -222,4 +247,25 @@ a:hover > * {
   justify-content: flex-end;
   align-items: center;
   text-align: right;
+}
+
+.nav-bar-horizontal-inner {
+  max-height: var(--max-tab-bar-height);
+  overflow-x: scroll;
+  height: 100%;
+}
+
+.nav-bar-horizontal {
+  display: inline-block;
+  min-width: 100vw;
+  border-bottom:1px solid var(--tab-border-color);
+}
+
+.nav-bar-horizontal > div  {
+  width: 100%;
+}
+
+.nav-bar-horizontal > div > span {
+  display: inline-block;
+  width: 16.66%;
 }

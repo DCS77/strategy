@@ -101,6 +101,14 @@
   margin: 10px;
 }
 
+.vertical-padding-top {
+  padding-top: 10px;
+}
+
+.vertical-padding-bottom {
+  margin-bottom: 30px;
+}
+
 .armyContainer {
   background-color: var(--army-container-color);
   padding: 10px;

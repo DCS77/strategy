@@ -10,7 +10,7 @@ const NavigationList = () => {
   const { t } = useTranslation('translation', { i18n });
 
   return (
-    <>
+    <div>
       <BarItem to='/tv' newTab>
         <span className='wide-screen'>
           <span className='inline flex-center all-spaced'><Television />{t('Arena TV')}</span>
@@ -59,7 +59,7 @@ const NavigationList = () => {
           <span className='inline flex-center'><Trophy /></span>
         </span>
       </BarItem>
-    </>
+    </div>
   );
 };
 

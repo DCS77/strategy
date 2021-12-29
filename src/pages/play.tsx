@@ -13,29 +13,64 @@ interface PlayProps {
   ID?: string;
 }
 
-const ShowGame = (t: any) => (
-  <div className='full-size gameRow'>
-    <div className='leftColumn'>
-      <div className='navSection'>
+interface ShowGameViewProps {
+  t: any;
+}
+
+interface ViewProps {
+  SearchForGame: any;
+  t: any;
+}
+
+const NarrowShowGameView = (Props: ShowGameViewProps) => {
+  const { t } = Props;
+  return (
+    <>
+      <div className='nav-bar-horizontal vertical-padding-top vertical-padding-bottom'>
         <NavigationList />
       </div>
-      <div className='moveHistory'>
-        {t('Move History')}
-      </div>
-    </div>
-    <div className='boardColumn'>
-      <Board />
-    </div>
-    <div className='rightColumn'>
-      <div className='opponentSection'>
+      <div className='vertical-padding-bottom'>
         {t('Opponent Details')}
       </div>
-      <div className='chatSection'>
+      <div className='vertical-padding-bottom'>
+        <Board short />
+      </div>
+      <div className='vertical-padding-bottom'>
         {t('Chat')}
       </div>
+      <div className='vertical-padding-bottom'>
+        {t('Move History')}
+      </div>
+    </>
+  );
+};
+
+const WideShowGameView = (Props: ShowGameViewProps) => {
+  const { t } = Props;
+  return (
+    <div className='full-size gameRow'>
+      <div className='leftColumn'>
+        <div className='navSection'>
+          <NavigationList />
+        </div>
+        <div className='moveHistory'>
+          {t('Move History')}
+        </div>
+      </div>
+      <div className='boardColumn'>
+        <Board />
+      </div>
+      <div className='rightColumn'>
+        <div className='opponentSection'>
+          {t('Opponent Details')}
+        </div>
+        <div className='chatSection'>
+          {t('Chat')}
+        </div>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 // Added temporarily to test adding of game tabs
 function MakeID(length: number) {
@@ -47,6 +82,48 @@ function MakeID(length: number) {
   }
   return result;
 }
+
+const NarrowPlayView = (Props: ViewProps) => {
+  const { SearchForGame, t } = Props;
+  return (
+    <>
+      <div className='nav-bar-horizontal vertical-padding-top vertical-padding-bottom'>
+        <NavigationList />
+      </div>
+      <div className='vertical-padding-bottom'>
+        Create a new game<br />
+        <button type='button' onClick={SearchForGame}>
+          Add game tab
+        </button><br />
+        Games being searched for
+      </div>
+      <div>
+        {t('Chat')}
+      </div>
+    </>
+  );
+};
+
+const WidePlayView = (Props: ViewProps) => {
+  const { SearchForGame, t } = Props;
+  return (
+    <div className='full-size gameRow'>
+      <div className='leftColumn'>
+        <NavigationList />
+      </div>
+      <div className='boardColumn'>
+        Create a new game
+        <button type='button' onClick={SearchForGame}>
+          Add game tab
+        </button>
+        Games being searched for
+      </div>
+      <div className='rightColumn'>
+        {t('Chat')}
+      </div>
+    </div>
+  );
+};
 
 const Play = (Props: PlayProps) => {
   const history = useHistory();
@@ -79,25 +156,27 @@ const Play = (Props: PlayProps) => {
   });
 
   if (ID) {
-    return ShowGame(t);
+    return (
+      <>
+        <div className='narrow-screen'>
+          <NarrowShowGameView t={t} />
+        </div>
+        <div className='wide-screen'>
+          <WideShowGameView t={t} />
+        </div>
+      </>
+    );
   }
 
   return (
-    <div className='full-size gameRow'>
-      <div className='leftColumn'>
-        <NavigationList />
+    <>
+      <div className='narrow-screen'>
+        <NarrowPlayView SearchForGame={SearchForGame} t={t} />
       </div>
-      <div className='boardColumn'>
-        Create a new game
-        <button type='button' onClick={SearchForGame}>
-          Add game tab
-        </button>
-        Games being searched for
+      <div className='wide-screen'>
+        <WidePlayView SearchForGame={SearchForGame} t={t} />
       </div>
-      <div className='rightColumn'>
-        {t('Chat')}
-      </div>
-    </div>
+    </>
   );
 };
 

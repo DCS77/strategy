@@ -5,9 +5,25 @@ import { useTranslation } from 'react-i18next';
 import NavigationList from '../components/navigation/navigationList';
 import i18n from '../i18nextConf';
 
-const Home = () => {
-  const { t } = useTranslation('translation', { i18n });
+interface ViewProps {
+  t: any;
+}
 
+const NarrowHomeView = (Props: ViewProps) => {
+  const { t } = Props;
+  return (
+    <>
+      <div className='nav-bar-horizontal vertical-padding-top vertical-padding-bottom'>
+        <NavigationList />
+      </div>
+      <div className='vertical-padding-bottom'>{t('News and Updates')}</div>
+      <div className='vertical-padding-bottom'>{t('Chat')}</div>
+    </>
+  );
+};
+
+const WideHomeView = (Props: ViewProps) => {
+  const { t } = Props;
   return (
     <div className='full-size homeRow'>
       <div className='navigationColumn'>
@@ -16,6 +32,21 @@ const Home = () => {
       <div className='centerColumn'>{t('News and Updates')}</div>
       <div className='chatColumn'>{t('Chat')}</div>
     </div>
+  );
+};
+
+const Home = () => {
+  const { t } = useTranslation('translation', { i18n });
+
+  return (
+    <>
+      <div className='narrow-screen'>
+        <NarrowHomeView t={t} />
+      </div>
+      <div className='wide-screen'>
+        <WideHomeView t={t} />
+      </div>
+    </>
   );
 };
 

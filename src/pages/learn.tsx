@@ -7,19 +7,32 @@ import { TabType } from '../types';
 import { useStateValue } from '../state/state';
 import i18n from '../i18nextConf';
 
-const Learn = () => {
-  const { dispatch } = useStateValue();
-  const { t } = useTranslation('translation', { i18n });
+interface ViewProps {
+  t: any;
+}
 
-  useEffect(() => {
-    dispatch({
-      type: 'addTab',
-      value: {
-        id: 'learn', path: '/learn', title: t('Learn to play'), type: TabType.Learn,
-      },
-    });
-  });
+const NarrowLearnView = (Props: ViewProps) => {
+  const { t } = Props;
+  return (
+    <>
+      <div className='nav-bar-horizontal vertical-padding-top vertical-padding-bottom'>
+        <NavigationList />
+      </div>
+      <div className='vertical-padding-bottom'>
+        {t('Select a lesson')}
+      </div>
+      <div className='vertical-padding-bottom'>
+        Text for selected lesson
+      </div>
+      <div className='vertical-padding-bottom'>
+        {t('Chat')}
+      </div>
+    </>
+  );
+};
 
+const WideLearnView = (Props: ViewProps) => {
+  const { t } = Props;
   return (
     <div className='full-size gameRow'>
       <div className='leftColumn'>
@@ -42,6 +55,31 @@ const Learn = () => {
         </div>
       </div>
     </div>
+  );
+};
+
+const Learn = () => {
+  const { dispatch } = useStateValue();
+  const { t } = useTranslation('translation', { i18n });
+
+  useEffect(() => {
+    dispatch({
+      type: 'addTab',
+      value: {
+        id: 'learn', path: '/learn', title: t('Learn to play'), type: TabType.Learn,
+      },
+    });
+  });
+
+  return (
+    <>
+      <div className='narrow-screen'>
+        <NarrowLearnView t={t} />
+      </div>
+      <div className='wide-screen'>
+        <WideLearnView t={t} />
+      </div>
+    </>
   );
 };
 

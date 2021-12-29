@@ -15,18 +15,13 @@ interface ArmyPiecesProps {
 
 interface ArmyPieceCountProps {
   piece: Piece;
-  removePiece: (type: PieceType) => void;
-}
-
-interface DeleteProps {
-  id?: string;
-  deleteArmy?: (id: string) => void;
+  removePiece?: (type: PieceType) => void;
 }
 
 const ArmyPieceCount = (Props: ArmyPieceCountProps) => {
   const { piece, removePiece } = Props;
   return (
-    <BarItem mouseUpHandler={() => removePiece(piece.type)} disableStyle>
+    <BarItem mouseUpHandler={removePiece ? () => removePiece(piece.type) : undefined} disableStyle>
       <span className='wide-screen'>
         <span title={piece.type} className='bar-spaced pieceContainer'>
           {PieceIcon(piece.type)}
@@ -44,6 +39,39 @@ const ArmyPieceCount = (Props: ArmyPieceCountProps) => {
     </BarItem>
   );
 };
+
+interface SaveProps {
+  id?: string;
+  pieces: Piece[];
+  saveArmy?: (pieces: Piece[]) => void;
+  saveText: string;
+  updateSaveText: any;
+}
+
+function SaveArmy(Props: SaveProps) {
+  const { pieces, saveArmy, updateSaveText } = Props;
+  if (saveArmy) {
+    saveArmy(pieces);
+    updateSaveText('Saved!');
+  }
+}
+
+const SaveButton = (Props: SaveProps) => {
+  const { saveArmy, saveText } = Props;
+  if (saveArmy) {
+    return (
+      <BarItem mouseUpHandler={() => SaveArmy(Props)} disableStyle>
+        <span className='pieceContainer'>{saveText}</span>
+      </BarItem>
+    );
+  }
+  return null;
+};
+
+interface DeleteProps {
+  id?: string;
+  deleteArmy?: (id: string) => void;
+}
 
 function DeleteArmy(Props: DeleteProps) {
   const { deleteArmy, id } = Props;
@@ -83,13 +111,6 @@ export const ArmyPieceCounts = (Props: ArmyPiecesProps) => {
     updateCopyText('Copied!');
   }
 
-  function SaveArmy() {
-    if (saveArmy) {
-      saveArmy(pieces);
-      updateSaveText('Saved!');
-    }
-  }
-
   if (pieces.length === 0) {
     return (<div>{t('You have not added any pieces.')}</div>);
   }
@@ -101,7 +122,7 @@ export const ArmyPieceCounts = (Props: ArmyPiecesProps) => {
           <ArmyPieceCount
             key={piece.type}
             piece={piece}
-            removePiece={removePiece || (() => {})}
+            removePiece={removePiece}
           />
         )) }
       </span>
@@ -109,9 +130,7 @@ export const ArmyPieceCounts = (Props: ArmyPiecesProps) => {
         <BarItem mouseUpHandler={() => CopyPiecesToClipboard(pieces)} disableStyle>
           <span className='pieceContainer'>{copyText}</span>
         </BarItem>
-        <BarItem mouseUpHandler={() => SaveArmy()} disableStyle>
-          <span className='pieceContainer'>{saveText}</span>
-        </BarItem>
+        <SaveButton id={id} pieces={pieces} saveArmy={saveArmy} saveText={saveText} updateSaveText={updateSaveText} />
         <DeleteButton id={id} deleteArmy={deleteArmy} />
       </span>
     </span>

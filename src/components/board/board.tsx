@@ -1,5 +1,11 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
+import i18n from '../../i18nextConf';
 import './board.css';
+
+interface BoardProps {
+  short?: boolean;
+}
 
 interface CellProps {
   cols: number;
@@ -16,6 +22,7 @@ interface RowProps {
 interface GridProps {
   cols: number;
   rows: number;
+  short?: boolean;
 }
 
 const Cell = (Props: CellProps) => {
@@ -41,14 +48,14 @@ const Row = (Props: RowProps) => {
   const oddEven = index % 2 === 0 ? 'even' : 'odd';
 
   return (
-    <div className={`boardRow ${oddEven} h-${rows}`}>
+    <div className={`board-row ${oddEven} h-${rows}`}>
       {Cols}
     </div>
   );
 };
 
 const Grid = (Props: GridProps) => {
-  const { cols, rows } = Props;
+  const { cols, rows, short } = Props;
   const Rows = (Array.from(new Array(rows), (val, index) => (
     <Row
       key={`board-row-${index}`}
@@ -59,22 +66,28 @@ const Grid = (Props: GridProps) => {
   )));
 
   return (
-    <div className='board'>
+    <div className={`board ${short ? 'board-short' : 'board-tall'}`}>
       {Rows}
     </div>
   );
 };
 
-const Board = () => (
-  <>
-    <div className='playerDetails'>
-      Player Details
-    </div>
-    <Grid cols={5} rows={9} />
-    <div className='playerDetails'>
-      Player Details
-    </div>
-  </>
-);
+const Board = (Props: BoardProps) => {
+  const { t } = useTranslation('translation', { i18n });
+  const { short } = Props;
+  return (
+    <>
+      <div className='playerDetails'>
+        {t('Player Details')}<br />
+        {t('Armies')}
+      </div>
+      <Grid cols={5} rows={9} short={short} />
+      <div className='playerDetails'>
+        {t('Player Details')}<br />
+        {t('Armies')}
+      </div>
+    </>
+  );
+};
 
 export default Board;

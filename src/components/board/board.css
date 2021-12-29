@@ -19,16 +19,24 @@
   background: var(--board-secondary-color);
 }
 
-.board {
+.board-tall {
   min-height: calc(80vh - var(--used-space-height));
   width: 100%;
 }
 
-.boardRow {
+.board-short {
+  width: 100%;
+}
+
+.board .board-row {
   height: calc((80vh - var(--used-space-height)) / var(--board-rows));
 }
 
-.boardRow .list {
+.board-short .board-row {
+  height: calc((60vh - var(--used-space-height)) / var(--board-rows));
+}
+
+.board-row .list {
   display: inline-block;
   height: 100%;
 }
@@ -44,13 +52,13 @@
 .board .h-9 { --board-rows: 9; }
 .board .h-10 { --board-rows: 10; }
 
-.boardRow .w-1 { min-width: 100%; }
-.boardRow .w-2 { min-width: 50%; }
-.boardRow .w-3 { min-width: 33.33%; }
-.boardRow .w-4 { min-width: 25%; }
-.boardRow .w-5 { min-width: 20%; }
-.boardRow .w-6 { min-width: 16.66%; }
-.boardRow .w-7 { min-width: 14.28%; }
-.boardRow .w-8 { min-width: 12.25%; }
-.boardRow .w-9 { min-width: 11.11%; }
-.boardRow .w-10 { min-width: 10%; }
+.board-row .w-1 { min-width: 100%; }
+.board-row .w-2 { min-width: 50%; }
+.board-row .w-3 { min-width: 33.33%; }
+.board-row .w-4 { min-width: 25%; }
+.board-row .w-5 { min-width: 20%; }
+.board-row .w-6 { min-width: 16.66%; }
+.board-row .w-7 { min-width: 14.28%; }
+.board-row .w-8 { min-width: 12.25%; }
+.board-row .w-9 { min-width: 11.11%; }
+.board-row .w-10 { min-width: 10%; }

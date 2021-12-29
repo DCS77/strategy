@@ -8,19 +8,32 @@ import { TabType } from '../types';
 import { useStateValue } from '../state/state';
 import i18n from '../i18nextConf';
 
-const TV = () => {
-  const { dispatch } = useStateValue();
-  const { t } = useTranslation('translation', { i18n });
+interface ViewProps {
+  t: any;
+}
 
-  useEffect(() => {
-    dispatch({
-      type: 'addTab',
-      value: {
-        id: 'tv', path: '/tv', title: t('Arena TV'), type: TabType.TV,
-      },
-    });
-  }, [dispatch, t]);
+const NarrowTVView = (Props: ViewProps) => {
+  const { t } = Props;
+  return (
+    <>
+      <div className='nav-bar-horizontal vertical-padding-top vertical-padding-bottom'>
+        <NavigationList />
+      </div>
+      <div className='vertical-padding-bottom'>
+        <Board short />
+      </div>
+      <div className='vertical-padding-bottom'>
+        {t('Chat')}
+      </div>
+      <div className='vertical-padding-bottom'>
+        {t('Move History')}
+      </div>
+    </>
+  );
+};
 
+const WideTVView = (Props: ViewProps) => {
+  const { t } = Props;
   return (
     <div className='full-size gameRow'>
       <div className='leftColumn'>
@@ -35,14 +48,36 @@ const TV = () => {
         <Board />
       </div>
       <div className='rightColumn'>
-        <div className='opponentSection'>
-          {t('Armies')}
-        </div>
         <div className='chatSection'>
           {t('Chat')}
         </div>
       </div>
     </div>
+  );
+};
+
+const TV = () => {
+  const { dispatch } = useStateValue();
+  const { t } = useTranslation('translation', { i18n });
+
+  useEffect(() => {
+    dispatch({
+      type: 'addTab',
+      value: {
+        id: 'tv', path: '/tv', title: t('Arena TV'), type: TabType.TV,
+      },
+    });
+  }, [dispatch, t]);
+
+  return (
+    <>
+      <div className='narrow-screen'>
+        <NarrowTVView t={t} />
+      </div>
+      <div className='wide-screen'>
+        <WideTVView t={t} />
+      </div>
+    </>
   );
 };
 

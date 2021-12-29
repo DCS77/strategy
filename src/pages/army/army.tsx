@@ -6,6 +6,7 @@ import { GraphQLResult } from '@aws-amplify/api';
 import { useTranslation } from 'react-i18next';
 import ArmyPage from '../../components/army/armyPage';
 import ArmyPieceCounts from '../../components/army/armyPieceCounts/armyPieceCounts';
+import ArmyPiecesList from '../../components/army/armyList/armyPiecesList';
 import CreateArmy from './createArmy';
 import { TabType } from '../../types';
 import { listArmies } from '../../graphql/queries';
@@ -53,10 +54,13 @@ const CentrePage = (Props: CentrePageProps) => {
   return (
     <div>
       <h1>{t('Your Armies')}</h1>
-      {tc('YouHaveXArmies', state.userArmies.length)}
-      {state.userArmies.length
-        ? t('SelectOneToViewAndEdit')
-        : t('ClickPlusToGetStarted')}
+      <p>
+        {tc('YouHaveXArmies', state.userArmies.length)}
+        {state.userArmies.length
+          ? t('SelectOneToViewAndEdit')
+          : t('ClickPlusToGetStarted')}
+      </p>
+      <ArmyPiecesList armies={state.userArmies} />
     </div>
   );
 };

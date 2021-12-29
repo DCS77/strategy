@@ -75,7 +75,7 @@ const BarItem = (Props: BarItemProps) => {
       tabIndex={0}
     >
       <ItemLink to={to} link={link} newTab={newTab} disableStyle={disableStyle}>
-        <span className={`pointingCursor
+        <span className={`${to || link || mouseUpHandler || mouseDownHandler ? 'pointing-cursor' : 'default-cursor'}
                             ${inline ? '' : 'item'}
                             ${tabItem ? 'tab-item' : ''}
                             ${largeButtons ? 'large-buttons' : ''}
