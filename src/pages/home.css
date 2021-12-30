@@ -1,22 +1,22 @@
-.navigationColumn {
+.navigation-column {
   float: left;
   width: 20%;
   min-height: calc(100vh - var(--used-space-height));
 }
 
-.centerColumn {
+.center-column {
   float: left;
   width: 60%;
   min-height: calc(100vh - var(--used-space-height));
 }
 
-.chatColumn {
+.chat-column {
   float: left;
   width: 20%;
   min-height: calc(100vh - var(--used-space-height));
 }
 
-.homeRow:after {
+.home-row:after {
   content: '';
   display: table;
   clear: both;

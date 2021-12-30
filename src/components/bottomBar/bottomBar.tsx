@@ -16,49 +16,49 @@ const BottomBar = () => {
       <div className='left-group inline'>
         <BarItem link='https://github.com/DCS77/strategy' newTab>
           <span className='wide-screen'>
-            <span className='inline flex-center bar-spaced'><GithubLogo />{t('Github')}</span>
+            <span className='inline flex-centre bar-spaced'><GithubLogo />{t('Github')}</span>
           </span>
           <span className='narrow-screen'>
-            <span className='inline flex-center'><GithubLogo />{t('Github')}</span>
+            <span className='inline flex-centre'><GithubLogo />{t('Github')}</span>
           </span>
         </BarItem>
         <BarItem to='/contact'>
           <span className='wide-screen'>
-            <span className='inline flex-center bar-spaced'><UserRectangle />{t('Contact')}</span>
+            <span className='inline flex-centre bar-spaced'><UserRectangle />{t('Contact')}</span>
           </span>
           <span className='narrow-screen'>
-            <span className='inline flex-center'><UserRectangle />{t('Contact')}</span>
+            <span className='inline flex-centre'><UserRectangle />{t('Contact')}</span>
           </span>
         </BarItem>
         <BarItem to='/donate'>
           <span className='wide-screen'>
-            <span className='inline flex-center bar-spaced'><CurrencyCircleDollar />{t('Donate')}</span>
+            <span className='inline flex-centre bar-spaced'><CurrencyCircleDollar />{t('Donate')}</span>
           </span>
           <span className='narrow-screen'>
-            <span className='inline flex-center'><CurrencyCircleDollar />{t('Donate')}</span>
+            <span className='inline flex-centre'><CurrencyCircleDollar />{t('Donate')}</span>
           </span>
         </BarItem>
       </div>
       <div className='right-group inline'>
         <BarItem to='/terms'>
           <span className='wide-screen'>
-            <span className='inline flex-center bar-spaced'><Scales />{t('Terms of Use')}</span>
+            <span className='inline flex-centre bar-spaced'><Scales />{t('Terms of Use')}</span>
           </span>
           <span className='narrow-screen'>
-            <span className='inline flex-center'><Scales />{t('Terms of Use')}</span>
+            <span className='inline flex-centre'><Scales />{t('Terms of Use')}</span>
           </span>
         </BarItem>
         <BarItem to='/privacy'>
           <span className='wide-screen'>
-            <span className='inline flex-center bar-spaced'><Cookie />{t('Privacy')}</span>
+            <span className='inline flex-centre bar-spaced'><Cookie />{t('Privacy')}</span>
           </span>
           <span className='narrow-screen'>
-            <span className='inline flex-center'><Cookie />{t('Privacy')}</span>
+            <span className='inline flex-centre'><Cookie />{t('Privacy')}</span>
           </span>
         </BarItem>
         <BarItem>
           <span className='wide-screen'>
-            <span className='inline flex-center bar-spaced'><Copyright />Daniel Smit 2021</span>
+            <span className='inline flex-centre bar-spaced'><Copyright />Daniel Smit 2021</span>
           </span>
         </BarItem>
       </div>

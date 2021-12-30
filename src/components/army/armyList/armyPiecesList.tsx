@@ -8,7 +8,7 @@ const ArmyOverviewSection = (army: ArmyType) => {
   return (
     <div key={id}>
       <span className='padding-left'>{name}</span>
-      <div className='armyContainer'>
+      <div className='army-container'>
         <ArmyPieceCounts pieces={pieces} id={id} />
       </div>
       <br />

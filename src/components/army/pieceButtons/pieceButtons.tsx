@@ -19,42 +19,42 @@ const PieceButtons = (Props: PieceButtonsProps) => {
     <>
       <h3>Pieces</h3>
       <BarItem largeButtons mouseUpHandler={() => selectPiece(PieceType.adventurer)}>
-        <span className='inline flex-center all-spaced'>
+        <span className='inline flex-centre all-spaced'>
           <PersonSimpleWalk />
           {' '}
           {t('Adventurer')}
         </span>
       </BarItem>
       <BarItem largeButtons mouseUpHandler={() => selectPiece(PieceType.commoner)}>
-        <span className='inline flex-center all-spaced'>
+        <span className='inline flex-centre all-spaced'>
           <Storefront />
           {' '}
           {t('Commoner')}
         </span>
       </BarItem>
       <BarItem largeButtons mouseUpHandler={() => selectPiece(PieceType.engineer)}>
-        <span className='inline flex-center all-spaced'>
+        <span className='inline flex-centre all-spaced'>
           <Wall />
           {' '}
           {t('Engineer')}
         </span>
       </BarItem>
       <BarItem largeButtons mouseUpHandler={() => selectPiece(PieceType.knight)}>
-        <span className='inline flex-center all-spaced'>
+        <span className='inline flex-centre all-spaced'>
           <Sword />
           {' '}
           {t('Knight')}
         </span>
       </BarItem>
       <BarItem largeButtons mouseUpHandler={() => selectPiece(PieceType.messenger)}>
-        <span className='inline flex-center all-spaced'>
+        <span className='inline flex-centre all-spaced'>
           <EnvelopeSimple />
           {' '}
           {t('Messenger')}
         </span>
       </BarItem>
       <BarItem largeButtons mouseUpHandler={() => selectPiece(PieceType.smuggler)}>
-        <span className='inline flex-center all-spaced'>
+        <span className='inline flex-centre all-spaced'>
           <Jeep />
           {' '}
           {t('Smuggler')}

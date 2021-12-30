@@ -39,14 +39,6 @@
   transition: .2s;
 }
 
-/* input:checked + .slider {
-  background-color: #d47a26;
-}
-
-input:focus + .slider {
-  box-shadow: 0 0 1px #d47a26;
-} */
-
 input:checked + .slider:before {
   -webkit-transform: translateX(12px);
   -ms-transform: translateX(12px);

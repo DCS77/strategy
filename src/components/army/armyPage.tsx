@@ -54,25 +54,25 @@ const WideArmyPageView = (Props: ViewProps) => {
     children, ShowCreateArmyPage, ShowHomePage, state, t,
   } = Props;
   return (
-    <div className='full-size gameRow'>
-      <div className='leftColumn'>
-        <div className='navSection'>
+    <div className='full-size game-row'>
+      <div className='left-column'>
+        <div className='nav-section'>
           <NavigationList />
         </div>
-        <div className='selectTeam'>
+        <div className='select-team'>
           <BarItem mouseUpHandler={ShowHomePage}>{t('Your Armies')}</BarItem>
           <ArmyList armies={state.userArmies} />
           <BarItem mouseUpHandler={ShowCreateArmyPage}><Plus /></BarItem>
         </div>
       </div>
-      <div className='armyColumn'>
+      <div className='army-column'>
         {children}
       </div>
-      <div className='rightColumn'>
-        <div className='actionSection'>
+      <div className='right-column'>
+        <div className='action-section'>
           {t('Actions')}
         </div>
-        <div className='chatSection'>
+        <div className='chat-section'>
           {t('Chat')}
         </div>
       </div>

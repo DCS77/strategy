@@ -25,12 +25,12 @@ const NarrowHomeView = (Props: ViewProps) => {
 const WideHomeView = (Props: ViewProps) => {
   const { t } = Props;
   return (
-    <div className='full-size homeRow'>
-      <div className='navigationColumn'>
+    <div className='full-size home-row'>
+      <div className='navigation-column'>
         <NavigationList />
       </div>
-      <div className='centerColumn'>{t('News and Updates')}</div>
-      <div className='chatColumn'>{t('Chat')}</div>
+      <div className='center-column'>{t('News and Updates')}</div>
+      <div className='chat-column'>{t('Chat')}</div>
     </div>
   );
 };

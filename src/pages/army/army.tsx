@@ -36,7 +36,7 @@ const ViewArmy = (Props: ViewArmyProps) => {
   return (
     <>
       <span className='heading-input padding-left'>{army.name}</span>
-      <div className='armyContainer'>
+      <div className='army-container'>
         <ArmyPieceCounts pieces={army.pieces} id={army.id} />
       </div>
     </>

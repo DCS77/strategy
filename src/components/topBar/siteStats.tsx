@@ -13,14 +13,14 @@ const SiteStats = () => {
   return (
     <span className='centre-group inline'>
       <BarItem to='/tv'>
-        <span className='inline flex-center all-spaced'>
+        <span className='inline flex-centre all-spaced'>
           <Television />
           TV
         </span>
       </BarItem>
       <BarItem to='/online'>
         <span className='wide-screen'>
-          <span className='inline flex-center all-spaced'>
+          <span className='inline flex-centre all-spaced'>
             <UsersFour />
             32
             {' '}
@@ -28,7 +28,7 @@ const SiteStats = () => {
           </span>
         </span>
         <span className='narrow-screen'>
-          <span className='inline flex-center'>
+          <span className='inline flex-centre'>
             <UsersFour />
             32
           </span>
@@ -36,7 +36,7 @@ const SiteStats = () => {
       </BarItem>
       <BarItem to='/live'>
         <span className='wide-screen'>
-          <span className='inline flex-center all-spaced'>
+          <span className='inline flex-centre all-spaced'>
             <Sword />
             8
             {' '}
@@ -44,14 +44,14 @@ const SiteStats = () => {
           </span>
         </span>
         <span className='narrow-screen'>
-          <span className='inline flex-center'>
+          <span className='inline flex-centre'>
             <Sword />
             8
           </span>
         </span>
       </BarItem>
       <BarItem to='/play'>
-        <span className='inline flex-center all-spaced'>
+        <span className='inline flex-centre all-spaced'>
           <Users />
           {t('Play')}
         </span>

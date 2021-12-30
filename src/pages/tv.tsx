@@ -35,20 +35,20 @@ const NarrowTVView = (Props: ViewProps) => {
 const WideTVView = (Props: ViewProps) => {
   const { t } = Props;
   return (
-    <div className='full-size gameRow'>
-      <div className='leftColumn'>
-        <div className='navSection'>
+    <div className='full-size game-row'>
+      <div className='left-column'>
+        <div className='nav-section'>
           <NavigationList />
         </div>
-        <div className='moveHistory'>
+        <div className='move-history'>
           {t('Move History')}
         </div>
       </div>
-      <div className='boardColumn'>
+      <div className='board-column'>
         <Board />
       </div>
-      <div className='rightColumn'>
-        <div className='chatSection'>
+      <div className='right-column'>
+        <div className='chat-section'>
           {t('Chat')}
         </div>
       </div>

@@ -23,7 +23,7 @@ const PieceDescription = (Props: PieceDescriptionProps) => {
           <p><b>{t('Speed')}</b> 3 <i>(cells per turn)</i></p>
           <p><b>{t('Abilities')} </b> No special abilities.</p>
           <BarItem largeButtons standout mouseUpHandler={() => addPiece(PieceType.adventurer)}>
-            <span className='inline flex-center all-spaced'>{t('Add')} (6{t('points')})</span>
+            <span className='inline flex-centre all-spaced'>{t('Add')} (6{t('points')})</span>
           </BarItem>
         </div>
       );
@@ -39,7 +39,7 @@ const PieceDescription = (Props: PieceDescriptionProps) => {
           <p>A battle only occurs when a non-commoner piece of yours enters the cell.</p>
           <p>Additonally, commoners return to your piece pool after losing a battle.</p>
           <BarItem largeButtons standout mouseUpHandler={() => addPiece(PieceType.commoner)}>
-            <span className='inline flex-center all-spaced'>{t('Add')} (1 {t('point')})</span>
+            <span className='inline flex-centre all-spaced'>{t('Add')} (1 {t('point')})</span>
           </BarItem>
         </div>
       );
@@ -56,7 +56,7 @@ const PieceDescription = (Props: PieceDescriptionProps) => {
           <p>Enemy pieces are also strength 1 while on cells with a wall of yours.</p>
           <p>They are expended after building a wall.</p>
           <BarItem largeButtons standout mouseUpHandler={() => addPiece(PieceType.engineer)}>
-            <span className='inline flex-center all-spaced'>{t('Add')} (4{t('points')})</span>
+            <span className='inline flex-centre all-spaced'>{t('Add')} (4{t('points')})</span>
           </BarItem>
         </div>
       );
@@ -69,7 +69,7 @@ const PieceDescription = (Props: PieceDescriptionProps) => {
           <p><b>{t('Speed')}</b> 3 <i>(cells per turn)</i></p>
           <p><b>{t('Abilities')} </b>No special abilities.</p>
           <BarItem largeButtons standout mouseUpHandler={() => addPiece(PieceType.knight)}>
-            <span className='inline flex-center all-spaced'>{t('Add')} (8{t('points')})</span>
+            <span className='inline flex-centre all-spaced'>{t('Add')} (8{t('points')})</span>
           </BarItem>
         </div>
       );
@@ -82,7 +82,7 @@ const PieceDescription = (Props: PieceDescriptionProps) => {
           <p><b>{t('Speed')}</b> 4 <i>(cells per turn)</i></p>
           <p><b>{t('Abilities')} </b>No special abilities.</p>
           <BarItem largeButtons standout mouseUpHandler={() => addPiece(PieceType.messenger)}>
-            <span className='inline flex-center all-spaced'>{t('Add')} (2{t('points')})</span>
+            <span className='inline flex-centre all-spaced'>{t('Add')} (2{t('points')})</span>
           </BarItem>
         </div>
       );
@@ -99,7 +99,7 @@ const PieceDescription = (Props: PieceDescriptionProps) => {
           </p>
           <p>Pieces sharing a cell with their smuggler all have strength 1.</p>
           <BarItem largeButtons standout mouseUpHandler={() => addPiece(PieceType.smuggler)}>
-            <span className='inline flex-center all-spaced'>{t('Add')} (8{t('points')})</span>
+            <span className='inline flex-centre all-spaced'>{t('Add')} (8{t('points')})</span>
           </BarItem>
         </div>
       );

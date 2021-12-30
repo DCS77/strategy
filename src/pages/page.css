@@ -1,16 +1,16 @@
-.leftColumn {
+.left-column {
   float: left;
   width: 20%;
   min-height: calc(100vh - var(--used-space-height));
 }
 
-.boardColumn {
+.board-column {
   float: left;
   width: 60%;
   min-height: calc(100vh - var(--used-space-height));
 }
 
-.learnColumn {
+.learn-column {
   float: left;
   width: 60%;
   min-height: calc(100vh - var(--used-space-height));
@@ -18,7 +18,7 @@
   overflow: scroll;
 }
 
-.armyColumn {
+.army-column {
   float: left;
   width: 60%;
   min-height: calc(100vh - var(--used-space-height));
@@ -26,71 +26,71 @@
   overflow: scroll;
 }
 
-.rightColumn {
+.right-column {
   float: left;
   width: 20%;
   min-height: calc(100vh - var(--used-space-height));
 }
 
-.gameRow:after {
+.game-row:after {
   content: '';
   display: table;
   clear: both;
 }
 
-.navSection {
+.nav-section {
   min-height: calc(40vh - var(--used-space-height));
   max-height: calc(40vh - var(--used-space-height));
   overflow: scroll;
 }
 
-.moveHistory {
+.move-history {
   min-height: calc(60vh - var(--used-space-height));
   max-height: calc(60vh - var(--used-space-height));
   overflow: scroll;
 }
 
-.opponentSection {
+.opponent-section {
   min-height: calc(40vh - var(--used-space-height));
   max-height: calc(40vh - var(--used-space-height));
   overflow: scroll;
 }
 
-.chatSection {
+.chat-section {
   min-height: calc(60vh - var(--used-space-height));
   max-height: calc(60vh - var(--used-space-height));
   overflow: scroll;
 }
 
-.selectLesson {
+.select-lesson {
   min-height: calc(60vh - var(--used-space-height));
   max-height: calc(60vh - var(--used-space-height));
   overflow: scroll;
 }
 
-.selectTeam {
+.select-team {
   min-height: calc(60vh - var(--used-space-height));
   max-height: calc(60vh - var(--used-space-height));
   overflow: scroll;
 }
 
-.actionSection {
+.action-section {
   min-height: calc(40vh - var(--used-space-height));
   max-height: calc(40vh - var(--used-space-height));
   overflow: scroll;
 }
 
-.column30 {
+.column-30 {
   float: left;
   width: 30%;
 }
 
-.column70 {
+.column-70 {
   float: left;
   width: 70%;
 }
 
-.pieceRow:after {
+.piece-row:after {
   content: "";
   display: table;
   clear: both;
@@ -109,21 +109,25 @@
   margin-bottom: 30px;
 }
 
-.armyContainer {
+.army-container {
   background-color: var(--army-container-color);
   padding: 10px;
   margin: 10px;
   overflow-x: scroll;
 }
 
-.pieceContainer {
+.piece-container {
   background-color: var(--piece-container-color);
   padding: 5px;
   margin: 5px;
   height: 20px;
 }
 
-.narrowPieceContainer {
+.piece-container:hover {
+  background-color: var(--piece-container-color-tint);
+}
+
+.narrow-piece-container {
   background-color: var(--piece-container-color);
   padding-top: 5px;
   padding-bottom: 5px;
@@ -136,7 +140,11 @@
   height: 20px;
 }
 
-.pieceCounts {
+.narrow-piece-container:hover {
+  background-color: var(--piece-container-color-tint);
+}
+
+.piece-counts {
   display: flex;
   white-space: nowrap;
   width: 100%;

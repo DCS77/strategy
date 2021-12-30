@@ -23,14 +23,14 @@ const ArmyPieceCount = (Props: ArmyPieceCountProps) => {
   return (
     <BarItem mouseUpHandler={removePiece ? () => removePiece(piece.type) : undefined} disableStyle>
       <span className='wide-screen'>
-        <span title={piece.type} className='bar-spaced pieceContainer'>
+        <span title={piece.type} className='bar-spaced piece-container'>
           {PieceIcon(piece.type)}
           {' '}
           {piece.count}
         </span>
       </span>
       <span className='narrow-screen'>
-        <span title={piece.type} className='bar-spaced narrowPieceContainer'>
+        <span title={piece.type} className='bar-spaced narrow-piece-container'>
           {PieceIcon(piece.type)}
           {' '}
           {piece.count}
@@ -61,7 +61,7 @@ const SaveButton = (Props: SaveProps) => {
   if (saveArmy) {
     return (
       <BarItem mouseUpHandler={() => SaveArmy(Props)} disableStyle>
-        <span className='pieceContainer'>{saveText}</span>
+        <span className='piece-container'>{saveText}</span>
       </BarItem>
     );
   }
@@ -85,7 +85,7 @@ const DeleteButton = (Props: DeleteProps) => {
   if (id && deleteArmy) {
     return (
       <BarItem mouseUpHandler={() => DeleteArmy(Props)} disableStyle>
-        <span className='pieceContainer'>Delete</span>
+        <span className='piece-container'>Delete</span>
       </BarItem>
     );
   }
@@ -116,7 +116,7 @@ export const ArmyPieceCounts = (Props: ArmyPiecesProps) => {
   }
 
   return (
-    <span className='pieceCounts'>
+    <span className='piece-counts'>
       <span className='left-group scroll-x'>
         { pieces.map((piece: Piece) => (
           <ArmyPieceCount
@@ -128,7 +128,7 @@ export const ArmyPieceCounts = (Props: ArmyPiecesProps) => {
       </span>
       <span className='right-group'>
         <BarItem mouseUpHandler={() => CopyPiecesToClipboard(pieces)} disableStyle>
-          <span className='pieceContainer'>{copyText}</span>
+          <span className='piece-container'>{copyText}</span>
         </BarItem>
         <SaveButton id={id} pieces={pieces} saveArmy={saveArmy} saveText={saveText} updateSaveText={updateSaveText} />
         <DeleteButton id={id} deleteArmy={deleteArmy} />

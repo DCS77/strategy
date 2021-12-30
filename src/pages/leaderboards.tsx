@@ -43,29 +43,29 @@ const NarrowLeaderboardsView = (Props: ViewProps) => {
 const WideLeaderboardsView = (Props: ViewProps) => {
   const { t } = Props;
   return (
-    <div className='full-size gameRow'>
-      <div className='leftColumn'>
-        <div className='navSection'>
+    <div className='full-size game-row'>
+      <div className='left-column'>
+        <div className='nav-section'>
           <NavigationList />
         </div>
-        <div className='selectTeam'>
+        <div className='select-team'>
           {t('Historic Leaderboards')}
           <br />
           Clicking history leaderboard opens in new tab to allow comparison?
         </div>
       </div>
-      <div className='learnColumn'>
+      <div className='learn-column'>
         {t('Leaderboards')}
         <br />
         CountryFlag, Name, Wins, Draws, Losses, Points
       </div>
-      <div className='rightColumn'>
-        <div className='actionSection'>
+      <div className='right-column'>
+        <div className='action-section'>
           {t('Player Details')}
           <br />
           e.g. View teams, follow (see team updates), request game
         </div>
-        <div className='chatSection'>
+        <div className='chat-section'>
           {t('Chat')}
         </div>
       </div>

@@ -34,23 +34,23 @@ const NarrowLearnView = (Props: ViewProps) => {
 const WideLearnView = (Props: ViewProps) => {
   const { t } = Props;
   return (
-    <div className='full-size gameRow'>
-      <div className='leftColumn'>
-        <div className='navSection'>
+    <div className='full-size game-row'>
+      <div className='left-column'>
+        <div className='nav-section'>
           <NavigationList />
         </div>
-        <div className='selectLesson'>
+        <div className='select-lesson'>
           {t('Select a lesson')}
         </div>
       </div>
-      <div className='learnColumn'>
+      <div className='learn-column'>
         Text for selected lesson
       </div>
-      <div className='rightColumn'>
-        <div className='actionSection'>
+      <div className='right-column'>
+        <div className='action-section'>
           {t('Actions')}
         </div>
-        <div className='chatSection'>
+        <div className='chat-section'>
           {t('Chat')}
         </div>
       </div>

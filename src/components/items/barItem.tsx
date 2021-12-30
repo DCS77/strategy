@@ -10,6 +10,7 @@ interface BarItemProps {
   newTab?: boolean;
   tabItem?: boolean;
   largeButtons?: boolean;
+  narrowCentred?: boolean;
   standout?: boolean;
   disableStyle?: boolean;
   children: React.ReactNode;
@@ -55,7 +56,7 @@ const ItemLink = (Props: LinkProps) => {
 
 const BarItem = (Props: BarItemProps) => {
   const {
-    children, disableStyle, icon, inline, largeButtons, link,
+    children, disableStyle, icon, inline, narrowCentred, largeButtons, link,
     mouseDownHandler, mouseUpHandler, onBlur, newTab, standout, tabItem, to,
   } = Props;
 
@@ -79,6 +80,7 @@ const BarItem = (Props: BarItemProps) => {
                             ${inline ? '' : 'item'}
                             ${tabItem ? 'tab-item' : ''}
                             ${largeButtons ? 'large-buttons' : ''}
+                            ${narrowCentred ? 'nav-bar-settings' : ''}
                             ${standout ? 'standout-bar-item' : ''}`}
         >
           {icon ? (<img src={icon} alt='icon' />) : null}

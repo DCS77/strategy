@@ -48,23 +48,23 @@ const NarrowShowGameView = (Props: ShowGameViewProps) => {
 const WideShowGameView = (Props: ShowGameViewProps) => {
   const { t } = Props;
   return (
-    <div className='full-size gameRow'>
-      <div className='leftColumn'>
-        <div className='navSection'>
+    <div className='full-size game-row'>
+      <div className='left-column'>
+        <div className='nav-section'>
           <NavigationList />
         </div>
-        <div className='moveHistory'>
+        <div className='move-history'>
           {t('Move History')}
         </div>
       </div>
-      <div className='boardColumn'>
+      <div className='board-column'>
         <Board />
       </div>
-      <div className='rightColumn'>
-        <div className='opponentSection'>
+      <div className='right-column'>
+        <div className='opponent-section'>
           {t('Opponent Details')}
         </div>
-        <div className='chatSection'>
+        <div className='chat-section'>
           {t('Chat')}
         </div>
       </div>
@@ -107,18 +107,18 @@ const NarrowPlayView = (Props: ViewProps) => {
 const WidePlayView = (Props: ViewProps) => {
   const { SearchForGame, t } = Props;
   return (
-    <div className='full-size gameRow'>
-      <div className='leftColumn'>
+    <div className='full-size game-row'>
+      <div className='left-column'>
         <NavigationList />
       </div>
-      <div className='boardColumn'>
+      <div className='board-column'>
         Create a new game
         <button type='button' onClick={SearchForGame}>
           Add game tab
         </button>
         Games being searched for
       </div>
-      <div className='rightColumn'>
+      <div className='right-column'>
         {t('Chat')}
       </div>
     </div>

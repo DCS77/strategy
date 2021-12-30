@@ -11,52 +11,52 @@ const NavigationList = () => {
 
   return (
     <div>
-      <BarItem to='/tv' newTab>
+      <BarItem to='/tv' newTab narrowCentred>
         <span className='wide-screen'>
-          <span className='inline flex-center all-spaced'><Television />{t('Arena TV')}</span>
+          <span className='inline flex-centre all-spaced'><Television />{t('Arena TV')}</span>
         </span>
         <span className='narrow-screen'>
-          <span className='inline flex-center'><Television /></span>
+          <span className='inline flex-centre'><Television /></span>
         </span>
       </BarItem>
-      <BarItem to='/play' newTab>
+      <BarItem to='/play' newTab narrowCentred>
         <span className='wide-screen'>
-          <span className='inline flex-center all-spaced'><Users />{t('Multiplayer')}</span>
+          <span className='inline flex-centre all-spaced'><Users />{t('Multiplayer')}</span>
         </span>
         <span className='narrow-screen'>
-          <span className='inline flex-center'><Users /></span>
+          <span className='inline flex-centre'><Users /></span>
         </span>
       </BarItem>
-      <BarItem to='/ai' newTab>
+      <BarItem to='/ai' newTab narrowCentred>
         <span className='wide-screen'>
-          <span className='inline flex-center all-spaced'><Cpu />{t('Play AI')}</span>
+          <span className='inline flex-centre all-spaced'><Cpu />{t('Play AI')}</span>
         </span>
         <span className='narrow-screen'>
-          <span className='inline flex-center'><Cpu /></span>
+          <span className='inline flex-centre'><Cpu /></span>
         </span>
       </BarItem>
-      <BarItem to='/learn' newTab>
+      <BarItem to='/learn' newTab narrowCentred>
         <span className='wide-screen'>
-          <span className='inline flex-center all-spaced'><Books />{t('Learn to play')}</span>
+          <span className='inline flex-centre all-spaced'><Books />{t('Learn to play')}</span>
         </span>
         <span className='narrow-screen'>
-          <span className='inline flex-center'><Books /></span>
+          <span className='inline flex-centre'><Books /></span>
         </span>
       </BarItem>
-      <BarItem to='/army' newTab>
+      <BarItem to='/army' newTab narrowCentred>
         <span className='wide-screen'>
-          <span className='inline flex-center all-spaced'><Horse />{t('Your Army')}</span>
+          <span className='inline flex-centre all-spaced'><Horse />{t('Your Army')}</span>
         </span>
         <span className='narrow-screen'>
-          <span className='inline flex-center'><Horse /></span>
+          <span className='inline flex-centre'><Horse /></span>
         </span>
       </BarItem>
-      <BarItem to='/leaderboards' newTab>
+      <BarItem to='/leaderboards' newTab narrowCentred>
         <span className='wide-screen'>
-          <span className='inline flex-center all-spaced'><Trophy />{t('Leaderboards')}</span>
+          <span className='inline flex-centre all-spaced'><Trophy />{t('Leaderboards')}</span>
         </span>
         <span className='narrow-screen'>
-          <span className='inline flex-center'><Trophy /></span>
+          <span className='inline flex-centre'><Trophy /></span>
         </span>
       </BarItem>
     </div>

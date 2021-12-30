@@ -158,7 +158,7 @@ const CreatePage = (Props: CreatePageProps) => {
         {t('SelectPiecesUse50Points')}
       </div>
 
-      <div className='pieceRow'>
+      <div className='piece-row'>
         <br />
         <div>
           <input
@@ -168,7 +168,7 @@ const CreatePage = (Props: CreatePageProps) => {
             ref={armyName}
           />
           <h3 className='padding-left'>{tc('PointsRemaining', points)}</h3>
-          <div className='armyContainer'>
+          <div className='army-container'>
             <ArmyPieceCounts
               id={armyID}
               pieces={pieces}
@@ -179,10 +179,10 @@ const CreatePage = (Props: CreatePageProps) => {
           </div>
         </div>
         <br />
-        <div className='column30'>
+        <div className='column-30'>
           <PieceButtons selectPiece={SelectPiece} />
         </div>
-        <div className='column70'>
+        <div className='column-70'>
           <PieceDescription
             type={selectedPiece}
             addPiece={(type: PieceType) => AddPiece(points, pieces, type, UpdateArmyPiecePoints)}

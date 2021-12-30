@@ -34,14 +34,14 @@ const Settings = (Props: SettingsProps) => {
     <>
       <BarItem mouseUpHandler={onLanguageMouseUp} mouseDownHandler={onLanguageMouseDown}>
         <span className='wide-screen'>
-          <span className='inline flex-center bar-spaced'><Translate /></span>
+          <span className='inline flex-centre bar-spaced'><Translate /></span>
         </span>
         <span className='narrow-screen'>
-          <span className='inline flex-center'><Translate /></span>
+          <span className='inline flex-centre'><Translate /></span>
         </span>
       </BarItem>
       <BarItem>
-        <span className='wide-screen inline flex-center bar-spaced'>
+        <span className='wide-screen inline flex-centre bar-spaced'>
           <PaintRoller />
           <Switch
             alt='Change theme'
@@ -52,13 +52,13 @@ const Settings = (Props: SettingsProps) => {
       </BarItem>
       <BarItem mouseUpHandler={onAccountMouseUp} mouseDownHandler={onAccountMouseDown}>
         <span className='wide-screen bar-spaced'>
-          <span className='inline flex-center bar-spaced'>
+          <span className='inline flex-centre bar-spaced'>
             {t('Account')}
             <CaretDown />
           </span>
         </span>
         <span className='narrow-screen'>
-          <span className='inline flex-center'>
+          <span className='inline flex-centre'>
             <User />
             <CaretDown />
           </span>
