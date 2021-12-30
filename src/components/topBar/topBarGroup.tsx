@@ -7,18 +7,18 @@ import '../../App.css';
 
 const TopBarGroup = () => {
   const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
-  const [accountDropdownClass, setAccountDropdownClass] = useState('passero hidden');
+  const [accountDropdownClass, setAccountDropdownClass] = useState('hidden');
   const [accountMouseDown, setAccountMouseDown] = useState(false);
   const accountDropdown = useRef<HTMLDivElement>(null);
 
   const [languageDropdownVisible, setLanguageDropdownVisible] = useState(false);
-  const [languageDropdownClass, setLanguageDropdownClass] = useState('passero hidden');
+  const [languageDropdownClass, setLanguageDropdownClass] = useState('hidden');
   const [languageMouseDown, setLanguageMouseDown] = useState(false);
   const languageDropdown = useRef<HTMLDivElement>(null);
 
   function ToggleAccountDropdown(visible: boolean) {
     setAccountDropdownVisible(visible);
-    setAccountDropdownClass(visible ? 'passero' : 'passero hidden');
+    setAccountDropdownClass(visible ? '' : 'hidden');
     if (visible && accountDropdown.current !== null) {
       accountDropdown.current.focus();
     }
@@ -45,7 +45,7 @@ const TopBarGroup = () => {
 
   function ToggleLanguageDropdown(visible: boolean) {
     setLanguageDropdownVisible(visible);
-    setLanguageDropdownClass(visible ? 'passero' : 'passero hidden');
+    setLanguageDropdownClass(visible ? '' : 'hidden');
     if (visible && languageDropdown.current !== null) {
       languageDropdown.current.focus();
     }

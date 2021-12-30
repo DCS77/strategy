@@ -56,7 +56,7 @@ const GameTabBar = (Props: GameTabBarProps) => {
 
   return (
     <div ref={ref}>
-      <div className='game-tab-bar passero'>
+      <div className='game-tab-bar'>
         <div className='game-tab-bar-inner'>
           <TabList ready={isReady} onHeightChange={onHeightChange} />
         </div>

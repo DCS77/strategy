@@ -12,7 +12,7 @@ const BottomBar = () => {
   const { t } = useTranslation('translation', { i18n });
 
   return (
-    <div className='footer passero inline'>
+    <div className='footer inline'>
       <div className='left-group inline'>
         <BarItem link='https://github.com/DCS77/strategy' newTab>
           <span className='wide-screen'>

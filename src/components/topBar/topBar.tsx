@@ -20,7 +20,7 @@ const TopBar = (Props: TopBarProps) => {
   } = Props;
 
   return (
-    <div className={`header passero theme-${state.pageLayout.theme}`}>
+    <div className={`header theme-${state.pageLayout.theme}`}>
       <span className='left-group'><SiteIdentity /></span>
       <span className='centre-group'><SiteStats /></span>
       <span className='right-group'>

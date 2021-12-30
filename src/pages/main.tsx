@@ -56,7 +56,7 @@ const Main = () => {
     <div
       ref={app}
       id='theme'
-      className={`flex-full transition theme-${state.pageLayout.theme} game-tab-bar-${gameTabBarSize}`}
+      className={`baloo flex-full transition theme-${state.pageLayout.theme} game-tab-bar-${gameTabBarSize}`}
     >
       <TopBarGroup />
       <div id='page' className='page'>

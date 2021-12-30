@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Passero+One');
+@import url('https://fonts.googleapis.com/css?family=Baloo+2');
 
 .transition > * {
   -webkit-transition: all .2s ease-out;
@@ -94,6 +94,11 @@ input {
   border: none;
 }
 
+.top-bar-logo {
+  height: 12px;
+  padding: 2px;
+}
+
 .heading-input {
   color: var(--font-color);
   font-size: 24px;
@@ -142,8 +147,8 @@ a:hover > * {
   color: var(--font-color);
 }
 
-.passero {
-  font-family: 'Passero One', regular;
+.baloo {
+  font-family: 'Baloo 2', regular;
 }
 
 .narrow-dimensions {

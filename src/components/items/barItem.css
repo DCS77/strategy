@@ -13,7 +13,6 @@
 
 img {
   height: var(--bar-height);
-  filter: var(--svg-filter);
 }
 
 .large-buttons {

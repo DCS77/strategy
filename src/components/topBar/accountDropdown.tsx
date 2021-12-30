@@ -20,7 +20,7 @@ const AccountDropdownMenu = (Props: AccountDropdownProps) => {
   function ClickLogout() { onClickAnyItem(); }
 
   return (
-    <div className='dropdown-menu passero'>
+    <div className='dropdown-menu'>
       <BarItem onBlur={onBlur} mouseUpHandler={ClickLogin}>{t('Login')}</BarItem>
       <BarItem onBlur={onBlur} mouseUpHandler={ClickRegister}>{t('Register')}</BarItem>
       <BarItem onBlur={onBlur} mouseUpHandler={ClickProfile}>{t('Profile')}</BarItem>

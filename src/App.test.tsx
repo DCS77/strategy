@@ -9,25 +9,25 @@ declare global {
        document: Document;
        window: Window;
        navigator: Navigator;
-    } 
+    }
   }
 }
 
 jest.mock('use-resize-observer', () => () => ({
   __esModule: true,
   default: jest.fn().mockImplementation(() => ({
-      observe: jest.fn(),
-      unobserve: jest.fn(),
-      disconnect: jest.fn(),
+    observe: jest.fn(),
+    unobserve: jest.fn(),
+    disconnect: jest.fn(),
   })),
 }));
 
-test('renders Strategy Game Site', () => {
+test('renders ReadyCompete', () => {
   render(
     <BrowserRouter>
       <App />
-    </BrowserRouter>
+    </BrowserRouter>,
   );
-  const linkElement = screen.getByText(/Strategy Game Site/i);
+  const linkElement = screen.getByText(/ReadyCompete/i);
   expect(linkElement).toBeInTheDocument();
 });

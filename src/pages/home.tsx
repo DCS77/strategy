@@ -3,6 +3,7 @@ import './home.css';
 import '../App.css';
 import { useTranslation } from 'react-i18next';
 import NavigationList from '../components/navigation/navigationList';
+import Logo from '../images/rc.svg';
 import i18n from '../i18nextConf';
 
 interface ViewProps {
@@ -16,7 +17,12 @@ const NarrowHomeView = (Props: ViewProps) => {
       <div className='nav-bar-horizontal vertical-padding-top vertical-padding-bottom'>
         <NavigationList />
       </div>
-      <div className='vertical-padding-bottom'>{t('News and Updates')}</div>
+      <div className='vertical-padding-bottom'>
+        <span className='home-logo-container'>
+          <img src={Logo} alt='icon' className='home-logo' />
+        </span>
+        {t('News and Updates')}
+      </div>
       <div className='vertical-padding-bottom'>{t('Chat')}</div>
     </>
   );
@@ -29,7 +35,14 @@ const WideHomeView = (Props: ViewProps) => {
       <div className='navigation-column'>
         <NavigationList />
       </div>
-      <div className='center-column'>{t('News and Updates')}</div>
+      <div className='center-column'>
+        <p>
+          <span className='home-logo-container'>
+            <img src={Logo} alt='icon' className='home-logo' />
+          </span>
+        </p>
+        {t('News and Updates')}
+      </div>
       <div className='chat-column'>{t('Chat')}</div>
     </div>
   );

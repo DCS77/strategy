@@ -28,7 +28,7 @@ const LanguageDropdownMenu = (Props: LanguageDropdownProps) => {
   function SelectCantonese() { i18n.changeLanguage('zh-yue'); onClickAnyItem(); }
 
   return (
-    <div className='dropdown-menu passero'>
+    <div className='dropdown-menu'>
       <BarItem onBlur={onBlur} mouseUpHandler={SelectEnglish}>English</BarItem>
       <BarItem onBlur={onBlur} mouseUpHandler={SelectGerman}>Deutsch (German)</BarItem>
       <BarItem onBlur={onBlur} mouseUpHandler={SelectFrench}>Française (French)</BarItem>

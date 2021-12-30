@@ -1,3 +1,18 @@
+.home-logo-container {
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.home-logo {
+  height: 20vh;
+  justify-content: center;
+  padding: 30px;
+  user-select: none;
+  pointer-events: none;
+}
+
 .left-column {
   float: left;
   width: 20%;

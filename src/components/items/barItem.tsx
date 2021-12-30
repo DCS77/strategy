@@ -4,6 +4,7 @@ import './barItem.css';
 
 interface BarItemProps {
   icon?: string;
+  iconClass?: string;
   to?: string;
   link?: string;
   inline?: boolean;
@@ -56,7 +57,7 @@ const ItemLink = (Props: LinkProps) => {
 
 const BarItem = (Props: BarItemProps) => {
   const {
-    children, disableStyle, icon, inline, narrowCentred, largeButtons, link,
+    children, disableStyle, icon, iconClass, inline, narrowCentred, largeButtons, link,
     mouseDownHandler, mouseUpHandler, onBlur, newTab, standout, tabItem, to,
   } = Props;
 
@@ -83,7 +84,7 @@ const BarItem = (Props: BarItemProps) => {
                             ${narrowCentred ? 'nav-bar-settings' : ''}
                             ${standout ? 'standout-bar-item' : ''}`}
         >
-          {icon ? (<img src={icon} alt='icon' />) : null}
+          {icon ? (<img src={icon} alt='icon' className={iconClass} />) : null}
           {children}
         </span>
       </ItemLink>
