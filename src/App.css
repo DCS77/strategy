@@ -27,7 +27,7 @@
   --standout-bar-color: #999;
   --standout-bar-color-tint: #666;
   --page-color: #ccc;
-  --page-gradient: linear-gradient(#ddd, #eee);
+  --page-gradient: linear-gradient(#eee, #fff);
   --font-color: #000;
   --font-highlighted-color: #ff6600;
   --link-color: #000;
@@ -35,9 +35,9 @@
   --tab-bar-item-color: #ccc;
   --tab-bar-item-highlighted-color: #fff;
   --tab-border-color: #bbb;
-  --army-container-color: #eee;
-  --piece-container-color: #ccc;
-  --piece-container-color-tint: #ddd;
+  --army-container-color: #ddd;
+  --piece-container-color: #bbb;
+  --piece-container-color-tint: #e6e6e6;
   --switch-color: #000;
   --svg-filter: brightness(3) invert(0);
   --bar-height: 22px;
@@ -136,8 +136,9 @@ a:hover > * {
   min-height: 100vh;
   padding-top: var(--bar-height);
   padding-bottom: var(--bar-height);
-  background-image: var(--page-gradient);
-  background-attachment: fixed;
+  background: var(--page-gradient) no-repeat center center fixed;
+  background-size: cover;
+  position: absolute;
   color: var(--font-color);
 }
 
