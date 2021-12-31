@@ -9,7 +9,7 @@ import reportWebVitals from './reportWebVitals';
 import awsExports from './aws-exports';
 
 try {
-  ReactGA.initialize('G-FPCW6J05RM');
+  ReactGA.initialize('UA-216110154-1');
 } catch {
   // Tracking disabled
 }
