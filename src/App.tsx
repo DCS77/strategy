@@ -1,4 +1,5 @@
 import React, { Reducer } from 'react';
+import ReactGA from 'react-ga';
 import { useHistory, withRouter } from 'react-router-dom';
 import { TabDetail } from './types';
 import { Actions, StateProps, StateProvider } from './state/state';
@@ -8,6 +9,14 @@ import './App.css';
 
 const App = () => {
   const history = useHistory();
+
+  React.useEffect(() => {
+    try {
+      ReactGA.pageview(window.location.href);
+    } catch {
+      // Tracking disabled by client
+    }
+  }, [window.location.href]);
 
   const initialState: StateProps = {
     userArmies: [],
