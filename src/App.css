@@ -143,7 +143,6 @@ a:hover > * {
   padding-bottom: var(--bar-height);
   background: var(--page-gradient) no-repeat center center fixed;
   background-size: cover;
-  position: absolute;
   color: var(--font-color);
 }
 
