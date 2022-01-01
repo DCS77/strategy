@@ -125,7 +125,7 @@ const Army = (Props: ArmyProps) => {
       dispatch({
         type: 'addTab',
         value: {
-          id: 'army', path: '/army', title: t('Your Army'), type: TabType.Army,
+          id: 'army', path: '/army', title: t('Your Armies'), type: TabType.Army,
         },
       });
     }

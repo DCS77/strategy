@@ -45,7 +45,7 @@ const NavigationList = () => {
       </BarItem>
       <BarItem to='/army' newTab narrowCentred>
         <span className='wide-screen'>
-          <span className='inline flex-centre all-spaced'><Horse />{t('Your Army')}</span>
+          <span className='inline flex-centre all-spaced'><Horse />{t('Your Armies')}</span>
         </span>
         <span className='narrow-screen'>
           <span className='inline flex-centre'><Horse /></span>

@@ -112,10 +112,10 @@ const WidePlayView = (Props: ViewProps) => {
         <NavigationList />
       </div>
       <div className='board-column'>
-        Create a new game
+        Create a new game<br />
         <button type='button' onClick={SearchForGame}>
           Add game tab
-        </button>
+        </button><br />
         Games being searched for
       </div>
       <div className='right-column'>
