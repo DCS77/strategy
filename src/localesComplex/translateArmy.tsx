@@ -11,7 +11,7 @@ function YouHaveXArmies(numArmies: number) {
     case 'ja':
       if (numArmies === 0) { return 'あなたには軍隊がありません。'; }
       return `${numArmies}${numArmies >= 10 ? '' : 'つ'}の軍隊を持っています。`;
-    default: return '<Missing Translation>';
+    default: return '<Missing Translation - Only English, Spanish or Japanese are currently supported>';
   }
 }
 
@@ -20,7 +20,7 @@ function PointsRemaining(points: number) {
     case 'en': return `${points} points remaining`;
     case 'es': return `Quedan ${points} puntos`;
     case 'ja': return `残り${points}ポイント`;
-    default: return '<Missing Translation>';
+    default: return '<Missing Translation - Only English, Spanish or Japanese are currently supported>';
   }
 }
 

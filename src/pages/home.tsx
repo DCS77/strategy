@@ -10,6 +10,19 @@ interface ViewProps {
   t: any;
 }
 
+const LanguageWarning = () => {
+  if (i18n.language === 'en' || i18n.language === 'es' || i18n.language === 'ja') {
+    return null;
+  }
+  return (
+    <p>
+      Note: Your language is currently set to '{i18n.language}'.
+      Unfortunately, only English (en), Spanish (es) and Japanese (ja) are currently supported.
+      Please change to one of these using the language selector at the top of the page.
+    </p>
+  );
+};
+
 const NarrowHomeView = (Props: ViewProps) => {
   const { t } = Props;
   return (
@@ -22,6 +35,11 @@ const NarrowHomeView = (Props: ViewProps) => {
           <img src={Logo} alt='icon' className='home-logo' />
         </span>
         {t('News and Updates')}
+        <h1>{t('News and Updates')}</h1>
+        This is still in development.<br />
+        Try visiting the Your Armies page to view existing armies or create a new one.<br />
+        The next features include user accounts and the ability to connect players for a game.
+        <LanguageWarning />
       </div>
       <div className='vertical-padding-bottom'>{t('Chat')}</div>
     </>
@@ -41,7 +59,11 @@ const WideHomeView = (Props: ViewProps) => {
             <img src={Logo} alt='icon' className='home-logo' />
           </span>
         </p>
-        {t('News and Updates')}
+        <h1>{t('News and Updates')}</h1>
+        This is still in development.<br />
+        Try visiting the Your Armies page to view existing armies or create a new one.<br />
+        The next features include user accounts and the ability to connect players for a game.
+        <LanguageWarning />
       </div>
       <div className='chat-column'>{t('Chat')}</div>
     </div>
