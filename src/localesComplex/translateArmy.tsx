@@ -1,7 +1,7 @@
 import i18n from '../i18nextConf';
 
 function YouHaveXArmies(numArmies: number) {
-  switch (i18n.language) {
+  switch (i18n.resolvedLanguage) {
     case 'en':
       if (numArmies === 0) { return 'You have no armies yet.'; }
       return `You have ${numArmies} ${numArmies === 1 ? ' army.' : ' armies.'}`;
@@ -16,7 +16,7 @@ function YouHaveXArmies(numArmies: number) {
 }
 
 function PointsRemaining(points: number) {
-  switch (i18n.language) {
+  switch (i18n.resolvedLanguage) {
     case 'en': return `${points} points remaining`;
     case 'es': return `Quedan ${points} puntos`;
     case 'ja': return `残り${points}ポイント`;

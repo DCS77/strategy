@@ -11,7 +11,7 @@ interface ViewProps {
 }
 
 const LanguageWarning = () => {
-  if (i18n.language === 'en' || i18n.language === 'es' || i18n.language === 'ja') {
+  if (i18n.resolvedLanguage === 'en' || i18n.resolvedLanguage === 'es' || i18n.resolvedLanguage === 'ja') {
     return null;
   }
   return (
