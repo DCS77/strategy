@@ -27,6 +27,7 @@
   },
   "rules": {
     "quotes": [2, "single", { "avoidEscape": true }],
+    "import/no-extraneous-dependencies": ["error", {"devDependencies": ["src/global.d.ts", "src/setupTests.ts", "**/*.test.ts", "**/*.test.tsx"]}],
     "jsx-a11y/no-noninteractive-tabindex": "off",
     "jsx-quotes": ["error", "prefer-single"],
     "max-len": ["error", { "code": 120 }],
