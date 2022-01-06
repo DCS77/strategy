@@ -45,7 +45,7 @@ const BottomBar = () => {
             <span className='inline flex-centre bar-spaced'><Scales />{t('Terms of Use')}</span>
           </span>
           <span className='narrow-screen'>
-            <span className='inline flex-centre'><Scales />{t('Terms of Use')}</span>
+            <span className='inline flex-centre'><Scales />{t('Terms')}</span>
           </span>
         </BarItem>
         <BarItem to='/privacy'>
