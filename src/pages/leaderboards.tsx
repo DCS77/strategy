@@ -78,6 +78,7 @@ const Army = () => {
   const { t } = useTranslation('translation', { i18n });
 
   useEffect(() => {
+    document.title = 'RC | Leaderboards: See top rated players';
     dispatch({
       type: 'addTab',
       value: {

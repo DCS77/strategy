@@ -67,6 +67,7 @@ const AI = () => {
   const { t } = useTranslation('translation', { i18n });
 
   useEffect(() => {
+    document.title = 'RC | Play AI';
     dispatch({
       type: 'addTab',
       value: {

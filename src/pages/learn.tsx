@@ -63,6 +63,7 @@ const Learn = () => {
   const { t } = useTranslation('translation', { i18n });
 
   useEffect(() => {
+    document.title = 'RC | Learn to play';
     dispatch({
       type: 'addTab',
       value: {

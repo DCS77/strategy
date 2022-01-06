@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './home.css';
 import '../App.css';
 import { useTranslation } from 'react-i18next';
@@ -72,6 +72,10 @@ const WideHomeView = (Props: ViewProps) => {
 
 const Home = () => {
   const { t } = useTranslation('translation', { i18n });
+
+  useEffect(() => {
+    document.title = 'RC | ReadyCompete Home';
+  });
 
   return (
     <>

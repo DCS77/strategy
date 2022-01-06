@@ -200,6 +200,7 @@ const CreateArmy = (Props: ArmyProps) => {
 
   useEffect(() => {
     if (!army) {
+      document.title = 'RC | Create an army';
       dispatch({
         type: 'addTab',
         value: {
@@ -207,6 +208,7 @@ const CreateArmy = (Props: ArmyProps) => {
         },
       });
     } else {
+      document.title = `RC | Army: ${army.name}`;
       dispatch({
         type: 'addTab',
         value: {

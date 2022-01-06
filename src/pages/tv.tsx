@@ -61,6 +61,7 @@ const TV = () => {
   const { t } = useTranslation('translation', { i18n });
 
   useEffect(() => {
+    document.title = 'RC | Arena TV: Watch top rated games';
     dispatch({
       type: 'addTab',
       value: {

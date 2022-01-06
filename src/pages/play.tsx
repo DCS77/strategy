@@ -138,7 +138,11 @@ const Play = (Props: PlayProps) => {
   }
 
   useEffect(() => {
+  }, []);
+
+  useEffect(() => {
     if (ID) {
+      document.title = `RC | Play Multiplayer: ${ID}`;
       dispatch({
         type: 'addTab',
         value: {
@@ -146,6 +150,7 @@ const Play = (Props: PlayProps) => {
         },
       });
     } else {
+      document.title = 'RC | Play Multiplayer';
       dispatch({
         type: 'addTab',
         value: {

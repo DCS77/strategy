@@ -122,6 +122,7 @@ const Army = (Props: ArmyProps) => {
 
   useEffect(() => {
     if (!ID) {
+      document.title = 'RC | Your Armies: View your armies or create a new one';
       dispatch({
         type: 'addTab',
         value: {
