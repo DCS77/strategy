@@ -1,33 +1,27 @@
 /* eslint-disable no-undef */
 import React from 'react';
 import '@testing-library/jest-dom';
-import { mount, shallow } from 'enzyme';
+import { shallow } from 'enzyme';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { MemoryRouter } from 'react-router-dom';
 import App from '../App';
-import Main from '../pages/main';
+
+function setup() {
+  return render(
+    <MemoryRouter>
+      <App />
+    </MemoryRouter>,
+  );
+}
 
 describe('App', () => {
   it('renders without crashing', () => {
     shallow(<App />);
   });
 
-  it('renders main component', () => {
-    const wrapper = mount(
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>,
-    );
-    expect(wrapper.contains(<Main />)).toEqual(true);
-  });
-
   it('ReadyCompete links to home page', async () => {
-    render(
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>,
-    );
+    setup();
 
     const link = screen.getByRole('link', { name: /ReadyCompete/i });
     userEvent.click(link);
@@ -35,11 +29,7 @@ describe('App', () => {
   });
 
   it('TV links to correct page', () => {
-    render(
-      <MemoryRouter>
-        <App />
-      </MemoryRouter>,
-    );
+    setup();
 
     const link = screen.getAllByRole('link', { name: /Arena TV/i });
 
