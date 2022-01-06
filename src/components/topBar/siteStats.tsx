@@ -12,12 +12,6 @@ const SiteStats = () => {
 
   return (
     <span className='centre-group inline'>
-      <BarItem to='/tv'>
-        <span className='inline flex-centre all-spaced'>
-          <Television />
-          TV
-        </span>
-      </BarItem>
       <BarItem to='/online'>
         <span className='wide-screen'>
           <span className='inline flex-centre all-spaced'>
@@ -48,12 +42,6 @@ const SiteStats = () => {
             <Sword />
             8
           </span>
-        </span>
-      </BarItem>
-      <BarItem to='/play'>
-        <span className='inline flex-centre all-spaced'>
-          <Users />
-          {t('Play')}
         </span>
       </BarItem>
     </span>
