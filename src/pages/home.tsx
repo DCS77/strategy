@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import './home.css';
 import '../App.css';
 import { useTranslation } from 'react-i18next';
-import NavigationList from '../components/navigation/navigationList';
+import DefaultNarrowView from './structures/defaultNarrowView';
+import DefaultWideView from './structures/defaultWideView';
 import Logo from '../images/rc.svg';
 import i18n from '../i18nextConf';
 
@@ -23,50 +24,45 @@ const LanguageWarning = () => {
   );
 };
 
-const NarrowHomeView = (Props: ViewProps) => {
+const CentrePage = (Props: ViewProps) => {
   const { t } = Props;
+
   return (
     <>
-      <div className='nav-bar-horizontal vertical-padding-top vertical-padding-bottom'>
-        <NavigationList />
-      </div>
-      <div className='vertical-padding-bottom'>
-        <span className='home-logo-container'>
-          <img src={Logo} alt='icon' className='home-logo' />
-        </span>
-        {t('News and Updates')}
-        <h1>{t('News and Updates')}</h1>
-        This is still in development.<br />
-        Try visiting the Your Armies page to view existing armies or create a new one.<br />
-        The next features include user accounts and the ability to connect players for a game.
-        <LanguageWarning />
-      </div>
-      <div className='vertical-padding-bottom'>{t('Chat')}</div>
+      <span className='home-logo-container'>
+        <img src={Logo} alt='icon' className='home-logo' />
+      </span>
+      {t('News and Updates')}
+      <h1>{t('News and Updates')}</h1>
+      This is still in development.<br />
+      Try visiting the Your Armies page to view existing armies or create a new one.<br />
+      The next features include user accounts and the ability to connect players for a game.
+      <LanguageWarning />
     </>
+  );
+};
+
+const NarrowHomeView = (Props: ViewProps) => {
+  const { t } = Props;
+
+  return (
+    <DefaultNarrowView
+      Elements={[
+        <CentrePage t={t} />,
+        t('Chat'),
+      ]}
+    />
   );
 };
 
 const WideHomeView = (Props: ViewProps) => {
   const { t } = Props;
+
   return (
-    <div className='full-size home-row'>
-      <div className='navigation-column'>
-        <NavigationList />
-      </div>
-      <div className='center-column'>
-        <p>
-          <span className='home-logo-container'>
-            <img src={Logo} alt='icon' className='home-logo' />
-          </span>
-        </p>
-        <h1>{t('News and Updates')}</h1>
-        This is still in development.<br />
-        Try visiting the Your Armies page to view existing armies or create a new one.<br />
-        The next features include user accounts and the ability to connect players for a game.
-        <LanguageWarning />
-      </div>
-      <div className='chat-column'>{t('Chat')}</div>
-    </div>
+    <DefaultWideView
+      Centre={<CentrePage t={t} />}
+      BottomRight={t('Chat')}
+    />
   );
 };
 

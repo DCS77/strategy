@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import './page.css';
 import '../App.css';
 import { useTranslation } from 'react-i18next';
-import NavigationList from '../components/navigation/navigationList';
+import DefaultNarrowView from './structures/defaultNarrowView';
+import DefaultWideView from './structures/defaultWideView';
 import { TabType } from '../types';
 import { useStateValue } from '../state/state';
 import i18n from '../i18nextConf';
@@ -13,48 +14,29 @@ interface ViewProps {
 
 const NarrowLearnView = (Props: ViewProps) => {
   const { t } = Props;
+
   return (
-    <>
-      <div className='nav-bar-horizontal vertical-padding-top vertical-padding-bottom'>
-        <NavigationList />
-      </div>
-      <div className='vertical-padding-bottom'>
-        {t('Select a lesson')}
-      </div>
-      <div className='vertical-padding-bottom'>
-        Text for selected lesson
-      </div>
-      <div className='vertical-padding-bottom'>
-        {t('Chat')}
-      </div>
-    </>
+    <DefaultNarrowView
+      Elements={[
+        t('Select a lesson'),
+        t('Actions'),
+        'Text for selected lesson',
+        t('Chat'),
+      ]}
+    />
   );
 };
 
 const WideLearnView = (Props: ViewProps) => {
   const { t } = Props;
+
   return (
-    <div className='full-size game-row'>
-      <div className='left-column'>
-        <div className='nav-section'>
-          <NavigationList />
-        </div>
-        <div className='select-lesson'>
-          {t('Select a lesson')}
-        </div>
-      </div>
-      <div className='learn-column'>
-        Text for selected lesson
-      </div>
-      <div className='right-column'>
-        <div className='action-section'>
-          {t('Actions')}
-        </div>
-        <div className='chat-section'>
-          {t('Chat')}
-        </div>
-      </div>
-    </div>
+    <DefaultWideView
+      BottomLeft={t('Select a lesson')}
+      Centre='Text for selected lesson'
+      TopRight={t('Actions')}
+      BottomRight={t('Chat')}
+    />
   );
 };
 

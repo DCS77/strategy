@@ -2,7 +2,8 @@ import React, { useEffect } from 'react';
 import './page.css';
 import '../App.css';
 import { useTranslation } from 'react-i18next';
-import NavigationList from '../components/navigation/navigationList';
+import DefaultNarrowView from './structures/defaultNarrowView';
+import DefaultWideView from './structures/defaultWideView';
 import Board from '../components/board/board';
 import { TabType } from '../types';
 import { useStateValue } from '../state/state';
@@ -14,45 +15,27 @@ interface ViewProps {
 
 const NarrowTVView = (Props: ViewProps) => {
   const { t } = Props;
+
   return (
-    <>
-      <div className='nav-bar-horizontal vertical-padding-top vertical-padding-bottom'>
-        <NavigationList />
-      </div>
-      <div className='vertical-padding-bottom'>
-        <Board short />
-      </div>
-      <div className='vertical-padding-bottom'>
-        {t('Chat')}
-      </div>
-      <div className='vertical-padding-bottom'>
-        {t('Move History')}
-      </div>
-    </>
+    <DefaultNarrowView
+      Elements={[
+        <Board short />,
+        t('Chat'),
+        t('Move History'),
+      ]}
+    />
   );
 };
 
 const WideTVView = (Props: ViewProps) => {
   const { t } = Props;
+
   return (
-    <div className='full-size game-row'>
-      <div className='left-column'>
-        <div className='nav-section'>
-          <NavigationList />
-        </div>
-        <div className='move-history'>
-          {t('Move History')}
-        </div>
-      </div>
-      <div className='board-column'>
-        <Board />
-      </div>
-      <div className='right-column'>
-        <div className='chat-section'>
-          {t('Chat')}
-        </div>
-      </div>
-    </div>
+    <DefaultWideView
+      BottomLeft={t('Move History')}
+      Centre={<Board />}
+      BottomRight={t('Chat')}
+    />
   );
 };
 

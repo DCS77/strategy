@@ -4,7 +4,8 @@ import '../App.css';
 import { useTranslation } from 'react-i18next';
 import { useHistory } from 'react-router-dom';
 import Board from '../components/board/board';
-import NavigationList from '../components/navigation/navigationList';
+import DefaultNarrowView from './structures/defaultNarrowView';
+import DefaultWideView from './structures/defaultWideView';
 import { TabType } from '../types';
 import i18n from '../i18nextConf';
 import { useStateValue } from '../state/state';
@@ -24,51 +25,29 @@ interface ViewProps {
 
 const NarrowShowGameView = (Props: ShowGameViewProps) => {
   const { t } = Props;
+
   return (
-    <>
-      <div className='nav-bar-horizontal vertical-padding-top vertical-padding-bottom'>
-        <NavigationList />
-      </div>
-      <div className='vertical-padding-bottom'>
-        {t('Opponent Details')}
-      </div>
-      <div className='vertical-padding-bottom'>
-        <Board short />
-      </div>
-      <div className='vertical-padding-bottom'>
-        {t('Chat')}
-      </div>
-      <div className='vertical-padding-bottom'>
-        {t('Move History')}
-      </div>
-    </>
+    <DefaultNarrowView
+      Elements={[
+        t('Opponent Details'),
+        <Board short />,
+        t('Chat'),
+        t('Move History'),
+      ]}
+    />
   );
 };
 
 const WideShowGameView = (Props: ShowGameViewProps) => {
   const { t } = Props;
+
   return (
-    <div className='full-size game-row'>
-      <div className='left-column'>
-        <div className='nav-section'>
-          <NavigationList />
-        </div>
-        <div className='move-history'>
-          {t('Move History')}
-        </div>
-      </div>
-      <div className='board-column'>
-        <Board />
-      </div>
-      <div className='right-column'>
-        <div className='opponent-section'>
-          {t('Opponent Details')}
-        </div>
-        <div className='chat-section'>
-          {t('Chat')}
-        </div>
-      </div>
-    </div>
+    <DefaultWideView
+      BottomLeft={t('Move History')}
+      Centre={<Board />}
+      TopRight={t('Opponent Details')}
+      BottomRight={t('Chat')}
+    />
   );
 };
 
@@ -83,45 +62,41 @@ function MakeID(length: number) {
   return result;
 }
 
-const NarrowPlayView = (Props: ViewProps) => {
+const CreateNewGameCentre = (Props: ViewProps) => {
   const { SearchForGame, t } = Props;
+
   return (
     <>
-      <div className='nav-bar-horizontal vertical-padding-top vertical-padding-bottom'>
-        <NavigationList />
-      </div>
-      <div className='vertical-padding-bottom'>
-        Create a new game<br />
-        <button type='button' onClick={SearchForGame}>
-          Add game tab
-        </button><br />
-        Games being searched for
-      </div>
-      <div>
-        {t('Chat')}
-      </div>
+      Create a new game<br />
+      <button type='button' onClick={SearchForGame}>
+        Add game tab
+      </button><br />
+      Games being searched for
     </>
+  );
+};
+
+const NarrowPlayView = (Props: ViewProps) => {
+  const { SearchForGame, t } = Props;
+
+  return (
+    <DefaultNarrowView
+      Elements={[
+        <CreateNewGameCentre SearchForGame={SearchForGame} t={t} />,
+        t('Chat'),
+      ]}
+    />
   );
 };
 
 const WidePlayView = (Props: ViewProps) => {
   const { SearchForGame, t } = Props;
+
   return (
-    <div className='full-size game-row'>
-      <div className='left-column'>
-        <NavigationList />
-      </div>
-      <div className='board-column'>
-        Create a new game<br />
-        <button type='button' onClick={SearchForGame}>
-          Add game tab
-        </button><br />
-        Games being searched for
-      </div>
-      <div className='right-column'>
-        {t('Chat')}
-      </div>
-    </div>
+    <DefaultWideView
+      Centre={<CreateNewGameCentre SearchForGame={SearchForGame} t={t} />}
+      BottomRight={t('Chat')}
+    />
   );
 };
 

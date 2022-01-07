@@ -1,0 +1,25 @@
+.bottom-left-section {
+  min-height: calc(60vh - var(--used-space-height));
+  max-height: calc(60vh - var(--used-space-height));
+  overflow: scroll;
+}
+
+.centre-column {
+  float: left;
+  width: 60%;
+  min-height: calc(100vh - var(--used-space-height));
+  max-height: calc(100vh - var(--used-space-height));
+  overflow: scroll;
+}
+
+.top-right-section {
+  min-height: calc(40vh - var(--used-space-height));
+  max-height: calc(40vh - var(--used-space-height));
+  overflow: scroll;
+}
+
+.bottom-right-section {
+  min-height: calc(60vh - var(--used-space-height));
+  max-height: calc(60vh - var(--used-space-height));
+  overflow: scroll;
+}
