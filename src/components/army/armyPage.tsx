@@ -5,7 +5,8 @@ import { Plus } from 'phosphor-react';
 import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import BarItem from '../items/barItem';
-import NavigationList from '../navigation/navigationList';
+import DefaultNarrowView from '../../pages/structures/defaultNarrowView';
+import DefaultWideView from '../../pages/structures/defaultWideView';
 import ArmyList from './armyList/armyList';
 import { getArmies } from '../../ts/dbFunctions';
 import { StateProps, useStateValue } from '../../state/state';
@@ -19,30 +20,40 @@ interface ViewProps {
   t: any;
 }
 
+const ArmyButtonList = (Props: ViewProps) => {
+  const {
+    ShowCreateArmyPage, ShowHomePage, state, t,
+  } = Props;
+
+  return (
+    <>
+      <BarItem mouseUpHandler={ShowHomePage}>{t('Your Armies')}</BarItem>
+      <ArmyList armies={state.userArmies} />
+      <BarItem mouseUpHandler={ShowCreateArmyPage}><Plus /></BarItem>
+    </>
+  );
+};
+
 const NarrowArmyPageView = (Props: ViewProps) => {
   const {
     children, ShowCreateArmyPage, ShowHomePage, state, t,
   } = Props;
+
+  const ArmyListComponent = (
+    <ArmyButtonList ShowCreateArmyPage={ShowCreateArmyPage} ShowHomePage={ShowHomePage} state={state} t={t}>
+      {children}
+    </ArmyButtonList>
+  );
+
   return (
-    <>
-      <div className='nav-bar-horizontal vertical-padding-top vertical-padding-bottom'>
-        <NavigationList />
-      </div>
-      <div className='vertical-padding-bottom'>
-        <BarItem mouseUpHandler={ShowHomePage}>{t('Your Armies')}</BarItem>
-        <ArmyList armies={state.userArmies} />
-        <BarItem mouseUpHandler={ShowCreateArmyPage}><Plus /></BarItem>
-      </div>
-      <div className='vertical-padding-bottom'>
-        {children}
-      </div>
-      <div className='vertical-padding-bottom'>
-        {t('Actions')}
-      </div>
-      <div className='vertical-padding-bottom'>
-        {t('Chat')}
-      </div>
-    </>
+    <DefaultNarrowView
+      Elements={[
+        ArmyListComponent,
+        children,
+        t('Actions'),
+        t('Chat'),
+      ]}
+    />
   );
 };
 
@@ -50,30 +61,20 @@ const WideArmyPageView = (Props: ViewProps) => {
   const {
     children, ShowCreateArmyPage, ShowHomePage, state, t,
   } = Props;
+
+  const ArmyListComponent = (
+    <ArmyButtonList ShowCreateArmyPage={ShowCreateArmyPage} ShowHomePage={ShowHomePage} state={state} t={t}>
+      {children}
+    </ArmyButtonList>
+  );
+
   return (
-    <div className='full-size game-row'>
-      <div className='left-column'>
-        <div className='nav-section'>
-          <NavigationList />
-        </div>
-        <div className='select-team'>
-          <BarItem mouseUpHandler={ShowHomePage}>{t('Your Armies')}</BarItem>
-          <ArmyList armies={state.userArmies} />
-          <BarItem mouseUpHandler={ShowCreateArmyPage}><Plus /></BarItem>
-        </div>
-      </div>
-      <div className='army-column'>
-        {children}
-      </div>
-      <div className='right-column'>
-        <div className='action-section'>
-          {t('Actions')}
-        </div>
-        <div className='chat-section'>
-          {t('Chat')}
-        </div>
-      </div>
-    </div>
+    <DefaultWideView
+      BottomLeft={ArmyListComponent}
+      Centre={children}
+      TopRight={t('Actions')}
+      BottomRight={t('Chat')}
+    />
   );
 };
 
