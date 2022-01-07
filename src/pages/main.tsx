@@ -25,15 +25,6 @@ const LoadingPage = () => (
   </div>
 );
 
-const GameTab = () => {
-  const splitPath = useLocation().pathname.split('/');
-  return (
-    <Play
-      ID={splitPath[2]}
-    />
-  );
-};
-
 const AITab = () => <AI />;
 const CreateArmyTab = () => <CreateArmy />;
 const LeaderboardsTab = () => <Leaderboards />;
@@ -68,7 +59,7 @@ const Main = () => {
         <GameTabBar onHeightChange={onTabBarHeightChange} />
         <Suspense fallback={<LoadingPage />}>
           <Switch>
-            <Route path='/play'><GameTab /></Route>
+            <Route path='/play/:id?' component={Play} />
             <Route path='/info'>Info 1</Route>
             <Route path='/tv'><TVTab /></Route>
             <Route path='/ai'><AITab /></Route>

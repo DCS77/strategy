@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import './page.css';
 import '../App.css';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import Board from '../components/board/board';
 import DefaultNarrowView from './structures/defaultNarrowView';
 import DefaultWideView from './structures/defaultWideView';
@@ -11,7 +11,7 @@ import i18n from '../i18nextConf';
 import { useStateValue } from '../state/state';
 
 interface PlayProps {
-  ID?: string;
+  id?: string;
 }
 
 interface ShowGameViewProps {
@@ -100,11 +100,11 @@ const WidePlayView = (Props: ViewProps) => {
   );
 };
 
-const Play = (Props: PlayProps) => {
+const Play = () => {
   const history = useHistory();
   const { dispatch } = useStateValue();
   const { t } = useTranslation('translation', { i18n });
-  const { ID } = Props;
+  const { id } = useParams<PlayProps>();
 
   function SearchForGame() {
     const gameId = MakeID(2);
@@ -116,12 +116,12 @@ const Play = (Props: PlayProps) => {
   }, []);
 
   useEffect(() => {
-    if (ID) {
-      document.title = `RC | Play Multiplayer: ${ID}`;
+    if (id) {
+      document.title = `RC | Play Multiplayer: ${id}`;
       dispatch({
         type: 'addTab',
         value: {
-          id: ID, path: `/play/${ID}`, title: `Game ${ID}`, type: TabType.Game,
+          id, path: `/play/${id}`, title: `Game ${id}`, type: TabType.Game,
         },
       });
     } else {
@@ -135,7 +135,7 @@ const Play = (Props: PlayProps) => {
     }
   });
 
-  if (ID) {
+  if (id) {
     return (
       <>
         <div className='narrow-screen'>
