@@ -1,15 +1,12 @@
 import React, { useEffect } from 'react';
 import '../page.css';
 import '../../App.css';
-import { API, graphqlOperation } from 'aws-amplify';
-import { GraphQLResult } from '@aws-amplify/api';
 import { useTranslation } from 'react-i18next';
 import ArmyPage from '../../components/army/armyPage';
 import ArmyPieceCounts from '../../components/army/armyPieceCounts/armyPieceCounts';
 import ArmyPiecesList from '../../components/army/armyList/armyPiecesList';
 import CreateArmy from './createArmy';
 import { TabType } from '../../types';
-import { listArmies } from '../../graphql/queries';
 import { Army as ArmyType, ListArmiesQuery } from '../../API';
 import tc from '../../localesComplex/translateArmy';
 import i18n from '../../i18nextConf';
@@ -109,17 +106,6 @@ const Army = (Props: ArmyProps) => {
   const { t } = useTranslation('translation', { i18n });
   const { ID } = Props;
 
-  async function getPageData() {
-    try {
-      const armyData = (await API.graphql(graphqlOperation(listArmies))) as GraphQLResult<ListArmiesQuery>;
-      return armyData?.data?.listArmies?.items;
-    } catch (error) {
-      console.error('Error: ', error);
-    }
-
-    return [];
-  }
-
   useEffect(() => {
     if (!ID) {
       document.title = 'RC | Your Armies: View your armies or create a new one';
@@ -130,25 +116,6 @@ const Army = (Props: ArmyProps) => {
         },
       });
     }
-
-    let isMounted = true;
-
-    if (!state.fetchedData.userArmies) {
-      try {
-        getPageData().then((result) => {
-          if (isMounted) {
-            dispatch({
-              type: 'setUserArmies',
-              value: result || [],
-            });
-          }
-        });
-      } catch (error) {
-        console.error('Error:', error);
-      }
-    }
-
-    return () => { isMounted = false; };
   }, [state.fetchedData.userArmies, dispatch, Props, t]);
 
   return (
