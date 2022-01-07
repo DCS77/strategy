@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 import '../page.css';
 import '../../App.css';
 import { useTranslation } from 'react-i18next';
@@ -7,13 +8,13 @@ import ArmyPieceCounts from '../../components/army/armyPieceCounts/armyPieceCoun
 import ArmyPiecesList from '../../components/army/armyList/armyPiecesList';
 import CreateArmy from './createArmy';
 import { TabType } from '../../types';
-import { Army as ArmyType, ListArmiesQuery } from '../../API';
+import { Army as ArmyType } from '../../API';
 import tc from '../../localesComplex/translateArmy';
 import i18n from '../../i18nextConf';
 import { useStateValue } from '../../state/state';
 
 interface ArmyProps {
-  ID?: string;
+  id: string;
 }
 
 interface CentrePageProps {
@@ -101,13 +102,13 @@ const ArmyPageSelector = (Props: SelectArmyPageProps) => {
   );
 };
 
-const Army = (Props: ArmyProps) => {
+const Army = () => {
   const { state, dispatch } = useStateValue();
   const { t } = useTranslation('translation', { i18n });
-  const { ID } = Props;
+  const { id } = useParams<ArmyProps>();
 
   useEffect(() => {
-    if (!ID) {
+    if (!id) {
       document.title = 'RC | Your Armies: View your armies or create a new one';
       dispatch({
         type: 'addTab',
@@ -116,10 +117,10 @@ const Army = (Props: ArmyProps) => {
         },
       });
     }
-  }, [state.fetchedData.userArmies, dispatch, Props, t]);
+  }, [state.fetchedData.userArmies, dispatch, id, t]);
 
   return (
-    <ArmyPageSelector ID={ID} />
+    <ArmyPageSelector ID={id} />
   );
 };
 

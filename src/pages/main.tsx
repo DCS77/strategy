@@ -1,7 +1,5 @@
 import React, { useRef, useState } from 'react';
-import {
-  Switch, Route, useLocation, useHistory,
-} from 'react-router-dom';
+import { Switch, Route, useLocation } from 'react-router-dom';
 import { useStateValue } from '../state/state';
 import Home from './home';
 import AI from './ai';
@@ -22,11 +20,6 @@ const GameTab = () => {
       ID={splitPath[2]}
     />
   );
-};
-
-const ArmyTab = () => {
-  const splitPath = useLocation().pathname.split('/');
-  return <Army ID={splitPath[2]} />;
 };
 
 const AITab = () => <AI />;
@@ -67,7 +60,7 @@ const Main = () => {
           <Route path='/tv'><TVTab /></Route>
           <Route path='/ai'><AITab /></Route>
           <Route path='/learn'><LearnTab /></Route>
-          <Route path='/army'><ArmyTab /></Route>
+          <Route path='/army/:id?' component={Army} />
           <Route path='/create'><CreateArmyTab /></Route>
           <Route path='/leaderboards'><LeaderboardsTab /></Route>
           <Route path='/online'>Online</Route>

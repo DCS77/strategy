@@ -3,7 +3,7 @@ import './home.css';
 import '../App.css';
 import { useTranslation } from 'react-i18next';
 import DefaultNarrowView from './structures/defaultNarrowView';
-import DefaultWideView from './structures/defaultWideView';
+import HomeWideView from './structures/homeWideView';
 import Logo from '../images/rc.svg';
 import i18n from '../i18nextConf';
 
@@ -59,9 +59,9 @@ const WideHomeView = (Props: ViewProps) => {
   const { t } = Props;
 
   return (
-    <DefaultWideView
+    <HomeWideView
       Centre={<CentrePage t={t} />}
-      BottomRight={t('Chat')}
+      Right={t('Chat')}
     />
   );
 };
