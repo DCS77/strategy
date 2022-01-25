@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { Auth } from 'aws-amplify';
 import {
   Translate, PaintRoller, CaretDown, User,
 } from 'phosphor-react';
@@ -21,6 +22,7 @@ const Settings = (Props: SettingsProps) => {
     onLanguageMouseUp, onLanguageMouseDown, onAccountMouseUp, onAccountMouseDown,
   } = Props;
   const { t } = useTranslation('translation', { i18n });
+  const [username, setUsername] = useState(t('Account'));
   const { state, dispatch } = useStateValue();
 
   function ToggleTheme(checked: boolean) {
@@ -29,6 +31,12 @@ const Settings = (Props: SettingsProps) => {
       value: checked ? 'dark' : 'light',
     });
   }
+
+  useEffect(() => {
+    Auth.currentAuthenticatedUser()
+      .then((data) => setUsername(data.username))
+      .catch((err) => console.log('Error finding user', err));
+  }, [Auth]);
 
   return (
     <>
@@ -53,7 +61,7 @@ const Settings = (Props: SettingsProps) => {
       <BarItem mouseUpHandler={onAccountMouseUp} mouseDownHandler={onAccountMouseDown}>
         <span className='wide-screen bar-spaced'>
           <span className='inline flex-centre bar-spaced'>
-            {t('Account')}
+            {username}
             <CaretDown />
           </span>
         </span>

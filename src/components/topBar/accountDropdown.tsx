@@ -16,7 +16,12 @@ const AccountDropdownMenu = (Props: AccountDropdownProps) => {
 
   function ClickLogin() { onClickAnyItem(); }
   function ClickRegister() { onClickAnyItem(); }
-  function ClickProfile() { onClickAnyItem(); }
+  function ClickProfile() {
+    Auth.currentAuthenticatedUser()
+      .then((data) => console.log('User data', data))
+      .catch((err) => console.log('Error finding user', err));
+    onClickAnyItem();
+  }
   function ClickSettings() { onClickAnyItem(); }
   function ClickLogout() {
     Auth.signOut()
