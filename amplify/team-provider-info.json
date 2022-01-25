@@ -23,6 +23,11 @@
       "StackName": "amplify-strategy-playjoda-10532",
       "StackId": "arn:aws:cloudformation:ap-southeast-2:323074840712:stack/amplify-strategy-playjoda-10532/6a48e3a0-67eb-11ec-b565-02e30391bb74",
       "AmplifyAppId": "dyeavz1fmwlo6"
+    },
+    "categories": {
+      "auth": {
+        "strategy220249d6": {}
+      }
     }
   }
 }

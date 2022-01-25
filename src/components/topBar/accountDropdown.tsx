@@ -1,5 +1,6 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import { Auth } from 'aws-amplify';
 import BarItem from '../items/barItem';
 import i18n from '../../i18nextConf';
 import '../../App.css';
@@ -17,7 +18,12 @@ const AccountDropdownMenu = (Props: AccountDropdownProps) => {
   function ClickRegister() { onClickAnyItem(); }
   function ClickProfile() { onClickAnyItem(); }
   function ClickSettings() { onClickAnyItem(); }
-  function ClickLogout() { onClickAnyItem(); }
+  function ClickLogout() {
+    Auth.signOut()
+      .then((data) => console.log(data))
+      .catch((err) => console.log(err));
+    onClickAnyItem();
+  }
 
   return (
     <div className='dropdown-menu'>

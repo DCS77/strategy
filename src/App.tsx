@@ -1,11 +1,15 @@
 import React, { Reducer } from 'react';
 import ReactGA from 'react-ga';
 import { useHistory, withRouter } from 'react-router-dom';
+import { AmplifyTheme, withAuthenticator } from 'aws-amplify-react';
 import { TabDetail } from './types';
 import { Actions, StateProps, StateProvider } from './state/state';
 import { Army as ArmyType } from './API';
 import Main from './pages/main';
 import './App.css';
+
+const AuthSectionHeader = { ...AmplifyTheme.sectionHeader, background: 'black' };
+const AuthTheme = { ...AmplifyTheme, sectionHeader: AuthSectionHeader };
 
 const App = () => {
   const history = useHistory();
@@ -138,4 +142,4 @@ const App = () => {
   );
 };
 
-export default withRouter(App);
+export default withRouter(withAuthenticator(App, false, [], null, AuthTheme));
