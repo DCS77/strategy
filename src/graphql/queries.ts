@@ -449,6 +449,7 @@ export const getArmy = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -471,6 +472,7 @@ export const listArmies = /* GraphQL */ `
         }
         createdAt
         updatedAt
+        owner
       }
       nextToken
     }

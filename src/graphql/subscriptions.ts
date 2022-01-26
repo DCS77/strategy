@@ -787,6 +787,7 @@ export const onCreateArmy = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -804,6 +805,7 @@ export const onUpdateArmy = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -821,6 +823,7 @@ export const onDeleteArmy = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;

@@ -41,7 +41,7 @@ type PlayerConfig @model {
   rating: Int!
 }
 
-type Army @model {
+type Army @model @auth(rules: [{ allow: owner, operations: [create, update, delete] }]) {
   id: ID!
   player: ID!
   name: String!

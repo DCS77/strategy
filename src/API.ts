@@ -417,6 +417,7 @@ export type Army = {
   pieces:  Array<Piece >,
   createdAt: string,
   updatedAt: string,
+  owner?: string | null,
 };
 
 export type UpdateArmyInput = {
@@ -1479,6 +1480,7 @@ export type CreateArmyMutation = {
     } >,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -1502,6 +1504,7 @@ export type UpdateArmyMutation = {
     } >,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -1525,6 +1528,7 @@ export type DeleteArmyMutation = {
     } >,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -2063,6 +2067,7 @@ export type GetArmyQuery = {
     } >,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -2089,6 +2094,7 @@ export type ListArmiesQuery = {
       } >,
       createdAt: string,
       updatedAt: string,
+      owner?: string | null,
     } >,
     nextToken?: string | null,
   } | null,
@@ -2982,6 +2988,7 @@ export type OnCreateArmySubscription = {
     } >,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -3000,6 +3007,7 @@ export type OnUpdateArmySubscription = {
     } >,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };
 
@@ -3018,5 +3026,6 @@ export type OnDeleteArmySubscription = {
     } >,
     createdAt: string,
     updatedAt: string,
+    owner?: string | null,
   } | null,
 };

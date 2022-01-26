@@ -8,11 +8,12 @@ import '../../App.css';
 interface AccountDropdownProps {
   onBlur: () => void;
   onClickAnyItem: () => void;
+  loggedIn: boolean;
 }
 
 const AccountDropdownMenu = (Props: AccountDropdownProps) => {
   const { t } = useTranslation('translation', { i18n });
-  const { onBlur, onClickAnyItem } = Props;
+  const { loggedIn, onBlur, onClickAnyItem } = Props;
 
   function ClickLogin() { onClickAnyItem(); }
   function ClickRegister() { onClickAnyItem(); }
@@ -30,13 +31,20 @@ const AccountDropdownMenu = (Props: AccountDropdownProps) => {
     onClickAnyItem();
   }
 
+  if (loggedIn) {
+    return (
+      <div className='dropdown-menu'>
+        <BarItem onBlur={onBlur} mouseUpHandler={ClickProfile}>{t('Profile')}</BarItem>
+        <BarItem onBlur={onBlur} mouseUpHandler={ClickSettings}>{t('Settings')}</BarItem>
+        <BarItem onBlur={onBlur} mouseUpHandler={ClickLogout}>{t('Logout')}</BarItem>
+      </div>
+    );
+  }
+
   return (
     <div className='dropdown-menu'>
       <BarItem onBlur={onBlur} mouseUpHandler={ClickLogin}>{t('Login')}</BarItem>
       <BarItem onBlur={onBlur} mouseUpHandler={ClickRegister}>{t('Register')}</BarItem>
-      <BarItem onBlur={onBlur} mouseUpHandler={ClickProfile}>{t('Profile')}</BarItem>
-      <BarItem onBlur={onBlur} mouseUpHandler={ClickSettings}>{t('Settings')}</BarItem>
-      <BarItem onBlur={onBlur} mouseUpHandler={ClickLogout}>{t('Logout')}</BarItem>
     </div>
   );
 };

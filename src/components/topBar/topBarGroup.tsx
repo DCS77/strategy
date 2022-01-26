@@ -1,4 +1,6 @@
-import React, { useState, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
+import { Auth } from 'aws-amplify';
+import { useStateValue } from '../../state/state';
 import AccountDropdownMenu from './accountDropdown';
 import LanguageDropdownMenu from './languageDropdown';
 import TopBar from './topBar';
@@ -6,6 +8,8 @@ import './topBar.css';
 import '../../App.css';
 
 const TopBarGroup = () => {
+  const { dispatch } = useStateValue();
+
   const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
   const [accountDropdownClass, setAccountDropdownClass] = useState('hidden');
   const [accountMouseDown, setAccountMouseDown] = useState(false);
@@ -15,6 +19,20 @@ const TopBarGroup = () => {
   const [languageDropdownClass, setLanguageDropdownClass] = useState('hidden');
   const [languageMouseDown, setLanguageMouseDown] = useState(false);
   const languageDropdown = useRef<HTMLDivElement>(null);
+
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    Auth.currentAuthenticatedUser()
+      .then((data) => {
+        setLoggedIn(true);
+        dispatch({
+          type: 'setUserData',
+          value: { data },
+        });
+      })
+      .catch((err) => setLoggedIn(false));
+  }, [Auth]);
 
   function ToggleAccountDropdown(visible: boolean) {
     setAccountDropdownVisible(visible);
@@ -82,7 +100,7 @@ const TopBarGroup = () => {
         onLanguageMouseDown={LanguageMouseDown}
       />
       <div ref={accountDropdown} className={accountDropdownClass}>
-        <AccountDropdownMenu onClickAnyItem={CloseAccountMenu} onBlur={AccountBlur} />
+        <AccountDropdownMenu loggedIn={loggedIn} onClickAnyItem={CloseAccountMenu} onBlur={AccountBlur} />
       </div>
       <div ref={languageDropdown} className={languageDropdownClass}>
         <LanguageDropdownMenu onClickAnyItem={CloseLanguageMenu} onBlur={LanguageBlur} />

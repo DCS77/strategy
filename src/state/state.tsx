@@ -19,10 +19,12 @@ export interface PageLayout {
 }
 
 export interface FetchedData {
+  userData?: boolean;
   userArmies?: boolean;
 }
 
 export interface StateProps {
+  userData: any;
   userArmies: ArmyType[];
   globalArmies: ArmyType[];
   tabs: TabDetail[];

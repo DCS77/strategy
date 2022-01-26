@@ -23,6 +23,7 @@ const App = () => {
   }, [window.location.href]);
 
   const initialState: StateProps = {
+    userData: {},
     userArmies: [],
     globalArmies: [],
     tabs: [],
@@ -34,9 +35,18 @@ const App = () => {
     },
     refs: {},
     fetchedData: {
+      userData: false,
       userArmies: false,
     },
   };
+
+  function SetUserData(state: StateProps, action: Actions) {
+    return {
+      ...state,
+      userData: action.value,
+      fetchedData: { ...state.fetchedData, userData: true },
+    };
+  }
 
   function SetUserArmies(state: StateProps, action: Actions) {
     return {
@@ -125,6 +135,7 @@ const App = () => {
 
   const reducer: Reducer<StateProps, Actions> = (state, action) => {
     switch (action.type) {
+      case 'setUserData': return SetUserData(state, action);
       case 'setUserArmies': return SetUserArmies(state, action);
       case 'addUserArmy': return AddUserArmy(state, action);
       case 'deleteUserArmy': return DeleteUserArmy(state, action);

@@ -3,12 +3,12 @@
   "serviceConfiguration": {
     "serviceName": "AppSync",
     "defaultAuthType": {
-      "mode": "API_KEY",
-      "expirationTime": 365,
-      "keyDescription": ""
+      "mode": "AMAZON_COGNITO_USER_POOLS",
+      "cognitoUserPoolId": "authstrategy220249d6"
     },
     "conflictResolution": {},
     "apiName": "playjoda",
-    "gqlSchemaPath": "/Users/mew/Documents/Development/joda/strategy-games/strategy/amplify/backend/api/playjoda/schema.graphql"
+    "gqlSchemaPath": "/Users/mew/Documents/Development/joda/strategy-games/strategy/amplify/backend/api/playjoda/schema.graphql",
+    "additionalAuthTypes": []
   }
 }

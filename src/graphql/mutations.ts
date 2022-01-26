@@ -835,6 +835,7 @@ export const createArmy = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -855,6 +856,7 @@ export const updateArmy = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
@@ -875,6 +877,7 @@ export const deleteArmy = /* GraphQL */ `
       }
       createdAt
       updatedAt
+      owner
     }
   }
 `;
