@@ -777,7 +777,7 @@ export const onCreateArmy = /* GraphQL */ `
   subscription OnCreateArmy {
     onCreateArmy {
       id
-      player
+      owner
       name
       wins
       losses
@@ -787,7 +787,6 @@ export const onCreateArmy = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -795,7 +794,7 @@ export const onUpdateArmy = /* GraphQL */ `
   subscription OnUpdateArmy {
     onUpdateArmy {
       id
-      player
+      owner
       name
       wins
       losses
@@ -805,7 +804,6 @@ export const onUpdateArmy = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -813,7 +811,7 @@ export const onDeleteArmy = /* GraphQL */ `
   subscription OnDeleteArmy {
     onDeleteArmy {
       id
-      player
+      owner
       name
       wins
       losses
@@ -823,7 +821,6 @@ export const onDeleteArmy = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;

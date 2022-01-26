@@ -95,7 +95,6 @@ const CreatePage = (Props: CreatePageProps) => {
           const newArmy = {
             name,
             pieces: newPieces,
-            player: 'PlayerID',
             wins: 0,
             losses: 0,
           } as ArmyType;

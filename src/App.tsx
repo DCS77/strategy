@@ -56,6 +56,13 @@ const App = () => {
     };
   }
 
+  function AddGlobalArmy(state: StateProps, action: Actions) {
+    return {
+      ...state,
+      globalArmies: [...state.globalArmies, action.value],
+    };
+  }
+
   function AddUserArmy(state: StateProps, action: Actions) {
     const army = state.userArmies.find((a) => a.id === action.value.id);
 
@@ -68,7 +75,6 @@ const App = () => {
       id: action.value.id,
       name: action.value.name,
       pieces: action.value.pieces,
-      player: 'PlayerID',
       wins: 0,
       losses: 0,
     } as ArmyType;
@@ -137,6 +143,7 @@ const App = () => {
     switch (action.type) {
       case 'setUserData': return SetUserData(state, action);
       case 'setUserArmies': return SetUserArmies(state, action);
+      case 'addGlobalArmy': return AddGlobalArmy(state, action);
       case 'addUserArmy': return AddUserArmy(state, action);
       case 'deleteUserArmy': return DeleteUserArmy(state, action);
       case 'addTab': return AddTab(state, action);

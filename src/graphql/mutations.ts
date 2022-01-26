@@ -825,7 +825,7 @@ export const createArmy = /* GraphQL */ `
   ) {
     createArmy(input: $input, condition: $condition) {
       id
-      player
+      owner
       name
       wins
       losses
@@ -835,7 +835,6 @@ export const createArmy = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -846,7 +845,7 @@ export const updateArmy = /* GraphQL */ `
   ) {
     updateArmy(input: $input, condition: $condition) {
       id
-      player
+      owner
       name
       wins
       losses
@@ -856,7 +855,6 @@ export const updateArmy = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -867,7 +865,7 @@ export const deleteArmy = /* GraphQL */ `
   ) {
     deleteArmy(input: $input, condition: $condition) {
       id
-      player
+      owner
       name
       wins
       losses
@@ -877,7 +875,6 @@ export const deleteArmy = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;

@@ -439,7 +439,7 @@ export const getArmy = /* GraphQL */ `
   query GetArmy($id: ID!) {
     getArmy(id: $id) {
       id
-      player
+      owner
       name
       wins
       losses
@@ -449,7 +449,6 @@ export const getArmy = /* GraphQL */ `
       }
       createdAt
       updatedAt
-      owner
     }
   }
 `;
@@ -462,7 +461,7 @@ export const listArmies = /* GraphQL */ `
     listArmies(filter: $filter, limit: $limit, nextToken: $nextToken) {
       items {
         id
-        player
+        owner
         name
         wins
         losses
@@ -472,7 +471,6 @@ export const listArmies = /* GraphQL */ `
         }
         createdAt
         updatedAt
-        owner
       }
       nextToken
     }

@@ -374,7 +374,7 @@ export type DeletePlayerConfigInput = {
 
 export type CreateArmyInput = {
   id?: string | null,
-  player: string,
+  owner?: string | null,
   name: string,
   wins: number,
   losses: number,
@@ -382,7 +382,6 @@ export type CreateArmyInput = {
 };
 
 export type ModelArmyConditionInput = {
-  player?: ModelIDInput | null,
   name?: ModelStringInput | null,
   wins?: ModelIntInput | null,
   losses?: ModelIntInput | null,
@@ -391,38 +390,21 @@ export type ModelArmyConditionInput = {
   not?: ModelArmyConditionInput | null,
 };
 
-export type ModelIDInput = {
-  ne?: string | null,
-  eq?: string | null,
-  le?: string | null,
-  lt?: string | null,
-  ge?: string | null,
-  gt?: string | null,
-  contains?: string | null,
-  notContains?: string | null,
-  between?: Array< string | null > | null,
-  beginsWith?: string | null,
-  attributeExists?: boolean | null,
-  attributeType?: ModelAttributeTypes | null,
-  size?: ModelSizeInput | null,
-};
-
 export type Army = {
   __typename: "Army",
   id: string,
-  player: string,
+  owner?: string | null,
   name: string,
   wins: number,
   losses: number,
   pieces:  Array<Piece >,
   createdAt: string,
   updatedAt: string,
-  owner?: string | null,
 };
 
 export type UpdateArmyInput = {
   id: string,
-  player?: string | null,
+  owner?: string | null,
   name?: string | null,
   wins?: number | null,
   losses?: number | null,
@@ -439,6 +421,22 @@ export type ModelPendingGameFilterInput = {
   and?: Array< ModelPendingGameFilterInput | null > | null,
   or?: Array< ModelPendingGameFilterInput | null > | null,
   not?: ModelPendingGameFilterInput | null,
+};
+
+export type ModelIDInput = {
+  ne?: string | null,
+  eq?: string | null,
+  le?: string | null,
+  lt?: string | null,
+  ge?: string | null,
+  gt?: string | null,
+  contains?: string | null,
+  notContains?: string | null,
+  between?: Array< string | null > | null,
+  beginsWith?: string | null,
+  attributeExists?: boolean | null,
+  attributeType?: ModelAttributeTypes | null,
+  size?: ModelSizeInput | null,
 };
 
 export type ModelPendingGameConnection = {
@@ -497,7 +495,7 @@ export type ModelPlayerConfigConnection = {
 
 export type ModelArmyFilterInput = {
   id?: ModelIDInput | null,
-  player?: ModelIDInput | null,
+  owner?: ModelStringInput | null,
   name?: ModelStringInput | null,
   wins?: ModelIntInput | null,
   losses?: ModelIntInput | null,
@@ -1469,7 +1467,7 @@ export type CreateArmyMutation = {
   createArmy?:  {
     __typename: "Army",
     id: string,
-    player: string,
+    owner?: string | null,
     name: string,
     wins: number,
     losses: number,
@@ -1480,7 +1478,6 @@ export type CreateArmyMutation = {
     } >,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -1493,7 +1490,7 @@ export type UpdateArmyMutation = {
   updateArmy?:  {
     __typename: "Army",
     id: string,
-    player: string,
+    owner?: string | null,
     name: string,
     wins: number,
     losses: number,
@@ -1504,7 +1501,6 @@ export type UpdateArmyMutation = {
     } >,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -1517,7 +1513,7 @@ export type DeleteArmyMutation = {
   deleteArmy?:  {
     __typename: "Army",
     id: string,
-    player: string,
+    owner?: string | null,
     name: string,
     wins: number,
     losses: number,
@@ -1528,7 +1524,6 @@ export type DeleteArmyMutation = {
     } >,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -2056,7 +2051,7 @@ export type GetArmyQuery = {
   getArmy?:  {
     __typename: "Army",
     id: string,
-    player: string,
+    owner?: string | null,
     name: string,
     wins: number,
     losses: number,
@@ -2067,7 +2062,6 @@ export type GetArmyQuery = {
     } >,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -2083,7 +2077,7 @@ export type ListArmiesQuery = {
     items:  Array< {
       __typename: "Army",
       id: string,
-      player: string,
+      owner?: string | null,
       name: string,
       wins: number,
       losses: number,
@@ -2094,7 +2088,6 @@ export type ListArmiesQuery = {
       } >,
       createdAt: string,
       updatedAt: string,
-      owner?: string | null,
     } >,
     nextToken?: string | null,
   } | null,
@@ -2977,7 +2970,7 @@ export type OnCreateArmySubscription = {
   onCreateArmy?:  {
     __typename: "Army",
     id: string,
-    player: string,
+    owner?: string | null,
     name: string,
     wins: number,
     losses: number,
@@ -2988,7 +2981,6 @@ export type OnCreateArmySubscription = {
     } >,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -2996,7 +2988,7 @@ export type OnUpdateArmySubscription = {
   onUpdateArmy?:  {
     __typename: "Army",
     id: string,
-    player: string,
+    owner?: string | null,
     name: string,
     wins: number,
     losses: number,
@@ -3007,7 +2999,6 @@ export type OnUpdateArmySubscription = {
     } >,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };
 
@@ -3015,7 +3006,7 @@ export type OnDeleteArmySubscription = {
   onDeleteArmy?:  {
     __typename: "Army",
     id: string,
-    player: string,
+    owner?: string | null,
     name: string,
     wins: number,
     losses: number,
@@ -3026,6 +3017,5 @@ export type OnDeleteArmySubscription = {
     } >,
     createdAt: string,
     updatedAt: string,
-    owner?: string | null,
   } | null,
 };

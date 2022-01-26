@@ -8,7 +8,7 @@ import './topBar.css';
 import '../../App.css';
 
 const TopBarGroup = () => {
-  const { dispatch } = useStateValue();
+  const { state, dispatch } = useStateValue();
 
   const [accountDropdownVisible, setAccountDropdownVisible] = useState(false);
   const [accountDropdownClass, setAccountDropdownClass] = useState('hidden');
@@ -20,7 +20,7 @@ const TopBarGroup = () => {
   const [languageMouseDown, setLanguageMouseDown] = useState(false);
   const languageDropdown = useRef<HTMLDivElement>(null);
 
-  const [loggedIn, setLoggedIn] = useState(false);
+  const [loggedIn, setLoggedIn] = useState(state.userData && state.userData.username);
 
   useEffect(() => {
     Auth.currentAuthenticatedUser()
@@ -28,7 +28,7 @@ const TopBarGroup = () => {
         setLoggedIn(true);
         dispatch({
           type: 'setUserData',
-          value: { data },
+          value: data,
         });
       })
       .catch((err) => setLoggedIn(false));

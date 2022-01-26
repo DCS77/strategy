@@ -9,6 +9,7 @@ import ArmyPiecesList from '../../components/army/armyList/armyPiecesList';
 import CreateArmy from './createArmy';
 import { TabType } from '../../types';
 import { Army as ArmyType } from '../../API';
+import { fetchArmy } from '../../ts/dbFunctions';
 import tc from '../../localesComplex/translateArmy';
 import i18n from '../../i18nextConf';
 import { useStateValue } from '../../state/state';
@@ -33,7 +34,8 @@ const ViewArmy = (Props: ViewArmyProps) => {
   const { army } = Props;
   return (
     <>
-      <span className='heading-input padding-left'>{army.name}</span>
+      <div className='heading-input padding-left'>{army.name}</div>
+      <i className='padding-left'>Created by {army.owner}</i>
       <div className='army-container'>
         <ArmyPieceCounts pieces={army.pieces} id={army.id} />
       </div>
@@ -67,12 +69,6 @@ const ArmyPageSelector = (Props: SelectArmyPageProps) => {
   const { state } = useStateValue();
   const { ID } = Props;
 
-  if (!state.fetchedData.userArmies) {
-    return (
-      <ArmyPage>{null}</ArmyPage>
-    );
-  }
-
   if (!ID) {
     return (
       <ArmyPage>
@@ -81,12 +77,18 @@ const ArmyPageSelector = (Props: SelectArmyPageProps) => {
     );
   }
 
+  if (!state.fetchedData.userArmies) {
+    return (
+      <ArmyPage>{null}</ArmyPage>
+    );
+  }
+
   const userArmy = state.userArmies.find((army) => army.id === ID);
   if (userArmy) {
     return <CreateArmy army={userArmy} />;
   }
 
-  const globalArmy = state.userArmies.find((army) => army.id === ID);
+  const globalArmy = state.globalArmies.find((army) => army.id === ID);
   if (globalArmy) {
     return (
       <ArmyPage>
@@ -98,6 +100,7 @@ const ArmyPageSelector = (Props: SelectArmyPageProps) => {
   return (
     <ArmyPage>
       Army not found.
+      {JSON.stringify(state.globalArmies)}
     </ArmyPage>
   );
 };
@@ -115,6 +118,21 @@ const Army = () => {
         value: {
           id: 'army', path: '/army', title: t('Your Armies'), type: TabType.Army,
         },
+      });
+    } else if (!state.globalArmies.some((army) => army.id === id)) {
+      fetchArmy(id).then((army) => {
+        if (army) {
+          dispatch({
+            type: 'addGlobalArmy',
+            value: army,
+          });
+          dispatch({
+            type: 'addTab',
+            value: {
+              id: army.id, path: `/army/${army.id}`, title: t(`View ${army.name}`), type: TabType.Edit,
+            },
+          });
+        }
       });
     }
   }, [state.fetchedData.userArmies, dispatch, id, t]);

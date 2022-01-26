@@ -8,7 +8,7 @@ import BarItem from '../items/barItem';
 import DefaultNarrowView from '../../pages/structures/defaultNarrowView';
 import DefaultWideView from '../../pages/structures/defaultWideView';
 import ArmyList from './armyList/armyList';
-import { getArmies } from '../../ts/dbFunctions';
+import { fetchUserArmies } from '../../ts/dbFunctions';
 import { StateProps, useStateValue } from '../../state/state';
 import i18n from '../../i18nextConf';
 
@@ -90,7 +90,7 @@ const ArmyPage = (Props: ArmyPageProps) => {
 
   useEffect(() => {
     if (!state.fetchedData.userArmies) {
-      getArmies().then((result) => {
+      fetchUserArmies(state.userData.username).then((result) => {
         dispatch({
           type: 'setUserArmies',
           value: result || [],
