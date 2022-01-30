@@ -2,6 +2,7 @@ export enum TabType {
   Army,
   Create,
   Edit,
+  PendingGame,
   Game,
   Leaderboards,
   Learn,

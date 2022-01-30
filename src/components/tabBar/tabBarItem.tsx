@@ -36,7 +36,7 @@ const GetTabText = (TabTextProps: TabBarItemProps) => {
   const titleString = title || '';
   const playerString = player || '';
   const ratingString = rating ? `(${rating})` : '';
-  const idString = id && (type === TabType.Game || type === TabType.Info) ? `#${id}` : '';
+  const idString = id && (type === TabType.Game || type === TabType.Info) ? `#${id.substring(0, 4)}` : '';
   const tabTextFields = [t(titleString), playerString, idString, ratingString];
   const text = tabTextFields.filter(Boolean).join(' ');
   return (<span className='tab-text'>{text.length > 1 ? text : GetEnumText(type)}</span>);

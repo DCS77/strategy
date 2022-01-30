@@ -27,6 +27,7 @@ const App = () => {
     userArmies: [],
     globalArmies: [],
     tabs: [],
+    pendingGames: [],
     gameData: [],
     editData: [],
     pageLayout: {
@@ -38,6 +39,7 @@ const App = () => {
       userData: false,
       userArmies: false,
     },
+    pendingGamesSubscription: undefined,
   };
 
   function SetUserData(state: StateProps, action: Actions) {
@@ -129,6 +131,13 @@ const App = () => {
     };
   }
 
+  function SetPendingGames(state: StateProps, action: Actions) {
+    return {
+      ...state,
+      pendingGames: action.value,
+    };
+  }
+
   function ChangeTheme(state: StateProps, action: Actions) {
     return {
       ...state,
@@ -148,6 +157,7 @@ const App = () => {
       case 'deleteUserArmy': return DeleteUserArmy(state, action);
       case 'addTab': return AddTab(state, action);
       case 'closeTab': return CloseTab(state, action);
+      case 'setPendingGames': return SetPendingGames(state, action);
       case 'changeTheme': return ChangeTheme(state, action);
       default: return state;
     }

@@ -1,7 +1,7 @@
 import React, {
   createContext, Dispatch, Reducer, useContext, useReducer,
 } from 'react';
-import { Army as ArmyType } from '../API';
+import { Army as ArmyType, PendingGame as PendingGameType } from '../API';
 import { TabDetail, TabDetails } from '../types';
 
 export interface Actions {
@@ -28,11 +28,13 @@ export interface StateProps {
   userArmies: ArmyType[];
   globalArmies: ArmyType[];
   tabs: TabDetail[];
+  pendingGames: PendingGameType[];
   gameData: any[];
   editData: any[];
   pageLayout: PageLayout;
   refs: GlobalRefs;
   fetchedData: FetchedData;
+  pendingGamesSubscription: any;
 }
 
 interface InitContextProps {

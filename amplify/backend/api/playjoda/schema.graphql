@@ -31,14 +31,16 @@ type Action @model {
   pieceTo: Coordinate!
 }
 
-type PlayerConfig @model {
+type PlayerConfig @model @auth(rules: [{ allow: owner, operations: [create, update, delete] }]) {
   id: ID!
   pieces: [Piece!]!
   time: Int!
-  health: Int!
+  health: Int
+  flags: Int
   moves: Int!
   actionsPerMove: Int!
   rating: Int!
+  owner: String
 }
 
 type Army @model @auth(rules: [{ allow: owner, operations: [create, update, delete] }]) {
@@ -50,7 +52,7 @@ type Army @model @auth(rules: [{ allow: owner, operations: [create, update, dele
   pieces: [Piece!]!
 }
 
-enum GameMode { standard no_turns }
+enum GameMode { ctf health no_turns }
 
 type Piece {
   type: PieceType!

@@ -9,7 +9,7 @@ import ArmyPiecesList from '../../components/army/armyList/armyPiecesList';
 import CreateArmy from './createArmy';
 import { TabType } from '../../types';
 import { Army as ArmyType } from '../../API';
-import { fetchArmy } from '../../ts/dbFunctions';
+import { fetchArmy } from '../../ts/db/army';
 import tc from '../../localesComplex/translateArmy';
 import i18n from '../../i18nextConf';
 import { useStateValue } from '../../state/state';

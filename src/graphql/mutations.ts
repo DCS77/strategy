@@ -13,21 +13,33 @@ export const createPendingGame = /* GraphQL */ `
         id
         playerOne {
           id
+          pieces {
+            type
+            count
+          }
           time
           health
+          flags
           moves
           actionsPerMove
           rating
+          owner
           createdAt
           updatedAt
         }
         playerTwo {
           id
+          pieces {
+            type
+            count
+          }
           time
           health
+          flags
           moves
           actionsPerMove
           rating
+          owner
           createdAt
           updatedAt
         }
@@ -40,8 +52,19 @@ export const createPendingGame = /* GraphQL */ `
         state {
           state
           turn
+          result {
+            tie
+            winMethod
+            winner
+          }
         }
         moves {
+          items {
+            id
+            timeLeft
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -64,21 +87,33 @@ export const updatePendingGame = /* GraphQL */ `
         id
         playerOne {
           id
+          pieces {
+            type
+            count
+          }
           time
           health
+          flags
           moves
           actionsPerMove
           rating
+          owner
           createdAt
           updatedAt
         }
         playerTwo {
           id
+          pieces {
+            type
+            count
+          }
           time
           health
+          flags
           moves
           actionsPerMove
           rating
+          owner
           createdAt
           updatedAt
         }
@@ -91,8 +126,19 @@ export const updatePendingGame = /* GraphQL */ `
         state {
           state
           turn
+          result {
+            tie
+            winMethod
+            winner
+          }
         }
         moves {
+          items {
+            id
+            timeLeft
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -115,21 +161,33 @@ export const deletePendingGame = /* GraphQL */ `
         id
         playerOne {
           id
+          pieces {
+            type
+            count
+          }
           time
           health
+          flags
           moves
           actionsPerMove
           rating
+          owner
           createdAt
           updatedAt
         }
         playerTwo {
           id
+          pieces {
+            type
+            count
+          }
           time
           health
+          flags
           moves
           actionsPerMove
           rating
+          owner
           createdAt
           updatedAt
         }
@@ -142,8 +200,19 @@ export const deletePendingGame = /* GraphQL */ `
         state {
           state
           turn
+          result {
+            tie
+            winMethod
+            winner
+          }
         }
         moves {
+          items {
+            id
+            timeLeft
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -170,9 +239,11 @@ export const createGame = /* GraphQL */ `
         }
         time
         health
+        flags
         moves
         actionsPerMove
         rating
+        owner
         createdAt
         updatedAt
       }
@@ -184,9 +255,11 @@ export const createGame = /* GraphQL */ `
         }
         time
         health
+        flags
         moves
         actionsPerMove
         rating
+        owner
         createdAt
         updatedAt
       }
@@ -208,6 +281,27 @@ export const createGame = /* GraphQL */ `
       moves {
         items {
           id
+          game {
+            id
+            mode
+            createdAt
+            updatedAt
+          }
+          player {
+            id
+            time
+            health
+            flags
+            moves
+            actionsPerMove
+            rating
+            owner
+            createdAt
+            updatedAt
+          }
+          action {
+            nextToken
+          }
           timeLeft
           createdAt
           updatedAt
@@ -234,9 +328,11 @@ export const updateGame = /* GraphQL */ `
         }
         time
         health
+        flags
         moves
         actionsPerMove
         rating
+        owner
         createdAt
         updatedAt
       }
@@ -248,9 +344,11 @@ export const updateGame = /* GraphQL */ `
         }
         time
         health
+        flags
         moves
         actionsPerMove
         rating
+        owner
         createdAt
         updatedAt
       }
@@ -272,6 +370,27 @@ export const updateGame = /* GraphQL */ `
       moves {
         items {
           id
+          game {
+            id
+            mode
+            createdAt
+            updatedAt
+          }
+          player {
+            id
+            time
+            health
+            flags
+            moves
+            actionsPerMove
+            rating
+            owner
+            createdAt
+            updatedAt
+          }
+          action {
+            nextToken
+          }
           timeLeft
           createdAt
           updatedAt
@@ -298,9 +417,11 @@ export const deleteGame = /* GraphQL */ `
         }
         time
         health
+        flags
         moves
         actionsPerMove
         rating
+        owner
         createdAt
         updatedAt
       }
@@ -312,9 +433,11 @@ export const deleteGame = /* GraphQL */ `
         }
         time
         health
+        flags
         moves
         actionsPerMove
         rating
+        owner
         createdAt
         updatedAt
       }
@@ -336,6 +459,27 @@ export const deleteGame = /* GraphQL */ `
       moves {
         items {
           id
+          game {
+            id
+            mode
+            createdAt
+            updatedAt
+          }
+          player {
+            id
+            time
+            health
+            flags
+            moves
+            actionsPerMove
+            rating
+            owner
+            createdAt
+            updatedAt
+          }
+          action {
+            nextToken
+          }
           timeLeft
           createdAt
           updatedAt
@@ -358,21 +502,33 @@ export const createMove = /* GraphQL */ `
         id
         playerOne {
           id
+          pieces {
+            type
+            count
+          }
           time
           health
+          flags
           moves
           actionsPerMove
           rating
+          owner
           createdAt
           updatedAt
         }
         playerTwo {
           id
+          pieces {
+            type
+            count
+          }
           time
           health
+          flags
           moves
           actionsPerMove
           rating
+          owner
           createdAt
           updatedAt
         }
@@ -385,8 +541,19 @@ export const createMove = /* GraphQL */ `
         state {
           state
           turn
+          result {
+            tie
+            winMethod
+            winner
+          }
         }
         moves {
+          items {
+            id
+            timeLeft
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -400,16 +567,46 @@ export const createMove = /* GraphQL */ `
         }
         time
         health
+        flags
         moves
         actionsPerMove
         rating
+        owner
         createdAt
         updatedAt
       }
       action {
         items {
           id
+          move {
+            id
+            timeLeft
+            createdAt
+            updatedAt
+          }
+          player {
+            id
+            time
+            health
+            flags
+            moves
+            actionsPerMove
+            rating
+            owner
+            createdAt
+            updatedAt
+          }
           pieceType
+          pieceFrom {
+            x
+            y
+            z
+          }
+          pieceTo {
+            x
+            y
+            z
+          }
           createdAt
           updatedAt
         }
@@ -432,21 +629,33 @@ export const updateMove = /* GraphQL */ `
         id
         playerOne {
           id
+          pieces {
+            type
+            count
+          }
           time
           health
+          flags
           moves
           actionsPerMove
           rating
+          owner
           createdAt
           updatedAt
         }
         playerTwo {
           id
+          pieces {
+            type
+            count
+          }
           time
           health
+          flags
           moves
           actionsPerMove
           rating
+          owner
           createdAt
           updatedAt
         }
@@ -459,8 +668,19 @@ export const updateMove = /* GraphQL */ `
         state {
           state
           turn
+          result {
+            tie
+            winMethod
+            winner
+          }
         }
         moves {
+          items {
+            id
+            timeLeft
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -474,16 +694,46 @@ export const updateMove = /* GraphQL */ `
         }
         time
         health
+        flags
         moves
         actionsPerMove
         rating
+        owner
         createdAt
         updatedAt
       }
       action {
         items {
           id
+          move {
+            id
+            timeLeft
+            createdAt
+            updatedAt
+          }
+          player {
+            id
+            time
+            health
+            flags
+            moves
+            actionsPerMove
+            rating
+            owner
+            createdAt
+            updatedAt
+          }
           pieceType
+          pieceFrom {
+            x
+            y
+            z
+          }
+          pieceTo {
+            x
+            y
+            z
+          }
           createdAt
           updatedAt
         }
@@ -506,21 +756,33 @@ export const deleteMove = /* GraphQL */ `
         id
         playerOne {
           id
+          pieces {
+            type
+            count
+          }
           time
           health
+          flags
           moves
           actionsPerMove
           rating
+          owner
           createdAt
           updatedAt
         }
         playerTwo {
           id
+          pieces {
+            type
+            count
+          }
           time
           health
+          flags
           moves
           actionsPerMove
           rating
+          owner
           createdAt
           updatedAt
         }
@@ -533,8 +795,19 @@ export const deleteMove = /* GraphQL */ `
         state {
           state
           turn
+          result {
+            tie
+            winMethod
+            winner
+          }
         }
         moves {
+          items {
+            id
+            timeLeft
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         createdAt
@@ -548,16 +821,46 @@ export const deleteMove = /* GraphQL */ `
         }
         time
         health
+        flags
         moves
         actionsPerMove
         rating
+        owner
         createdAt
         updatedAt
       }
       action {
         items {
           id
+          move {
+            id
+            timeLeft
+            createdAt
+            updatedAt
+          }
+          player {
+            id
+            time
+            health
+            flags
+            moves
+            actionsPerMove
+            rating
+            owner
+            createdAt
+            updatedAt
+          }
           pieceType
+          pieceFrom {
+            x
+            y
+            z
+          }
+          pieceTo {
+            x
+            y
+            z
+          }
           createdAt
           updatedAt
         }
@@ -580,21 +883,69 @@ export const createAction = /* GraphQL */ `
         id
         game {
           id
+          playerOne {
+            id
+            time
+            health
+            flags
+            moves
+            actionsPerMove
+            rating
+            owner
+            createdAt
+            updatedAt
+          }
+          playerTwo {
+            id
+            time
+            health
+            flags
+            moves
+            actionsPerMove
+            rating
+            owner
+            createdAt
+            updatedAt
+          }
+          boardSize {
+            x
+            y
+            z
+          }
           mode
+          state {
+            state
+            turn
+          }
+          moves {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         player {
           id
+          pieces {
+            type
+            count
+          }
           time
           health
+          flags
           moves
           actionsPerMove
           rating
+          owner
           createdAt
           updatedAt
         }
         action {
+          items {
+            id
+            pieceType
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         timeLeft
@@ -609,9 +960,11 @@ export const createAction = /* GraphQL */ `
         }
         time
         health
+        flags
         moves
         actionsPerMove
         rating
+        owner
         createdAt
         updatedAt
       }
@@ -642,21 +995,69 @@ export const updateAction = /* GraphQL */ `
         id
         game {
           id
+          playerOne {
+            id
+            time
+            health
+            flags
+            moves
+            actionsPerMove
+            rating
+            owner
+            createdAt
+            updatedAt
+          }
+          playerTwo {
+            id
+            time
+            health
+            flags
+            moves
+            actionsPerMove
+            rating
+            owner
+            createdAt
+            updatedAt
+          }
+          boardSize {
+            x
+            y
+            z
+          }
           mode
+          state {
+            state
+            turn
+          }
+          moves {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         player {
           id
+          pieces {
+            type
+            count
+          }
           time
           health
+          flags
           moves
           actionsPerMove
           rating
+          owner
           createdAt
           updatedAt
         }
         action {
+          items {
+            id
+            pieceType
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         timeLeft
@@ -671,9 +1072,11 @@ export const updateAction = /* GraphQL */ `
         }
         time
         health
+        flags
         moves
         actionsPerMove
         rating
+        owner
         createdAt
         updatedAt
       }
@@ -704,21 +1107,69 @@ export const deleteAction = /* GraphQL */ `
         id
         game {
           id
+          playerOne {
+            id
+            time
+            health
+            flags
+            moves
+            actionsPerMove
+            rating
+            owner
+            createdAt
+            updatedAt
+          }
+          playerTwo {
+            id
+            time
+            health
+            flags
+            moves
+            actionsPerMove
+            rating
+            owner
+            createdAt
+            updatedAt
+          }
+          boardSize {
+            x
+            y
+            z
+          }
           mode
+          state {
+            state
+            turn
+          }
+          moves {
+            nextToken
+          }
           createdAt
           updatedAt
         }
         player {
           id
+          pieces {
+            type
+            count
+          }
           time
           health
+          flags
           moves
           actionsPerMove
           rating
+          owner
           createdAt
           updatedAt
         }
         action {
+          items {
+            id
+            pieceType
+            createdAt
+            updatedAt
+          }
           nextToken
         }
         timeLeft
@@ -733,9 +1184,11 @@ export const deleteAction = /* GraphQL */ `
         }
         time
         health
+        flags
         moves
         actionsPerMove
         rating
+        owner
         createdAt
         updatedAt
       }
@@ -768,9 +1221,11 @@ export const createPlayerConfig = /* GraphQL */ `
       }
       time
       health
+      flags
       moves
       actionsPerMove
       rating
+      owner
       createdAt
       updatedAt
     }
@@ -789,9 +1244,11 @@ export const updatePlayerConfig = /* GraphQL */ `
       }
       time
       health
+      flags
       moves
       actionsPerMove
       rating
+      owner
       createdAt
       updatedAt
     }
@@ -810,9 +1267,11 @@ export const deletePlayerConfig = /* GraphQL */ `
       }
       time
       health
+      flags
       moves
       actionsPerMove
       rating
+      owner
       createdAt
       updatedAt
     }

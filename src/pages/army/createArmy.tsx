@@ -2,8 +2,6 @@ import React, { useEffect, useState, useRef } from 'react';
 import '../page.css';
 import '../../App.css';
 import { useTranslation } from 'react-i18next';
-import { API, graphqlOperation } from 'aws-amplify';
-import { GraphQLResult } from '@aws-amplify/api';
 import ArmyPage from '../../components/army/armyPage';
 import ArmyPieceCounts from '../../components/army/armyPieceCounts/armyPieceCounts';
 import PieceButtons from '../../components/army/pieceButtons/pieceButtons';
@@ -11,14 +9,12 @@ import PieceDescription from '../../components/army/pieceDescription/pieceDescri
 import {
   AddPiece, CountPoints, RemovePiece, Piece,
 } from '../../components/army/pieces';
-import {
-  Army as ArmyType, CreateArmyMutation, DeleteArmyInput, DeleteArmyMutation, PieceType, UpdateArmyInput,
-} from '../../API';
+import { Army as ArmyType, PieceType } from '../../API';
 import { TabType } from '../../types';
 import tc from '../../localesComplex/translateArmy';
 import i18n from '../../i18nextConf';
 import { useStateValue } from '../../state/state';
-import { createArmy, deleteArmy, updateArmy } from '../../graphql/mutations';
+import { addArmy, removeArmy, modifyArmy } from '../../ts/db/army';
 
 interface CreatePageProps {
   army?: ArmyType;
@@ -49,34 +45,6 @@ const CreatePage = (Props: CreatePageProps) => {
     }
   }, [Props]);
 
-  async function CreateArmyDB(newArmy: ArmyType) {
-    try {
-      return await API.graphql(graphqlOperation(createArmy, { input: newArmy })) as GraphQLResult<CreateArmyMutation>;
-    } catch (error) {
-      return undefined;
-    }
-  }
-
-  async function UpdateArmyDB(id: string, newName: string, newPieces: Piece[]) {
-    try {
-      const update = { id, name: newName, pieces: newPieces } as UpdateArmyInput;
-      return await API.graphql(graphqlOperation(updateArmy, { input: update })) as GraphQLResult<CreateArmyMutation>;
-    } catch (error) {
-      return undefined;
-    }
-  }
-
-  async function DeleteArmyDB(id: string) {
-    try {
-      const deleteInput = { id } as DeleteArmyInput;
-      return await API.graphql(
-        graphqlOperation(deleteArmy, { input: deleteInput }),
-      ) as GraphQLResult<DeleteArmyMutation>;
-    } catch (error) {
-      return undefined;
-    }
-  }
-
   function UpdateArmyPiecePoints(newPieces: Piece[], newPoints: number) {
     updatePieces(newPieces);
     updatePoints(newPoints);
@@ -99,7 +67,7 @@ const CreatePage = (Props: CreatePageProps) => {
             losses: 0,
           } as ArmyType;
 
-          CreateArmyDB(newArmy).then((result) => {
+          addArmy(newArmy).then((result) => {
             if (result) {
               localArmyID = result?.data?.createArmy?.id;
               updateArmyID(localArmyID);
@@ -118,7 +86,7 @@ const CreatePage = (Props: CreatePageProps) => {
           });
           updateArmyID('newgame');
         } else {
-          UpdateArmyDB(localArmyID, armyName.current.value, newPieces);
+          modifyArmy(localArmyID, armyName.current.value, newPieces);
 
           dispatch({
             type: 'addUserArmy',
@@ -139,7 +107,7 @@ const CreatePage = (Props: CreatePageProps) => {
 
   function DeleteArmy(id: string) {
     if (armyID) {
-      DeleteArmyDB(armyID);
+      removeArmy(armyID);
 
       dispatch({
         type: 'deleteUserArmy',
