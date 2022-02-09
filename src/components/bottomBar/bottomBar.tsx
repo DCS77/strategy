@@ -58,7 +58,7 @@ const BottomBar = () => {
         </BarItem>
         <BarItem>
           <span className='wide-screen'>
-            <span className='inline flex-centre bar-spaced'><Copyright />Daniel Smit 2021</span>
+            <span className='inline flex-centre bar-spaced'><Copyright />Daniel Smit 2022</span>
           </span>
         </BarItem>
       </div>
