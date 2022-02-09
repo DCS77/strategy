@@ -49,10 +49,13 @@ npm run lint-and-fix # Automatically fixes code not adhering to eslint config
 ## Screenshots
 
 [<img src="documentation/images/armies-page.png" width="500"/>](documentation/images/armies-page.png)
+
 An overview of each of your armies. Select from any of your existing armies when initiating a new game.
 
 [<img src="documentation/images/edit-army-page.png" width="500"/>](documentation/images/edit-army-page.png)
+
 Use up to 50 points to select pieces for your army. Select pieces to implement your unique strategies.
 
 [<img src="documentation/images/play-game-page.png" width="500"/>](documentation/images/play-game-page.png)
+
 Players will face off against each other with their custom armies on a 1D or 2D board with various custom game settings.
